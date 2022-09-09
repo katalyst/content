@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+require "rails_helper"
+
+RSpec.describe "katalyst/content/content" do
+  it "loads dummy app" do
+    visit root_path
+
+    expect(page).to have_text "Dummy app"
+  end
+end

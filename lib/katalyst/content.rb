@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "content/version"
+require "katalyst/content/version"
+require "katalyst/content/engine"
 
 module Katalyst
   module Content
-    class Error < StandardError; end
     # Your code goes here...
   end
 end
