@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "importmap-rails"
 gem "rails"
 gem "rake"
 gem "rubocop-katalyst", require: false
