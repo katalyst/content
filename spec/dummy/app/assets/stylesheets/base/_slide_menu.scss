@@ -1,0 +1,32 @@
+@use "../utils/breakpoints";
+
+/* Slide menu */
+/* -------------------------------------------------------------------------------------------- */
+
+.slide-menu {
+  position: fixed;
+  z-index: 2500;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 24rem;
+  transform: translateX(-100%);
+  visibility: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  color: #000;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoints.tablet-breakpoint {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.slide-menu--open {
+  visibility: visible;
+  transform: translateX(0);
+  box-shadow: -0.5rem 0px 5px rgba(#e0e0e0, 1);
+}

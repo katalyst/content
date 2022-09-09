@@ -1,0 +1,75 @@
+.flash__wrapper {
+  position: fixed;
+  display: block;
+  max-width: 100%;
+  width: 420px;
+  margin: 0 !important;
+  padding: 0.5rem 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+
+  > * {
+    padding: 0 0.5rem;
+  }
+}
+
+[data-controller="flash"] {
+  position: relative;
+}
+
+[data-controller="flash"][data-collapsed] {
+  opacity: 0;
+}
+
+%flash {
+  position: relative;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;
+  width: 100%;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  margin-bottom: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(31, 41, 55, 0.06),
+    0px 4px 6px rgba(31, 41, 55, 0.1);
+
+  > .icon {
+    margin-right: 0.7rem;
+  }
+}
+
+.flash--message {
+  flex-grow: 1;
+}
+
+.flash--close {
+  margin-left: 0.7rem;
+  cursor: pointer;
+  align-self: flex-start;
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.5);
+  align-self: center;
+}
+
+.flash-alert {
+  fill: var(--site-warning);
+  @extend %flash;
+}
+
+.flash-success {
+  fill: var(--site-success);
+  @extend %flash;
+}
+
+.flash-notice {
+  fill: var(--site-notice);
+  @extend %flash;
+}
+
+.flash-error {
+  fill: var(--site-alert);
+  @extend %flash;
+}

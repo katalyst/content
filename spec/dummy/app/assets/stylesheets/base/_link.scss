@@ -1,0 +1,24 @@
+a[href] {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+
+  &.no-hover-link {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &[disabled] {
+    color: var(--site-disabled);
+    pointer-events: none;
+    opacity: 0.45;
+  }
+}

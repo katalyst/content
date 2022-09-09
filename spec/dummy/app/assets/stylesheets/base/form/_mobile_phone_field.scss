@@ -1,0 +1,21 @@
+@use "../../utils/breakpoints";
+
+.mobile-phone-field {
+  display: flex;
+  max-width: 70ch;
+  gap: 0.5rem;
+
+  > * {
+    width: unset !important;
+  }
+
+  :last-child {
+    flex-grow: 1;
+  }
+
+  @include breakpoints.tablet-breakpoint {
+    > * {
+      width: 50% !important;
+    }
+  }
+}
