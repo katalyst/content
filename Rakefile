@@ -16,4 +16,11 @@ RSpec::Core::RakeTask.new(spec: %w[app:test:prepare app:db:prepare])
 RuboCop::RakeTask.new
 
 desc "Run all linters"
-task default: %i[spec rubocop]
+task lint: %w[rubocop app:yarn:lint]
+
+desc "Run all auto-formatters"
+task format: %w[rubocop:autocorrect app:yarn:format]
+
+task default: %i[lint spec] do
+  puts "🎉 build complete! 🎉"
+end
