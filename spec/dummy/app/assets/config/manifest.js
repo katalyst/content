@@ -1,3 +1,2 @@
-//= link_directory ../stylesheets .css
 //= link_tree ../javascripts
-//= link katalyst_content.js
+//= link_tree ../builds

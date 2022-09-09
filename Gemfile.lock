@@ -94,6 +94,8 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    dartsass-rails (0.4.0)
+      railties (>= 6.0.0)
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.11.0)
@@ -262,6 +264,7 @@ PLATFORMS
 DEPENDENCIES
   apparition!
   capybara
+  dartsass-rails
   factory_bot_rails
   faker
   importmap-rails
