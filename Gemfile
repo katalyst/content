@@ -11,6 +11,7 @@ gem "rake"
 gem "rubocop-katalyst", require: false
 gem "sprockets-rails"
 gem "sqlite3"
+gem "stimulus-rails"
 
 group :development, :test do
   gem "factory_bot_rails"
