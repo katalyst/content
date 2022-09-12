@@ -6,6 +6,7 @@ gemspec
 
 gem "dartsass-rails"
 gem "importmap-rails"
+gem "katalyst-tables"
 gem "rails"
 gem "rake"
 gem "rubocop-katalyst", require: false

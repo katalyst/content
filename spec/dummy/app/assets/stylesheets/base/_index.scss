@@ -7,6 +7,8 @@
 @use "flash";
 @use "form";
 @use "icon";
+@use "index-table";
+@use "index-table-actions";
 @use "link";
 @use "list";
 @use "skip_content";
@@ -14,16 +16,16 @@
 @use "typography";
 
 button,
-.button-primary,
+.button--primary,
 input[type="submit"] {
   @include button.button-filled;
 }
 
-.button-secondary {
+.button--secondary {
   @include button.button-outline;
 }
 
-.button-tertiary {
+.button--tertiary {
   @include button.button-text;
 }
 

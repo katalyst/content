@@ -114,6 +114,7 @@ GEM
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     json (2.6.2)
+    katalyst-tables (1.0.0)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -276,6 +277,7 @@ DEPENDENCIES
   faker
   importmap-rails
   katalyst-content!
+  katalyst-tables
   puma
   rails
   rails-controller-testing
