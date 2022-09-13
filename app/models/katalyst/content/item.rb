@@ -7,7 +7,7 @@ module Katalyst
       belongs_to :container, polymorphic: true
 
       validates :heading, presence: true
-      validates :background, presence: true, inclusion: { in: Content.config.backgrounds }
+      validates :background, presence: true, inclusion: { in: Katalyst::Content.config.backgrounds }
 
       after_initialize :initialize_tree
 

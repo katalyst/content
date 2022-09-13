@@ -9,6 +9,7 @@ class CreateKatalystContentItems < ActiveRecord::Migration[7.0]
       t.string :heading, null: false
       t.boolean :show_heading, null: false, default: true
       t.string :background, null: false
+      t.boolean :visible, null: false, default: true
 
       t.timestamps
     end
