@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_12_053954) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_003839) do
+  create_table "katalyst_content_items", force: :cascade do |t|
+    t.string "type"
+    t.string "container_type"
+    t.integer "container_id"
+    t.string "heading", null: false
+    t.boolean "show_heading", default: true, null: false
+    t.string "background", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["container_type", "container_id"], name: "index_katalyst_content_items_on_container"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title", null: false
     t.string "slug", null: false
