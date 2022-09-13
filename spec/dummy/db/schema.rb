@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_13_003839) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_020047) do
   create_table "katalyst_content_items", force: :cascade do |t|
     t.string "type"
     t.string "container_type"
@@ -23,12 +23,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_13_003839) do
     t.index ["container_type", "container_id"], name: "index_katalyst_content_items_on_container"
   end
 
+  create_table "page_versions", force: :cascade do |t|
+    t.integer "parent_id", null: false
+    t.json "nodes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_page_versions_on_parent_id"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title", null: false
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "published_version_id"
+    t.integer "draft_version_id"
+    t.index ["draft_version_id"], name: "index_pages_on_draft_version_id"
+    t.index ["published_version_id"], name: "index_pages_on_published_version_id"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
+  add_foreign_key "page_versions", "pages", column: "parent_id"
+  add_foreign_key "pages", "page_versions", column: "draft_version_id"
+  add_foreign_key "pages", "page_versions", column: "published_version_id"
 end

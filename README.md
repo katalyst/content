@@ -1,8 +1,7 @@
 # Katalyst::Content
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/katalyst/content`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Katalyst Content provides tools for creating and publishing content on Rails
+applications.
 
 ## Installation
 
@@ -22,17 +21,74 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Content can be added to multiple models in your application. These examples
+assume a `Page` model.
+
+Assuming your model already exists, create a table for versions and add
+published and draft version columns to your model. For example, if you have a
+pages model:
+
+```ruby
+class CreatePageVersions < ActiveRecord::Migration[7.0]
+  def change
+    create_table :page_versions do |t|
+      t.references :parent, foreign_key: { to_table: :pages }, null: false
+      t.json :nodes
+
+      t.timestamps
+    end
+
+    change_table :pages do |t|
+      t.references :published_version, foreign_key: { to_table: :page_versions }
+      t.references :draft_version, foreign_key: { to_table: :page_versions }
+    end
+  end
+end
+```
+
+Next, include the `Katalyst::Content` concerns into your model, and add a nested
+model for storing content version information:
+
+```ruby
+class Page < ApplicationRecord
+  include Katalyst::Content::Container
+
+  class Version < ApplicationRecord
+    include Katalyst::Content::Version
+  end
+end
+```
+
+You may also want to configure your factory to add container information to
+items:
+
+```ruby
+FactoryBot.define do
+  factory :page do
+    title { Faker::Beer.unique.name }
+    slug { title.parameterize }
+
+    after(:build) do |page, _context|
+      page.items.each { |item| item.container = page }
+    end
+
+    after(:create) do |page, _context|
+      page.items_attributes = page.items.map.with_index { |item, index| { id: item.id, index: index, depth: 0 } }
+      page.publish!
+    end
+  end
+end
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake` to run the tests.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/katalyst-content.
+Bug reports and pull requests are welcome on GitHub at https://github.com/katalyst/content.
 
 ## License
 
