@@ -8,6 +8,17 @@ module Katalyst
 
       validates :heading, presence: true
       validates :background, presence: true, inclusion: { in: Content.config.backgrounds }
+
+      after_initialize :initialize_tree
+
+      attr_accessor :parent, :children, :index, :depth
+
+      private
+
+      def initialize_tree
+        self.parent   ||= nil
+        self.children ||= []
+      end
     end
   end
 end
