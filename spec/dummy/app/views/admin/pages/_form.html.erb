@@ -1,0 +1,15 @@
+<div class="field required">
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+</div>
+
+<div class="field optional">
+  <%= form.label :slug %>
+  <%= form.text_field :slug %>
+</div>
+
+<%= tag.div class: "errors" do %>
+  <% form.object.errors.full_messages.each do |error| %>
+    <li class="error"><%= error %></li>
+  <% end %>
+<% end if form.object.errors.any? %>

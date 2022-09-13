@@ -1,0 +1,15 @@
+<div>
+  <%= link_to "Pages", [:admin, Page] %> >
+  <%= link_to page.title, [:admin, page] %>
+</div>
+
+<%= form_with model: page, url: [:admin, page] do |form| %>
+  <%= render "form", form: form %>
+
+  <div class="button-row">
+    <%= form.submit :save %>
+    <%= link_to "Delete", url_for(action: :show),
+                class: "button button-secondary",
+                data:  { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
+<% end %>
