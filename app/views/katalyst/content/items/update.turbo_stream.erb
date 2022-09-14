@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "content--editor--item-frame" do %>
+  <%= render "katalyst/content/editor/new_items", container: item.container %>
+<% end %>
+
+<%= turbo_stream.replace dom_id(previous) do %>
+  <%= render "katalyst/content/editor/item", item: item %>
+<% end %>

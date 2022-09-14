@@ -1,3 +1,17 @@
 <%= link_to "Pages", [:admin, Page] %>
 
 <h1><%= page.title %></h1>
+
+<%= content_editor_status_bar container: page %>
+
+<%= content_editor_container container: page, url: [:admin, page], scope: :container do |form| %>
+  <div role="rowheader">
+    <h4>Heading</h4>
+    <h4></h4>
+    <h4>Actions</h4>
+  </div>
+
+  <%= content_editor_list container: page %>
+<% end %>
+
+<%= render "katalyst/content/editor/new_items", container: page %>

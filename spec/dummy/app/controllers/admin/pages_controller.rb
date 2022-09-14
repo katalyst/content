@@ -4,6 +4,7 @@ module Admin
   class PagesController < ApplicationController
     include Katalyst::Tables::Backend
 
+    helper Katalyst::Content::EditorHelper
     helper Katalyst::Tables::Frontend
 
     def index
@@ -44,8 +45,18 @@ module Admin
 
       page.attributes = page_params
 
-      unless page.save
+      unless page.valid?
         return render :show, locals: { page: page }, status: :unprocessable_entity
+      end
+
+      case params[:commit]
+      when "publish"
+        page.save!
+        page.publish!
+      when "save"
+        page.save!
+      when "revert"
+        page.revert!
       end
 
       redirect_to [:admin, page]
@@ -64,7 +75,7 @@ module Admin
     def page_params
       return {} if params[:page].blank?
 
-      params.require(:page).permit(:title, :slug)
+      params.require(:page).permit(:title, :slug, items_attributes: %i[id index depth])
     end
   end
 end

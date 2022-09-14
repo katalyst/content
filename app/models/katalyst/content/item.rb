@@ -13,6 +13,18 @@ module Katalyst
 
       attr_accessor :parent, :children, :index, :depth
 
+      def self.permitted_params
+        %i[
+          container_type
+          container_id
+          type
+          heading
+          show_heading
+          background
+          visible
+        ]
+      end
+
       private
 
       def initialize_tree

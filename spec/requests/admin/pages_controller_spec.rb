@@ -53,7 +53,7 @@ RSpec.describe Admin::PagesController do
   end
 
   describe "PATCH /admin/pages/:id" do
-    let(:action) { patch admin_page_path(page), params: { page: page_params } }
+    let(:action) { patch admin_page_path(page), params: { commit: "save", page: page_params } }
     let(:page) { create :page }
     let(:page_params) { { title: "updated" } }
 

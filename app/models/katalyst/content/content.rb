@@ -12,6 +12,10 @@ module Katalyst
 
         self.content = source.content&.body if source.content.is_a?(ActionText::RichText)
       end
+
+      def self.permitted_params
+        super + %i[content]
+      end
     end
   end
 end
