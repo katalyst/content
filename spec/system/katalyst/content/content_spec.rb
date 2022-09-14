@@ -12,7 +12,7 @@ RSpec.describe "katalyst/content/content" do
   it "has stimulus configured" do
     visit root_path
 
-    expect(page).to have_text "Dummy app - stimulus"
+    expect(page).to have_text "Stimulus loaded"
   end
 
   it "has turbo configured" do
