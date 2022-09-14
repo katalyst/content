@@ -2,9 +2,12 @@
   <div class="tree" data-invisible="<%= !item.visible? %>">
     <%= builder.accordion_actions %>
 
-    <span role="img" value="<%= item.model_name.to_param %>" title="Type"></span>
+    <span role="img" value="<%= item.model_name.param_key %>" title="Type"></span>
     <h4 class="heading" title="<%= item.heading %>"><%= item.heading %></h4>
     <span role="img" value="invisible" title="Hidden"></span>
+  </div>
+
+  <div class="item-background-<%= item.background %>">
   </div>
 
   <%= builder.item_actions %>
