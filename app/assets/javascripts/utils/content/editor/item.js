@@ -129,6 +129,39 @@ export default class Item {
   }
 
   /**
+   * Increase the depth of this item and its descendants.
+   * If this causes it to become a child of a collapsed item, then collapse this item.
+   */
+  nest() {
+    this.traverse((child) => {
+      child.depth += 1;
+    });
+
+    if (this.previousItem.hasCollapsedDescendants()) {
+      this.previousItem.collapseChild(this);
+    }
+  }
+
+  /**
+   * Move the given item into this element's hidden children list.
+   * Assumes the list already exists.
+   *
+   * @param item {Item}
+   */
+  collapseChild(item) {
+    this.#childrenListElement.appendChild(item.node);
+  }
+
+  /**
+   * Decrease the depth of this item (and its descendants).
+   */
+  deNest() {
+    this.traverse((child) => {
+      child.depth -= 1;
+    });
+  }
+
+  /**
    * Collapses visible (logical) children into this element's hidden children
    * list, creating it if it doesn't already exist.
    */
