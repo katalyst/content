@@ -11,6 +11,7 @@ module Katalyst
         def build(**options)
           tag.div **default_options(**options) do
             concat status(:published, last_update: l(container.updated_at, format: :short))
+            concat status(:unpublished)
             concat status(:draft)
             concat status(:dirty)
             concat actions

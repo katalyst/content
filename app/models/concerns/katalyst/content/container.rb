@@ -51,10 +51,12 @@ module Katalyst
       # A resource is in draft mode if it has an unpublished draft or it has no published version.
       # @return the current state of the resource, either `published` or `draft`
       def state
-        if published_version_id && published_version_id == draft_version_id
-          :published
-        else
+        if !published_version_id
+          :unpublished
+        elsif published_version_id != draft_version_id
           :draft
+        else
+          :published
         end
       end
 

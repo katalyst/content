@@ -8,5 +8,6 @@ en:
           discard: Discard
           publish: Publish
           published_html: Published <i>(last updated %{last_update})</i>
+          unpublished_html: Unpublished
           revert: Revert
           save: Save
