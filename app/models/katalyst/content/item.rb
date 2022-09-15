@@ -25,6 +25,10 @@ module Katalyst
         ]
       end
 
+      def to_plain_text
+        heading if show_heading?
+      end
+
       private
 
       def initialize_tree

@@ -16,6 +16,10 @@ module Katalyst
       def self.permitted_params
         super + %i[content]
       end
+
+      def to_plain_text
+        [super, content.to_plain_text].compact.join("\n")
+      end
     end
   end
 end

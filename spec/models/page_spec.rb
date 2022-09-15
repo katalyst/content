@@ -206,7 +206,6 @@ RSpec.describe Page do
     end
 
     it "changes published version" do
-      page.update(items_attributes: page.draft_nodes.take(1))
       published = page.published_version
       draft     = page.draft_version
       expect { page.publish! }.to change(page, :published_version).from(published).to(draft)
@@ -236,6 +235,33 @@ RSpec.describe Page do
         page.publish!
         expect(page.items.where(id: orphaned)).to be_empty
       end
+    end
+  end
+
+  describe "#unpublish!" do
+    let(:item_attributes) { page.draft_nodes.take(1) }
+
+    before do
+      page.update(items_attributes: item_attributes)
+    end
+
+    it "changes published version" do
+      published = page.published_version
+      expect { page.unpublish! }.to change(page, :published_version).from(published).to(nil)
+    end
+
+    it "removes orphaned version" do
+      expect { page.unpublish! }.to change(page.versions, :count).by(-1)
+    end
+
+    it "removes orphaned published version" do
+      previous = page.published_version
+      page.unpublish!
+      expect(page.versions.where(id: previous)).to be_empty
+    end
+
+    it "doesn't remove orphaned item" do
+      expect { page.unpublish! }.not_to change(Katalyst::Content::Item, :count)
     end
   end
 
@@ -281,6 +307,28 @@ RSpec.describe Page do
         page.revert!
         expect(Katalyst::Content::Item.where(id: multiple_items.map(&:id))).to be_empty
       end
+    end
+  end
+
+  describe "#published_text" do
+    subject(:page) { create :page, items: items }
+
+    context "with heading" do
+      let(:items) { build_list :katalyst_content_content, 1, heading: "HEADING", content: "BODY" }
+
+      it { expect(page).to have_attributes(published_text: "HEADING\nBODY") }
+    end
+
+    context "without heading" do
+      let(:items) { build_list :katalyst_content_content, 1, heading: "HEADING", show_heading: false, content: "BODY" }
+
+      it { expect(page).to have_attributes(published_text: "BODY") }
+    end
+
+    context "with multiple items" do
+      let(:items) { build_list :katalyst_content_content, 3, show_heading: false, content: "BODY" }
+
+      it { expect(page).to have_attributes(published_text: "BODY\nBODY\nBODY") }
     end
   end
 end

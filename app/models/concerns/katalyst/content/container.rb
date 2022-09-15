@@ -20,8 +20,8 @@ module Katalyst
                    inverse_of: :parent,
                    optional:   true
 
-        delegate :nodes, :items, :tree, to: :published_version, prefix: :published, allow_nil: true
-        delegate :nodes, :items, :tree, to: :draft_version, prefix: :draft, allow_nil: true
+        delegate :nodes, :items, :tree, :text, to: :published_version, prefix: :published, allow_nil: true
+        delegate :nodes, :items, :tree, :text, to: :draft_version, prefix: :draft, allow_nil: true
 
         has_many :versions,
                  class_name:  "#{name}::Version",
@@ -67,6 +67,12 @@ module Katalyst
       # Reverts the draft version to the current published version
       def revert!
         update!(draft_version: published_version)
+        self
+      end
+
+      # Sets the currently published version to nil
+      def unpublish!
+        update!(published_version_id: nil)
         self
       end
 
