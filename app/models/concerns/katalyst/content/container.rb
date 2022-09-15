@@ -46,6 +46,17 @@ module Katalyst
                  class_name: "Katalyst::Content::Item",
                  dependent:  :destroy,
                  validate:   true
+
+        scope :order_by_state, ->(dir) do
+          dir            = :asc unless %w[asc desc].include?(dir.to_s)
+          unpublished    = arel_table[:published_version_id].eq(nil)
+          draft          = arel_table[:published_version_id].not_eq(arel_table[:draft_version_id])
+          case_statement = Arel::Nodes::Case.new
+                             .when(unpublished).then(3)
+                             .when(draft).then(2)
+                             .else(1)
+          order(case_statement.public_send(dir)).order(updated_at: dir)
+        end
       end
 
       # A resource is in draft mode if it has an unpublished draft or it has no published version.
