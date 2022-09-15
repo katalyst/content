@@ -101,8 +101,7 @@ $status-dirty-color: #aaa !default;
       align-items: center;
     }
 
-    .title,
-    .url {
+    .heading {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -113,10 +112,37 @@ $status-dirty-color: #aaa !default;
 [data-controller="content--editor--container"] [role="rowheader"],
 [data-controller="content--editor--item"] {
   display: grid;
-  grid-template-columns: 40% 2fr auto;
+  grid-template-columns: minmax(10rem, calc(100% - 12rem)) 1fr 10rem;
   padding: 0.25rem 0.5rem;
   gap: 1rem;
   align-items: center;
+}
+
+[data-controller="content--editor--item"] {
+  .item-background::before {
+    content: "A";
+    font-family: cursive;
+    display: inline-block;
+    min-height: 1rem;
+    min-width: 1rem;
+    text-align: center;
+    color: var(--theme-text-color);
+    background-color: var(--theme-background-color);
+    border: 1px solid var(--theme-border-color);
+    border-radius: 2px;
+  }
+
+  .item-background.light {
+    --theme-text-color: black;
+    --theme-border-color: black;
+    --theme-background-color: white;
+  }
+
+  .item-background.dark {
+    --theme-text-color: white;
+    --theme-border-color: white;
+    --theme-background-color: black;
+  }
 }
 
 // Ensures vertical alignment of header with rows
