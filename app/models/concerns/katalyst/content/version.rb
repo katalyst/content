@@ -28,6 +28,10 @@ module Katalyst
           item
         end
       end
+
+      def text
+        items.filter_map(&:to_plain_text).join("\n")
+      end
     end
   end
 end
