@@ -4,6 +4,8 @@
 @use "item-rules";
 @use "new-items";
 @use "status-bar";
+@use "trix";
+@use "trix-rails";
 
 $grey-light: #f4f4f4 !default;
 $grey: #ececec !default;
