@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    katalyst-content (0.1.0)
+    katalyst-content (0.1.1)
 
 GEM
   remote: https://rubygems.org/
