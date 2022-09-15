@@ -20,6 +20,7 @@
   }
 
   &[data-state="published"] .status-text[data-published],
+  &[data-state="unpublished"] .status-text[data-unpublished],
   &[data-state="draft"] .status-text[data-draft],
   &[data-state="dirty"] .status-text[data-dirty] {
     display: unset;
@@ -68,6 +69,14 @@
     [value="save"],
     [value="revert"],
     [value="discard"] {
+      display: none;
+    }
+  }
+
+  &[data-state="unpublished"] {
+    [value="save"],
+    [value="discard"],
+    [value="revert"] {
       display: none;
     }
   }

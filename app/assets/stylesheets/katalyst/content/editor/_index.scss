@@ -159,7 +159,8 @@ $status-dirty-color: #aaa !default;
   --color: #{$status-published-border-color};
   --border: #{$status-published-color};
 
-  &[data-state="draft"] {
+  &[data-state="draft"],
+  &[data-state="unpublished"] {
     --background: #{$status-draft-background-color};
     --color: #{$status-draft-border-color};
     --border: #{$status-draft-color};
