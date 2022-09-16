@@ -17,6 +17,7 @@
     display: none;
     grid-area: status;
     font-weight: bold;
+    color: var(--color);
   }
 
   &[data-state="published"] .status-text[data-published],

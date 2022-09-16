@@ -19,9 +19,17 @@ module Katalyst
         end
 
         def status(state, **options)
-          tag.span(t("views.katalyst.content.editor.#{state}_html", **options),
-                   class: "status-text",
-                   data:  { state => "" })
+          status_text  = t("views.katalyst.content.editor.#{state}_html", **options)
+          html_options = { class: "status-text", data: { state => "", turbo: false } }
+
+          case state
+          when :published
+            link_to status_text, url_for(container), **html_options
+          when :unpublished, :draft
+            link_to status_text, "#{url_for(container)}/preview", **html_options
+          else
+            tag.span status_text, **html_options
+          end
         end
 
         def actions
