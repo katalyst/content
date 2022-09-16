@@ -57,6 +57,8 @@ module Katalyst
                              .else(1)
           order(case_statement.public_send(dir)).order(updated_at: dir)
         end
+
+        scope :published, -> { where.not(published_version_id: nil) }
       end
 
       # A resource is in draft mode if it has an unpublished draft or it has no published version.
@@ -69,6 +71,10 @@ module Katalyst
         else
           :published
         end
+      end
+
+      def published?
+        published_version_id.present?
       end
 
       # Promotes the draft version to become the published version

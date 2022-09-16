@@ -72,6 +72,11 @@ RSpec.describe Page do
     it { expect { update }.to change(page, :slug) }
   end
 
+  describe "#published?" do
+    it { expect(create(:page)).to be_published }
+    it { expect(create(:page, :unpublished)).not_to be_published }
+  end
+
   describe ".versions.active" do
     it "filters unused versions" do
       published = page.published_version
@@ -85,6 +90,15 @@ RSpec.describe Page do
     it "filters used versions" do
       unused = page.versions.create
       expect(page.versions.inactive).to contain_exactly(unused)
+    end
+  end
+
+  describe ".published" do
+    it "filters published versions" do
+      create(:page, :unpublished)
+      published_page = create(:page)
+
+      expect(described_class.published).to contain_exactly(published_page)
     end
   end
 
