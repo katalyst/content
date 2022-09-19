@@ -107,7 +107,9 @@ module Katalyst
       private
 
       def unset_versions
-        update(draft_version: nil, published_version: nil)
+        self.draft_version_id = nil
+        self.published_version_id = nil
+        save!(validate: false)
       end
 
       # Returns an unsaved copy of draft version for accumulating changes.
