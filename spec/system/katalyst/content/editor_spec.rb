@@ -27,7 +27,7 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Publish"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     page.reload
 
@@ -49,7 +49,7 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Publish"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     container.reload
 
@@ -74,7 +74,7 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Publish"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     container.reload
 
@@ -104,7 +104,7 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Publish"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     container.reload
 
@@ -126,7 +126,7 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Publish"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     container.reload
 
@@ -147,7 +147,7 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Save"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Draft", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     container.reload
 
@@ -168,11 +168,11 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Save"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Draft", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Revert"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     container.reload
 
@@ -193,11 +193,11 @@ RSpec.describe "katalyst/content/editor" do
 
     click_on "Save"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Draft", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Published", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
     container.reload
 
