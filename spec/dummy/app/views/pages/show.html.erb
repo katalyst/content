@@ -2,6 +2,6 @@
 
 <h1><%= page.title %></h1>
 
-<% page.published_items.each do |item| %>
-  <%= render item %>
+<% page.published_items.select(&:visible?).each do |item| %>
+  <%= render item%>
 <% end %>

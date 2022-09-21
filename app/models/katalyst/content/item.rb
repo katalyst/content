@@ -26,7 +26,7 @@ module Katalyst
       end
 
       def to_plain_text
-        heading if show_heading?
+        heading if show_heading? && visible?
       end
 
       private

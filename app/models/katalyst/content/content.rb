@@ -18,7 +18,7 @@ module Katalyst
       end
 
       def to_plain_text
-        [super, content.to_plain_text].compact.join("\n")
+        [super, content.to_plain_text].compact.join("\n") if visible?
       end
     end
   end

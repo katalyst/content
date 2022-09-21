@@ -16,6 +16,22 @@ RSpec.describe Katalyst::Content::Content do
   it { is_expected.to validate_inclusion_of(:background).in_array(Katalyst::Content.config.backgrounds) }
   it { is_expected.to validate_presence_of(:content) }
 
+  describe "#to_plain_text" do
+    it { is_expected.to have_attributes(to_plain_text: "#{content.heading}\n#{content.content.to_plain_text}") }
+
+    context "when heading is hidden" do
+      subject(:content) { build :katalyst_content_content, container: page, show_heading: false }
+
+      it { is_expected.to have_attributes(to_plain_text: content.content.to_plain_text.to_s) }
+    end
+
+    context "when content is not visible" do
+      subject(:content) { build :katalyst_content_content, container: page, visible: false }
+
+      it { is_expected.to have_attributes(to_plain_text: nil) }
+    end
+  end
+
   describe "#dup" do
     subject(:content) { create :katalyst_content_content, container: page }
 
