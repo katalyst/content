@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "katalyst/content/editor" do
+RSpec.describe "katalyst/content/editor/container" do
   # Disabled because we need an HTML5 drag/drop implementation of `drag_to`.
   # Checked selenium, cuprite, and apparition and none of them have one
   # https://bugs.chromium.org/p/chromium/issues/detail?id=850071
