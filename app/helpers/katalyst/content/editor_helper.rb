@@ -37,6 +37,17 @@ module Katalyst
       def content_editor_status_bar(container:, **options)
         Editor::StatusBar.new(self, container).build(**options)
       end
+
+      def content_editor_rich_text_options(options = {})
+        defaults = {
+          data: {
+            direct_upload_url: direct_uploads_url,
+            controller:        "content--editor--trix",
+            action:            "trix-initialize->content--editor--trix#trixInitialize",
+          },
+        }
+        defaults.deep_merge(options)
+      end
     end
   end
 end

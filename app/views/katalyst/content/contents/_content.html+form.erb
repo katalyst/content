@@ -31,10 +31,7 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.rich_text_area :content, data: {
-      controller: "content--editor--trix",
-      action: "trix-initialize->content--editor--trix#trixInitialize"
-    } %>
+    <%= form.rich_text_area :content, content_editor_rich_text_options %>
   </div>
 
   <%= form.submit "Done" %>
