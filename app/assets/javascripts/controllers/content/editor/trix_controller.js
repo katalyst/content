@@ -1,51 +1,37 @@
 import { Controller } from "@hotwired/stimulus";
 import Trix from "trix";
 
+// Stimulus controller doesn't do anything, but having one ensures that trix
+// will be lazy loaded when a trix-editor is added to the dom.
 export default class TrixController extends Controller {
-  trixInitialize(event) {
-    const { toolbarElement } = event.target;
-
-    permitURILinks(toolbarElement);
+  trixInitialize(e) {
+    // noop, useful as an extension point for registering behaviour on load
   }
 }
+
+// Add H4 as an acceptable tag
+Trix.config.blockAttributes["heading4"] = {
+  tagName: "h4",
+  terminal: true,
+  breakOnReturn: true,
+  group: false,
+};
+
+// Remove H1 from trix list of acceptable tags
+delete Trix.config.blockAttributes.heading1;
 
 /**
  * Allow users to enter path and fragment URIs which the input[type=url] browser
  * input does not permit. Uses a permissive regex pattern which is not suitable
  * for untrusted use cases.
  */
-function permitURILinks(toolbar) {
-  const input = toolbar.querySelector("input[name=href]");
-
-  // Change the input type from "url" to "text"
-  input.type = "text";
-
-  // restrict acceptable inputs
-  input.pattern = "(https?|/|#).*?";
-}
+const LINK_PATTERN = "(https?|/|#).*?";
 
 /**
- * Define an additional heading level that should be accepted by trix.
+ * Customize default toolbar:
  *
- * @param level the H{level} to define
- */
-function defineHeading(level) {
-  Trix.config.blockAttributes[`heading${level}`] ||= {
-    tagName: `h${level}`,
-    terminal: true,
-    breakOnReturn: true,
-    group: false,
-  };
-}
-
-// Add heading 4
-defineHeading(4);
-
-// Remove heading 1
-delete Trix.config.blockAttributes.heading1;
-
-/**
- * Customize default toolbar to modify headings from h1 to h4
+ * * headings: h4 instead of h1
+ * * links: use type=text instead of type=url
  *
  * @returns {String} toolbar html fragment
  */
@@ -80,7 +66,7 @@ Trix.config.toolbar.getDefaultHTML = () => {
 <div class="trix-dialogs" data-trix-dialogs>
   <div class="trix-dialog trix-dialog--link" data-trix-dialog="href" data-trix-dialog-attribute="href">
     <div class="trix-dialog__link-fields">
-      <input type="url" name="href" class="trix-input trix-input--dialog" placeholder="${lang.urlPlaceholder}" aria-label="${lang.url}" required data-trix-input>
+      <input type="text" name="href" pattern="${LINK_PATTERN}" class="trix-input trix-input--dialog" placeholder="${lang.urlPlaceholder}" aria-label="${lang.url}" required data-trix-input>
       <div class="trix-button-group">
         <input type="button" class="trix-button trix-button--dialog" value="${lang.link}" data-trix-method="setAttribute">
         <input type="button" class="trix-button trix-button--dialog" value="${lang.unlink}" data-trix-method="removeAttribute">
