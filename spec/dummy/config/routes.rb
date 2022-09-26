@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   resources :pages, param: :slug, only: :show, path: ""
 
+  resolve("Page") { |page| page_path(page.slug) }
+
   root to: "home#index"
 end
