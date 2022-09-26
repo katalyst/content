@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "dartsass-rails"
+gem "image_processing"
 gem "importmap-rails"
 gem "katalyst-tables"
 gem "rails"
