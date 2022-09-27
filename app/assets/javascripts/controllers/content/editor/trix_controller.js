@@ -9,6 +9,8 @@ export default class TrixController extends Controller {
   }
 }
 
+Trix.config.lang["captionPlaceholder"] = "Add alt text\u2026";
+
 // Add H4 as an acceptable tag
 Trix.config.blockAttributes["heading4"] = {
   tagName: "h4",
