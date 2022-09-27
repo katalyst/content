@@ -17,6 +17,14 @@ Trix.config.blockAttributes["heading4"] = {
   group: false,
 };
 
+// Add caption as an acceptable tag
+Trix.config.blockAttributes["attachmentCaption"] = {
+  tagName: "attachment-caption",
+  terminal: true,
+  breakOnReturn: true,
+  group: false,
+};
+
 // Remove H1 from trix list of acceptable tags
 delete Trix.config.blockAttributes.heading1;
 
@@ -32,6 +40,7 @@ const LINK_PATTERN = "(https?|/|#).*?";
  *
  * * headings: h4 instead of h1
  * * links: use type=text instead of type=url
+ * * attachmentCaption: used for attachments - default caption is used for alt text
  *
  * @returns {String} toolbar html fragment
  */
@@ -56,6 +65,7 @@ Trix.config.toolbar.getDefaultHTML = () => {
   </span>
   <span class="trix-button-group trix-button-group--file-tools" data-trix-button-group="file-tools">
     <button type="button" class="trix-button trix-button--icon trix-button--icon-attach" data-trix-action="attachFiles" title="${lang.attachFiles}" tabindex="-1">${lang.attachFiles}</button>
+    <button type="button" class="trix-button trix-button--icon trix-button--icon-attachment-caption" data-trix-attribute="attachmentCaption" title="${lang.attachmentCaption}" tabindex="-1">${lang.attachmentCaption}</button>
   </span>
   <span class="trix-button-group-spacer"></span>
   <span class="trix-button-group trix-button-group--history-tools" data-trix-button-group="history-tools">
