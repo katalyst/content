@@ -4,10 +4,14 @@ module Katalyst
   module Content
     # STI base class for content items
     class Item < ApplicationRecord
+      def self.config
+        Katalyst::Content.config
+      end
+
       belongs_to :container, polymorphic: true
 
       validates :heading, presence: true
-      validates :background, presence: true, inclusion: { in: Katalyst::Content.config.backgrounds }
+      validates :background, presence: true, inclusion: { in: config.backgrounds }
 
       after_initialize :initialize_tree
 

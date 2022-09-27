@@ -16,4 +16,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "spec/factories/**/*", "LICENSE.txt", "README.md"]
   spec.require_paths = ["lib"]
   spec.metadata["rubygems_mfa_required"] = "true"
+
+  spec.add_dependency "active_storage_validations"
 end
