@@ -2,10 +2,16 @@
   <%= render "hidden_fields", form: form %>
   <%= render "form_errors", form: form %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image, accept: Katalyst::Content.config.image_mime_types.join(',') %>
-  </div>
+  <%= content_editor_image_field item: figure, method: :image do |builder| %>
+    <div class="field">
+      <%= form.label :image %>
+      <div>
+        <%= builder.preview class: "image-wrapper" %>
+      </div>
+      <%= form.file_field :image, **builder.file_input_options %>
+      <hint><%= builder.hint_text %></hint>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :heading %>

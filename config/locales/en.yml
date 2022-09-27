@@ -20,3 +20,6 @@ en:
           unpublished_html: Unpublished
           revert: Revert
           save: Save
+        item:
+          size_hint:
+            Must be less than %{max_size}

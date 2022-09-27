@@ -14,6 +14,7 @@ module Katalyst
 
         attr_accessor :template, :container
 
+        delegate :config, to: ::Katalyst::Content
         delegate_missing_to :template
 
         def initialize(template, container)

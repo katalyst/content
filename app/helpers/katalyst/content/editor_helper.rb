@@ -48,6 +48,10 @@ module Katalyst
         }
         defaults.deep_merge(options)
       end
+
+      def content_editor_image_field(item:, method:, **options, &block)
+        Editor::ImageField.new(self, item.container).build(item, method, **options, &block)
+      end
     end
   end
 end

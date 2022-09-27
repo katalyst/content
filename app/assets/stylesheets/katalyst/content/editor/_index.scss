@@ -1,5 +1,6 @@
 @use "icon";
 
+@use "figure";
 @use "item-actions";
 @use "item-rules";
 @use "new-items";
@@ -171,4 +172,8 @@ $status-dirty-color: #aaa !default;
     --color: #{$status-dirty-border-color};
     --border: #{$status-dirty-color};
   }
+}
+
+[data-controller="content--editor--image-field"] {
+  --icon-passive-color: #{$icon-passive-color};
 }
