@@ -1,0 +1,32 @@
+<%= form_with model: figure, scope: :item, url: path do |form| %>
+  <%= render "hidden_fields", form: form %>
+  <%= render "form_errors", form: form %>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, accept: Katalyst::Content.config.image_mime_types.join(',') %>
+  </div>
+
+  <div class="field">
+    <%= form.label :heading %>
+    <%= form.text_field :heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :background %>
+    <%= form.select :background, Katalyst::Content.config.backgrounds %>
+  </div>
+
+  <div class="field">
+    <%= form.label :visible %>
+    <%= form.check_box :visible %>
+  </div>
+
+  <div class="field">
+    <%= form.label :caption %>
+    <%= form.text_field :caption %>
+  </div>
+
+  <%= form.submit "Done" %>
+  <%= link_to "Discard", :back %>
+<% end %>

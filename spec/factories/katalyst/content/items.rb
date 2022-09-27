@@ -19,7 +19,7 @@ FactoryBot.define do
 
   factory :katalyst_content_figure, class: "Katalyst::Content::Figure" do
     content_item_defaults
-    image { Rack::Test::UploadedFile.new(Rails.root.parent.join("fixtures/images/sample.png"), "image/png") }
+    image { image_upload }
     alt { Faker::Lorem.sentence }
     caption { Faker::Hacker.say_something_smart }
   end
