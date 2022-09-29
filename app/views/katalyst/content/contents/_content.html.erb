@@ -1,5 +1,5 @@
-<div id="<%= content.heading&.parameterize %>" class="<%= content.background %>">
+<%= content_item_tag content do %>
   <%= tag.h3 content.heading if content.show_heading? %>
 
   <%= content.content %>
-</div>
+<% end %>

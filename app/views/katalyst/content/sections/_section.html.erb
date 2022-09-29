@@ -1,0 +1,7 @@
+<%= content_item_tag section do %>
+  <%= tag.h2 section.heading if section.show_heading? %>
+
+  <div>
+    <%= render_content_items section.children %>
+  </div>
+<% end %>

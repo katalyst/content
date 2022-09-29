@@ -2,7 +2,7 @@
 
 module Katalyst
   module Content
-    module ApplicationHelper
+    class Section < Item
     end
   end
 end
