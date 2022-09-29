@@ -18,7 +18,9 @@ FactoryBot.define do
     end
 
     after(:create) do |page, context|
-      page.items_attributes = page.items.map.with_index { |item, index| { id: item.id, index: index, depth: 0 } }
+      page.items_attributes = page.items.map.with_index do |item, index|
+        { id: item.id, index: index, depth: item.depth }
+      end
 
       if context._publish
         page.publish!
