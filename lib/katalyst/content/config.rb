@@ -11,6 +11,7 @@ module Katalyst
       config_accessor(:items) do
         %w[
           Katalyst::Content::Content
+          Katalyst::Content::Section
         ]
       end
     end
