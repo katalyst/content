@@ -1,13 +1,6 @@
 <%= form_with model: item, scope: :item, url: path do |form| %>
-  <%= form.hidden_field :container_type %>
-  <%= form.hidden_field :container_id %>
-  <%= form.hidden_field :type %>
-
-  <%= tag.div class: "errors" do %>
-    <% item.errors.full_messages.each do |error| %>
-      <li class="error"><%= error %></li>
-    <% end %>
-  <% end if item.errors.any? %>
+  <%= render "hidden_fields", form: form %>
+  <%= render "form_errors", form: form %>
 
   <div class="field">
     <%= form.label :heading %>
