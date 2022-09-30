@@ -1,15 +1,21 @@
-<%= form_with model: content, scope: :item, url: path do |form| %>
+<%= form_with model: figure, scope: :item, url: path do |form| %>
   <%= render "hidden_fields", form: form %>
   <%= render "form_errors", form: form %>
+
+  <%= content_editor_image_field item: figure, method: :image do |builder| %>
+    <div class="field">
+      <%= form.label :image %>
+      <div>
+        <%= builder.preview class: "image-wrapper" %>
+      </div>
+      <%= form.file_field :image, **builder.file_input_options %>
+      <hint><%= builder.hint_text %></hint>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :heading %>
     <%= form.text_field :heading %>
-  </div>
-
-  <div class="field">
-    <%= form.label :show_heading %>
-    <%= form.check_box :show_heading %>
   </div>
 
   <div class="field">
@@ -23,8 +29,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.rich_text_area :content, content_editor_rich_text_options %>
+    <%= form.label :caption %>
+    <%= form.text_field :caption %>
   </div>
 
   <%= form.submit "Done" %>

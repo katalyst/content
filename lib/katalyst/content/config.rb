@@ -11,9 +11,12 @@ module Katalyst
       config_accessor(:items) do
         %w[
           Katalyst::Content::Content
+          Katalyst::Content::Figure
           Katalyst::Content::Section
         ]
       end
+      config_accessor(:image_mime_types) { %w[image/png image/gif image/jpeg image/webp] }
+      config_accessor(:max_image_size) { 20 }
     end
   end
 end

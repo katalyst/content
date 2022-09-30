@@ -14,7 +14,7 @@ module Katalyst
       end
 
       def create
-        item = @container.items.build(item_params)
+        @item = item = @container.items.build(item_params)
         if item.save
           render :update, locals: { item: item, previous: @container.items.build(type: item.type) }
         else

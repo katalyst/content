@@ -1,4 +1,13 @@
 en:
+  activerecord:
+    attributes:
+      katalyst/content/figure:
+        heading: "Alternate text"
+    errors:
+      models:
+        katalyst/content/item:
+          file_size_out_of_range:
+            must be less than %{max_size}"
   views:
     katalyst:
       content:
@@ -11,3 +20,6 @@ en:
           unpublished_html: Unpublished
           revert: Revert
           save: Save
+        item:
+          size_hint:
+            Must be less than %{max_size}

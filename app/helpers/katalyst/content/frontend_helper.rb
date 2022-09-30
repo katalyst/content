@@ -46,6 +46,8 @@ module Katalyst
 
       def tag
         case item
+        when Figure
+          :figure
         when Section
           :section
         else
