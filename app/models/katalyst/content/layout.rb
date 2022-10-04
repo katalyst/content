@@ -2,7 +2,7 @@
 
 module Katalyst
   module Content
-    class Section < Layout
+    class Layout < Item
     end
   end
 end
