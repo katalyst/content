@@ -85,6 +85,7 @@ export default class ContainerController extends Controller {
 
       this.updateRequested = false;
       const engine = new RulesEngine(this.maxDepthValue);
+      this.container.items.forEach((item) => engine.normalize(item));
       this.container.items.forEach((item) => engine.update(item));
 
       this.#notifyChange();

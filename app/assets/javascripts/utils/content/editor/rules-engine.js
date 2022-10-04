@@ -14,19 +14,26 @@ export default class RulesEngine {
   }
 
   /**
-   * Apply rules to the given item by computing a ruleset then merging it
-   * with the item's current state.
+   * Enforce structural rules to ensure that the given item is currently in a
+   * valid state.
    *
    * @param {Item} item
    */
-  update(item) {
-    this.rules = {};
-
+  normalize(item) {
     // structural rules enforce a valid tree structure
     this.firstItemDepthZero(item);
     this.depthMustBeSet(item);
     this.itemCannotHaveInvalidDepth(item);
     this.itemCannotExceedDepthLimit(item);
+  }
+
+  /**
+   * Apply rules to the given item to determine what operations are permitted.
+   *
+   * @param {Item} item
+   */
+  update(item) {
+    this.rules = {};
 
     // behavioural rules define what the user is allowed to do
     this.parentsCannotDeNest(item);
