@@ -27,10 +27,13 @@ export default class RulesEngine {
     this.depthMustBeSet(item);
     this.itemCannotHaveInvalidDepth(item);
     this.itemCannotExceedDepthLimit(item);
+    this.itemCannotHaveChildren(item);
 
     // behavioural rules define what the user is allowed to do
+    this.parentsCannotNest(item);
     this.parentsCannotDeNest(item);
     this.rootsCannotDeNest(item);
+    this.onlyLastChildCanDeNest(item);
     this.nestingNeedsParent(item);
     this.nestingCannotExceedMaxDepth(item);
     this.leavesCannotCollapse(item);
@@ -82,13 +85,17 @@ export default class RulesEngine {
    */
   itemCannotExceedDepthLimit(item) {
     if (this.maxDepth > 0 && this.maxDepth <= item.depth) {
-      // Note: this change can cause an issue where the previous item is treated
-      // like a parent even though it no longer has children. This is because
-      // items are processed in order. This issue does not seem worth solving
-      // as it only occurs if the max depth is altered. The issue can be worked
-      // around by saving the container.
       item.depth = this.maxDepth - 1;
     }
+  }
+
+  /**
+   * Only layouts are allowed to have children
+   * @param {Item} item
+   */
+  itemCannotHaveChildren(item) {
+    if (!item.layout && item.hasExpandedDescendants())
+      item.depth = item.depth + 1;
   }
 
   /**
@@ -101,12 +108,26 @@ export default class RulesEngine {
   }
 
   /**
+   * nesting an expanded item would loose its children
+   *
+   * @param {Item} item
+   */
+  parentsCannotNest(item) {
+    if (item.hasExpandedDescendants()) this.#deny("denyNest");
+  }
+
+  /**
    * Item depth can't go below 0.
    *
    * @param {Item} item
    */
   rootsCannotDeNest(item) {
     if (item.depth === 0) this.#deny("denyDeNest");
+  }
+
+  onlyLastChildCanDeNest(item) {
+    const next = item.nextItem;
+    if (next && next.depth === item.depth) this.#deny("denyDeNest");
   }
 
   /**
@@ -134,7 +155,12 @@ export default class RulesEngine {
    */
   nestingNeedsParent(item) {
     const previous = item.previousItem;
-    if (!previous || previous.depth < item.depth) this.#deny("denyNest");
+    if (
+      !previous ||
+      previous.depth < item.depth ||
+      (!previous.layout && previous.depth === item.depth)
+    )
+      this.#deny("denyNest");
   }
 
   /**
