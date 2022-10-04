@@ -33,6 +33,10 @@ module Katalyst
         heading if show_heading? && visible?
       end
 
+      def container?
+        false
+      end
+
       private
 
       def initialize_tree

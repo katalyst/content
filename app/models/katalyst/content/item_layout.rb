@@ -2,7 +2,10 @@
 
 module Katalyst
   module Content
-    class Section < ItemLayout
+    class ItemLayout < Item
+      def container?
+        true
+      end
     end
   end
 end

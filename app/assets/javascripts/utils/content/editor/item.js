@@ -80,6 +80,10 @@ export default class Item {
     this.#indexInput.value = `${index}`;
   }
 
+  get layout() {
+    return this.node.dataset[`contentContainer`] === "true";
+  }
+
   /**
    * @returns {Item} nearest neighbour (index - 1)
    */
