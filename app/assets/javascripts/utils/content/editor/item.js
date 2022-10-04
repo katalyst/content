@@ -153,7 +153,9 @@ export default class Item {
    * @param item {Item}
    */
   collapseChild(item) {
+    if (item.hasExpandedDescendants()) item.collapse();
     this.#childrenListElement.appendChild(item.node);
+    item.expand();
   }
 
   /**

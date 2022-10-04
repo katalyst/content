@@ -30,8 +30,6 @@ export default class RulesEngine {
     this.itemCannotHaveChildren(item);
 
     // behavioural rules define what the user is allowed to do
-    this.parentsCannotNest(item);
-    this.parentsCannotDeNest(item);
     this.rootsCannotDeNest(item);
     this.onlyLastChildCanDeNest(item);
     this.nestingNeedsParent(item);
@@ -96,24 +94,6 @@ export default class RulesEngine {
   itemCannotHaveChildren(item) {
     if (!item.layout && item.hasExpandedDescendants())
       item.depth = item.depth + 1;
-  }
-
-  /**
-   * De-nesting an item would create a gap of 2 between itself and its children
-   *
-   * @param {Item} item
-   */
-  parentsCannotDeNest(item) {
-    if (item.hasExpandedDescendants()) this.#deny("denyDeNest");
-  }
-
-  /**
-   * nesting an expanded item would loose its children
-   *
-   * @param {Item} item
-   */
-  parentsCannotNest(item) {
-    if (item.hasExpandedDescendants()) this.#deny("denyNest");
   }
 
   /**
