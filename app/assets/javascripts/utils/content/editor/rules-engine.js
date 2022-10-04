@@ -160,7 +160,7 @@ export default class RulesEngine {
    * @param {Item} item
    */
   parentsCannotBeDeleted(item) {
-    if (item.hasExpandedDescendants()) this.#deny("denyRemove");
+    if (!item.itemId || item.hasExpandedDescendants()) this.#deny("denyRemove");
   }
 
   /**
