@@ -52,6 +52,11 @@ module Katalyst
       def content_editor_image_field(item:, method:, **options, &block)
         Editor::ImageField.new(self, item.container).build(item, method, **options, &block)
       end
+
+      # When rendering item forms do not include the controller namespace prefix (katalyst/content)
+      def prefix_partial_path_with_controller_namespace
+        false
+      end
     end
   end
 end
