@@ -23,9 +23,7 @@
     }
   }
 
-  [role="img"][value="content"],
-  [role="img"][value="figure"],
-  [role="img"][value="section"] {
+  [role="img"][title="Type"] {
     width: 1.5rem;
     height: 1.5rem;
     display: grid;
