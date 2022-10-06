@@ -4,20 +4,26 @@ export default class ImageFieldController extends Controller {
   static targets = ["preview"];
   static values = {
     mimeTypes: Array,
+    maxSize: Number,
   };
 
+  /**
+   * used to calculate the actual drag enter and leave of the element
+   * as drag enter and leave are called on child elements too
+   * @type {number}
+   */
   #counter = 0;
 
   onUpload(event) {
-    this.previewTarget.classList.remove("hidden");
-
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      this.imageTag.src = e.target.result;
-    };
-
-    reader.readAsDataURL(event.currentTarget.files[0]);
+    const file = event.currentTarget.files[0];
+    if (file.size <= this.maxSizeValue) {
+      this.previewTarget.classList.remove("hidden");
+      this.#showPreview(file);
+    } else {
+      event.currentTarget.value = "";
+      this.previewTarget.classList.add("hidden");
+      alert("file size is too big");
+    }
   }
 
   drop(event) {
@@ -63,6 +69,16 @@ export default class ImageFieldController extends Controller {
 
   get imageTag() {
     return this.previewTarget.querySelector("img");
+  }
+
+  #showPreview(file) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      this.imageTag.src = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
   }
 }
 

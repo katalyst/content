@@ -63,6 +63,8 @@ module Katalyst
           add_option(options, :data, :action, ACTIONS)
           add_option(options, :data, :"#{IMAGE_FIELD_CONTROLLER}_mime_types_value",
                      config.image_mime_types.to_json)
+          add_option(options, :data, :"#{IMAGE_FIELD_CONTROLLER}_max_size_value",
+                     config.max_image_size.megabytes)
 
           options
         end
