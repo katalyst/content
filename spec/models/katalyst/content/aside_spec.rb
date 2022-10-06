@@ -1,31 +1,22 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "item_examples"
 
 RSpec.describe Katalyst::Content::Aside do
   subject(:aside) { build :katalyst_content_section, container: page }
 
   let(:page) { create :page }
 
-  it { is_expected.to be_valid }
-
-  it { is_expected.to belong_to(:container).required }
-
-  it { is_expected.to validate_presence_of(:heading) }
-  it { is_expected.to validate_presence_of(:background) }
-  it { is_expected.to validate_inclusion_of(:background).in_array(Katalyst::Content.config.backgrounds) }
+  it_behaves_like "a item" do
+    let(:item) { aside }
+  end
 
   describe "#to_plain_text" do
     it { is_expected.to have_attributes(to_plain_text: aside.heading) }
 
     context "when heading is hidden" do
-      subject(:aside) { build :katalyst_content_aside, container: Page.new, show_heading: false }
-
-      it { is_expected.to have_attributes(to_plain_text: nil) }
-    end
-
-    context "when section is not visible" do
-      subject(:aside) { build :katalyst_content_aside, container: Page.new, visible: false }
+      before { aside.show_heading = false }
 
       it { is_expected.to have_attributes(to_plain_text: nil) }
     end

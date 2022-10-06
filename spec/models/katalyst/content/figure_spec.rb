@@ -7,13 +7,10 @@ RSpec.describe Katalyst::Content::Figure do
 
   let(:page) { create :page }
 
-  it { is_expected.to be_valid }
+  it_behaves_like "a item" do
+    let(:item) { figure }
+  end
 
-  it { is_expected.to belong_to(:container).required }
-
-  it { is_expected.to validate_presence_of(:heading) }
-  it { is_expected.to validate_presence_of(:background) }
-  it { is_expected.to validate_inclusion_of(:background).in_array(Katalyst::Content.config.backgrounds) }
   it { is_expected.to validate_presence_of(:image) }
 
   it { is_expected.to validate_content_type_of(:image).allowing(Katalyst::Content.config.image_mime_types) }
@@ -34,12 +31,6 @@ RSpec.describe Katalyst::Content::Figure do
       subject(:figure) { build :katalyst_content_figure, container: page, show_heading: false }
 
       it { is_expected.to have_attributes(to_plain_text: "Image: #{figure.alt}\nCaption: #{figure.caption}") }
-    end
-
-    context "when content is not visible" do
-      subject(:figure) { build :katalyst_content_figure, container: page, visible: false }
-
-      it { is_expected.to have_attributes(to_plain_text: nil) }
     end
   end
 
