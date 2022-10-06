@@ -1,0 +1,14 @@
+<%= content_item_tag aside do %>
+  <%= tag.h3 aside.heading if aside.show_heading? %>
+
+  <% items = aside.children.select(&:visible?) %>
+  <% last = items.pop %>
+  <div role="aside-container">
+    <div>
+      <%= render_content_items items %>
+    </div>
+    <aside>
+      <%= render_content_items [last] %>
+    </aside>
+  </div>
+<% end %>
