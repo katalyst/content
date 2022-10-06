@@ -20,6 +20,7 @@ export default class RulesEngine {
     this.firstItemDepthZero(item);
     this.depthMustBeSet(item);
     this.itemCannotHaveInvalidDepth(item);
+    this.parentMustBeLayout(item);
   }
 
   /**
@@ -73,6 +74,20 @@ export default class RulesEngine {
     const previous = item.previousItem;
     if (previous && previous.depth < item.depth - 1) {
       item.depth = previous.depth + 1;
+    }
+  }
+
+  /**
+   * Parent item, if any, must be a layout.
+   *
+   * @param {Item} item
+   */
+  parentMustBeLayout(item) {
+    // if we're the first child, make sure our parent is a layout
+    // if we're a sibling, we know the previous item is valid so we must be too
+    const previous = item.previousItem;
+    if (previous && previous.depth < item.depth && !previous.isLayout) {
+      item.depth = previous.depth;
     }
   }
 
