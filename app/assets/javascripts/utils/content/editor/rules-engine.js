@@ -9,10 +9,6 @@ export default class RulesEngine {
     "denyEdit",
   ];
 
-  constructor(maxDepth = null) {
-    this.maxDepth = maxDepth;
-  }
-
   /**
    * Enforce structural rules to ensure that the given item is currently in a
    * valid state.
@@ -24,7 +20,6 @@ export default class RulesEngine {
     this.firstItemDepthZero(item);
     this.depthMustBeSet(item);
     this.itemCannotHaveInvalidDepth(item);
-    this.itemCannotExceedDepthLimit(item);
   }
 
   /**
@@ -39,7 +34,6 @@ export default class RulesEngine {
     this.parentsCannotDeNest(item);
     this.rootsCannotDeNest(item);
     this.nestingNeedsParent(item);
-    this.nestingCannotExceedMaxDepth(item);
     this.leavesCannotCollapse(item);
     this.needHiddenItemsToExpand(item);
     this.parentsCannotBeDeleted(item);
@@ -79,22 +73,6 @@ export default class RulesEngine {
     const previous = item.previousItem;
     if (previous && previous.depth < item.depth - 1) {
       item.depth = previous.depth + 1;
-    }
-  }
-
-  /**
-   * Depth must not exceed container's depth limit.
-   *
-   * @param {Item} item
-   */
-  itemCannotExceedDepthLimit(item) {
-    if (this.maxDepth > 0 && this.maxDepth <= item.depth) {
-      // Note: this change can cause an issue where the previous item is treated
-      // like a parent even though it no longer has children. This is because
-      // items are processed in order. This issue does not seem worth solving
-      // as it only occurs if the max depth is altered. The issue can be worked
-      // around by saving the container.
-      item.depth = this.maxDepth - 1;
     }
   }
 
@@ -142,17 +120,6 @@ export default class RulesEngine {
   nestingNeedsParent(item) {
     const previous = item.previousItem;
     if (!previous || previous.depth < item.depth) this.#deny("denyNest");
-  }
-
-  /**
-   * An item can't be nested (indented) if doing so would exceed the max depth.
-   *
-   * @param {Item} item
-   */
-  nestingCannotExceedMaxDepth(item) {
-    if (this.maxDepth > 0 && this.maxDepth <= item.depth + 1) {
-      this.#deny("denyNest");
-    }
   }
 
   /**

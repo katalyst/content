@@ -6,9 +6,6 @@ import RulesEngine from "utils/content/editor/rules-engine";
 
 export default class ContainerController extends Controller {
   static targets = ["container"];
-  static values = {
-    maxDepth: Number,
-  };
 
   connect() {
     this.state = this.container.state;
@@ -84,7 +81,7 @@ export default class ContainerController extends Controller {
       if (!this.updateRequested) return;
 
       this.updateRequested = false;
-      const engine = new RulesEngine(this.maxDepthValue);
+      const engine = new RulesEngine();
       this.container.items.forEach((item) => engine.normalize(item));
       this.container.items.forEach((item) => engine.update(item));
 

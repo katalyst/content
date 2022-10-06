@@ -29,10 +29,6 @@ module Katalyst
           add_option(options, :data, :controller, CONTAINER_CONTROLLER)
           add_option(options, :data, :action, ACTIONS)
 
-          # depth = options.delete(:depth) || container.depth
-          #
-          # add_option(options, :data, :"#{CONTAINER_CONTROLLER}-max-depth-value", depth) if depth
-
           options
         end
       end
