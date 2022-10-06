@@ -127,12 +127,25 @@ export default class Item {
   traverse(callback) {
     // capture descendants before traversal in case of side-effects
     // specifically, setting depth affects calculation
-    const collapsed = this.#collapsedChildren;
     const expanded = this.#expandedDescendants;
 
     callback(this);
-    collapsed.forEach((item) => item.traverse(callback));
-    expanded.forEach((item) => item.traverse(callback));
+    this.#traverseCollapsed(callback);
+    expanded.forEach((item) => this.#traverseCollapsed(item));
+  }
+
+  /**
+   * Recursively traverse the node's collapsed descendants, if any.
+   *
+   * @callback {Item}
+   */
+  #traverseCollapsed(callback) {
+    if (!this.hasCollapsedDescendants()) return;
+
+    this.#collapsedDescendants.forEach((item) => {
+      callback(item);
+      item.#traverseCollapsed(callback);
+    });
   }
 
   /**
@@ -143,10 +156,6 @@ export default class Item {
     this.traverse((child) => {
       child.depth += 1;
     });
-
-    if (this.previousItem.hasCollapsedDescendants()) {
-      this.previousItem.collapseChild(this);
-    }
   }
 
   /**
@@ -202,10 +211,12 @@ export default class Item {
    * @param deny {boolean}
    */
   toggleRule(rule, deny = false) {
-    if (this.node.dataset.hasOwnProperty(rule) && !deny)
+    if (this.node.dataset.hasOwnProperty(rule) && !deny) {
       delete this.node.dataset[rule];
-    if (!this.node.dataset.hasOwnProperty(rule) && deny)
+    }
+    if (!this.node.dataset.hasOwnProperty(rule) && deny) {
       this.node.dataset[rule] = "";
+    }
 
     if (rule === "denyDrag") {
       if (!this.node.hasAttribute("draggable") && !deny) {
@@ -245,6 +256,9 @@ export default class Item {
     return this.node.querySelector(`:scope > [data-content-children]`);
   }
 
+  /**
+   * @returns {Item[]} all items that follow this element that have a greater depth.
+   */
   get #expandedDescendants() {
     const descendants = [];
 
@@ -257,7 +271,10 @@ export default class Item {
     return descendants;
   }
 
-  get #collapsedChildren() {
+  /**
+   * @returns {Item[]} all items directly contained inside this element's hidden children element.
+   */
+  get #collapsedDescendants() {
     if (!this.hasCollapsedDescendants()) return [];
 
     return Array.from(this.#childrenListElement.children).map(

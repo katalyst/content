@@ -111,8 +111,8 @@ RSpec.describe "katalyst/content/editor/container" do
     expect(container.published_items.map(&:heading)).to eq([items.last.heading, items.first.heading])
   end
 
-  it "can change item depth" do
-    items = build_list :katalyst_content_item, 2
+  it "can nest items in sections" do
+    items = [build(:katalyst_content_section), build(:katalyst_content_content)]
     container = create :page, items: items
 
     expect(container.draft_items.map(&:depth)).to eq([0, 0])
@@ -131,6 +131,17 @@ RSpec.describe "katalyst/content/editor/container" do
     container.reload
 
     expect(container.published_items.map(&:depth)).to eq([0, 1])
+  end
+
+  it "cannot nest items that are not containers" do
+    items = build_list :katalyst_content_content, 2
+    container = create :page, items: items
+
+    expect(container.draft_items.map(&:depth)).to eq([0, 0])
+
+    visit admin_page_path(container)
+
+    expect(page).not_to have_selector("li[data-content-item]:not([data-deny-nest]")
   end
 
   it "can save without publishing" do

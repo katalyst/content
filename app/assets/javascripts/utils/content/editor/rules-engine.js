@@ -9,6 +9,14 @@ export default class RulesEngine {
     "denyEdit",
   ];
 
+  constructor(debug = false) {
+    if (debug) {
+      this.debug = (...args) => console.log(...args);
+    } else {
+      this.debug = () => {};
+    }
+  }
+
   /**
    * Enforce structural rules to ensure that the given item is currently in a
    * valid state.
@@ -21,6 +29,7 @@ export default class RulesEngine {
     this.depthMustBeSet(item);
     this.itemCannotHaveInvalidDepth(item);
     this.parentMustBeLayout(item);
+    this.parentCannotHaveExpandedAndCollapsedChildren(item);
   }
 
   /**
@@ -34,6 +43,7 @@ export default class RulesEngine {
     // behavioural rules define what the user is allowed to do
     this.parentsCannotDeNest(item);
     this.rootsCannotDeNest(item);
+    this.onlyLastItemCanDeNest(item);
     this.nestingNeedsParent(item);
     this.leavesCannotCollapse(item);
     this.needHiddenItemsToExpand(item);
@@ -49,7 +59,9 @@ export default class RulesEngine {
    * First item can't have a parent, so its depth should always be 0
    */
   firstItemDepthZero(item) {
-    if (item.index === 0) {
+    if (item.index === 0 && !item.depth === 0) {
+      this.debug(`enforce depth on item ${item.index}: ${item.depth} => 0`);
+
       item.depth = 0;
     }
   }
@@ -61,6 +73,8 @@ export default class RulesEngine {
    */
   depthMustBeSet(item) {
     if (isNaN(item.depth) || item.depth < 0) {
+      this.debug(`unset depth on item ${item.index}: => 0`);
+
       item.depth = 0;
     }
   }
@@ -73,6 +87,12 @@ export default class RulesEngine {
   itemCannotHaveInvalidDepth(item) {
     const previous = item.previousItem;
     if (previous && previous.depth < item.depth - 1) {
+      this.debug(
+        `invalid depth on item ${item.index}: ${item.depth} => ${
+          previous.depth + 1
+        }`
+      );
+
       item.depth = previous.depth + 1;
     }
   }
@@ -87,7 +107,24 @@ export default class RulesEngine {
     // if we're a sibling, we know the previous item is valid so we must be too
     const previous = item.previousItem;
     if (previous && previous.depth < item.depth && !previous.isLayout) {
+      this.debug(
+        `invalid parent for item ${item.index}: ${item.depth} => ${previous.depth}`
+      );
+
       item.depth = previous.depth;
+    }
+  }
+
+  /**
+   * If a parent has expanded and collapsed children, expand.
+   *
+   * @param {Item} item
+   */
+  parentCannotHaveExpandedAndCollapsedChildren(item) {
+    if (item.hasCollapsedDescendants() && item.hasExpandedDescendants()) {
+      this.debug(`expanding collapsed children of item ${item.index}`);
+
+      item.expand();
     }
   }
 
@@ -107,6 +144,17 @@ export default class RulesEngine {
    */
   rootsCannotDeNest(item) {
     if (item.depth === 0) this.#deny("denyDeNest");
+  }
+
+  /**
+   * De-nesting an item that has siblings would make it a container.
+   *
+   * @param {Item} item
+   */
+  onlyLastItemCanDeNest(item) {
+    const next = item.nextItem;
+    if (next && next.depth === item.depth && !item.isLayout)
+      this.#deny("denyDeNest");
   }
 
   /**
@@ -134,7 +182,13 @@ export default class RulesEngine {
    */
   nestingNeedsParent(item) {
     const previous = item.previousItem;
-    if (!previous || previous.depth < item.depth) this.#deny("denyNest");
+    // no previous, so cannot nest
+    if (!previous) this.#deny("denyNest");
+    // previous is too shallow, nesting would increase depth too much
+    else if (previous.depth < item.depth) this.#deny("denyNest");
+    // new parent is not a layout
+    else if (previous.depth === item.depth && !previous.isLayout)
+      this.#deny("denyNest");
   }
 
   /**
