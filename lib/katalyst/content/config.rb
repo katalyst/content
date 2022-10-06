@@ -13,6 +13,7 @@ module Katalyst
           Katalyst::Content::Content
           Katalyst::Content::Figure
           Katalyst::Content::Section
+          Katalyst::Content::Aside
         ]
       end
       config_accessor(:image_mime_types) { %w[image/png image/gif image/jpeg image/webp] }
