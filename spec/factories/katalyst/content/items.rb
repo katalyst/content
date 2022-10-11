@@ -28,6 +28,10 @@ FactoryBot.define do
     content_item_defaults
   end
 
+  factory :katalyst_content_group, class: "Katalyst::Content::Group" do
+    content_item_defaults
+  end
+
   factory :katalyst_content_aside, class: "Katalyst::Content::Aside" do
     content_item_defaults
   end
