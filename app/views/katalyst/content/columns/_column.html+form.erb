@@ -1,0 +1,27 @@
+<%= form_with model: column, scope: :item, url: path do |form| %>
+  <%= render "hidden_fields", form: form %>
+  <%= render "form_errors", form: form %>
+
+  <div class="field">
+    <%= form.label :heading %>
+    <%= form.text_field :heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :show_heading %>
+    <%= form.check_box :show_heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :background %>
+    <%= form.select :background, Katalyst::Content.config.backgrounds %>
+  </div>
+
+  <div class="field">
+    <%= form.label :visible %>
+    <%= form.check_box :visible %>
+  </div>
+
+  <%= form.submit "Done" %>
+  <%= link_to "Discard", :back %>
+<% end %>

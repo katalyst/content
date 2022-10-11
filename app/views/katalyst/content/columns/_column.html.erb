@@ -1,0 +1,14 @@
+<%= content_item_tag column do %>
+  <%= tag.h3 column.heading if column.show_heading? %>
+
+  <% items = column.children.select(&:visible?) %>
+  <% last = items.pop %>
+  <div class="columns-container">
+    <div class="column">
+      <%= render_content_items items %>
+    </div>
+    <div class="column">
+      <%= render_content_items [last] %>
+    </div>
+  </div>
+<% end %>

@@ -31,4 +31,8 @@ FactoryBot.define do
   factory :katalyst_content_aside, class: "Katalyst::Content::Aside" do
     content_item_defaults
   end
+
+  factory :katalyst_content_column, class: "Katalyst::Content::Column" do
+    content_item_defaults
+  end
 end
