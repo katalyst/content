@@ -2,7 +2,7 @@
 
 module Katalyst
   module Content
-    class Column < Item
+    class Column < Layout
     end
   end
 end

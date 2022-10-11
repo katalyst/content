@@ -2,7 +2,7 @@
 
 module Katalyst
   module Content
-    class Aside < Item
+    class Aside < Layout
     end
   end
 end

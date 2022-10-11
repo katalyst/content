@@ -2,7 +2,7 @@
 
 module Katalyst
   module Content
-    class Group < Item
+    class Group < Layout
     end
   end
 end
