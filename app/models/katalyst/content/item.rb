@@ -11,7 +11,7 @@ module Katalyst
       belongs_to :container, polymorphic: true
 
       validates :heading, presence: true
-      validates :background, presence: true, inclusion: { in: config.backgrounds }
+      validates :background, presence: true, inclusion: { in: config.backgrounds }, if: :validate_background?
 
       after_initialize :initialize_tree
 
@@ -42,6 +42,10 @@ module Katalyst
       def initialize_tree
         self.parent   ||= nil
         self.children ||= []
+      end
+
+      def validate_background?
+        true
       end
     end
   end
