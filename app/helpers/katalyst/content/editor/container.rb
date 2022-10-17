@@ -6,6 +6,7 @@ module Katalyst
       class Container < Base
         ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
           submit->#{CONTAINER_CONTROLLER}#reindex
+          content:drop->#{CONTAINER_CONTROLLER}#drop
           content:reindex->#{CONTAINER_CONTROLLER}#reindex
           content:reset->#{CONTAINER_CONTROLLER}#reset
         ACTIONS
