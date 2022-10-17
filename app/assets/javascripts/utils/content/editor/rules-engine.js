@@ -59,7 +59,7 @@ export default class RulesEngine {
    * First item can't have a parent, so its depth should always be 0
    */
   firstItemDepthZero(item) {
-    if (item.index === 0 && !item.depth === 0) {
+    if (item.index === 0 && item.depth !== 0) {
       this.debug(`enforce depth on item ${item.index}: ${item.depth} => 0`);
 
       item.depth = 0;

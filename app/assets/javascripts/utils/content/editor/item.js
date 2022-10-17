@@ -131,7 +131,7 @@ export default class Item {
 
     callback(this);
     this.#traverseCollapsed(callback);
-    expanded.forEach((item) => this.#traverseCollapsed(item));
+    expanded.forEach((item) => item.#traverseCollapsed(callback));
   }
 
   /**
@@ -149,16 +149,6 @@ export default class Item {
   }
 
   /**
-   * Increase the depth of this item and its descendants.
-   * If this causes it to become a child of a collapsed item, then collapse this item.
-   */
-  nest() {
-    this.traverse((child) => {
-      child.depth += 1;
-    });
-  }
-
-  /**
    * Move the given item into this element's hidden children list.
    * Assumes the list already exists.
    *
@@ -166,15 +156,6 @@ export default class Item {
    */
   collapseChild(item) {
     this.#childrenListElement.appendChild(item.node);
-  }
-
-  /**
-   * Decrease the depth of this item (and its descendants).
-   */
-  deNest() {
-    this.traverse((child) => {
-      child.depth -= 1;
-    });
   }
 
   /**
