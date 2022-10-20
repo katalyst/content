@@ -8,7 +8,7 @@
       <%= render_content_items items %>
     </div>
     <div class="column">
-      <%= render_content_items [last] %>
+      <%= render_content_items [last] if last %>
     </div>
   </div>
 <% end %>
