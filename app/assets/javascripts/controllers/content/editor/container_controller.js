@@ -34,10 +34,13 @@ export default class ContainerController extends Controller {
 
     let delta = 0;
     if (previous === undefined) {
+      // if previous does not exist, set depth to 0
       delta = -item.depth;
-    } else if (previous.isLayout && item.hasExpandedDescendants()) {
+    } else if (previous.isLayout && item.nextItem && item.nextItem.depth > previous.depth) {
+      // if previous is a layout and next is a child of previous, make item a child of previous
       delta = previous.depth - item.depth + 1;
     } else {
+      // otherwise, make item a sibling of previous
       delta = previous.depth - item.depth;
     }
 
