@@ -35,7 +35,7 @@ export default class ContainerController extends Controller {
     let delta = 0;
     if (previous === undefined) {
       delta = -item.depth;
-    } else if (previous.isLayout && previous.hasExpandedDescendants()) {
+    } else if (previous.isLayout && item.hasExpandedDescendants()) {
       delta = previous.depth - item.depth + 1;
     } else {
       delta = previous.depth - item.depth;
