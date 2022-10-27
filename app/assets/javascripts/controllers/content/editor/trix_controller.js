@@ -25,7 +25,7 @@ delete Trix.config.blockAttributes.heading1;
  * input does not permit. Uses a permissive regex pattern which is not suitable
  * for untrusted use cases.
  */
-const LINK_PATTERN = "(https?|/|#).*?";
+const LINK_PATTERN = "(https?|mailto:|tel:|/|#).*?";
 
 /**
  * Customize default toolbar:
