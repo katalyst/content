@@ -76,3 +76,13 @@ Trix.config.toolbar.getDefaultHTML = () => {
 </div>
 `;
 };
+
+/**
+ * If the <trix-editor> element is in the HTML when Trix loads, then Trix will have already injected the toolbar content
+ * before our code gets a chance to run. Fix that now.
+ *
+ * Note: in Trix 2 this is likely to no longer be necessary.
+ */
+document.querySelectorAll("trix-toolbar").forEach((e) => {
+  e.innerHTML = Trix.config.toolbar.getDefaultHTML();
+});
