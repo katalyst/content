@@ -13,6 +13,12 @@ module Katalyst
         # rubocop:enable Rails/ReflectionClassName
 
         attribute :nodes, Katalyst::Content::Types::NodesType.new, default: -> { [] }
+
+        validate :ensure_items_exists
+      end
+
+      def ensure_items_exists
+        parent.errors.add(:items, :missing_item) unless items.all?(&:present?)
       end
 
       def items
@@ -22,10 +28,10 @@ module Katalyst
 
         items = parent.items.where(id: nodes.map(&:id)).index_by(&:id)
         nodes.map do |node|
-          item       = items[node.id]
-          item.index = node.index
-          item.depth = node.depth
-          item
+          items[node.id]&.tap do |item|
+            item.index = node.index
+            item.depth = node.depth
+          end
         end
       end
 

@@ -165,6 +165,25 @@ RSpec.describe "katalyst/content/editor/container" do
     expect(container.draft_items).to contain_exactly(having_attributes(heading: "Updated"))
   end
 
+  it "can show errors on save" do
+    item = build :katalyst_content_item
+    container = create :page, items: [item]
+
+    visit admin_page_path(container)
+
+    find("a[title='Edit']").click
+    fill_in "Heading", with: "Updated"
+    click_on "Done"
+
+    expect(page).to have_selector("li", text: "Updated")
+    container.items.reload.destroy_all
+
+    click_on "Save"
+
+    expect(page).to have_text("items are missing or invalid")
+    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+  end
+
   it "can revert a change" do
     item = build :katalyst_content_item
     container = create :page, items: [item]

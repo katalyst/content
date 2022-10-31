@@ -95,6 +95,11 @@ module Katalyst
         self
       end
 
+      # Required for testing items validation
+      def items_attributes
+        draft_version&.nodes&.as_json
+      end
+
       # Updates the current draft version with new structure. Attributes should be structural information about the
       # items, e.g. `{index => {id:, depth:}` or `[{id:, depth:}]`.
       #

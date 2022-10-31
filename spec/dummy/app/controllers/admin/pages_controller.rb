@@ -46,7 +46,8 @@ module Admin
       page.attributes = page_params
 
       unless page.valid?
-        return render :show, locals: { page: page }, status: :unprocessable_entity
+        return render turbo_stream: helpers.content_editor_errors(container: page),
+                      status:       :unprocessable_entity
       end
 
       case params[:commit]

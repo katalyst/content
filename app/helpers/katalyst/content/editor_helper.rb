@@ -25,6 +25,12 @@ module Katalyst
         Editor::List.new(self, container).items(item)
       end
 
+      # Generate a turbo stream fragment that will show structural errors to the user.
+      def content_editor_errors(container:, **options)
+        turbo_stream.replace(dom_id(container, :errors),
+                             Editor::Errors.new(self, container).build(**options))
+      end
+
       # Gene
       def content_editor_new_item(item:, container: item.container, **options, &block)
         Editor::NewItem.new(self, container).build(item, **options, &block)

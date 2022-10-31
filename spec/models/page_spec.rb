@@ -23,6 +23,12 @@ RSpec.describe Page do
 
   it { expect(page.items).to eq(items) }
 
+  it "validates items" do
+    expect(page).not_to allow_value([{ id: 404, depth: 0, index: 0 }])
+                          .for(:items_attributes)
+                          .with_message(I18n.t("activerecord.errors.messages.missing_item"), against: :items)
+  end
+
   it { is_expected.to have_attributes(state: :published) }
   it { expect(page.draft_version).to eq(page.published_version) }
 

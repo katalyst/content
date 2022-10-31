@@ -14,11 +14,16 @@ module Katalyst
         def build(options)
           form_with(model: container, **default_options(id: container_form_id, **options)) do |form|
             concat hidden_input
+            concat errors
             concat(capture { yield form })
           end
         end
 
         private
+
+        def errors
+          Editor::Errors.new(self, container).build
+        end
 
         # Hidden input ensures that if the container is empty then the controller
         # receives an empty array.
