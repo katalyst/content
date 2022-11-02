@@ -12,10 +12,10 @@ def transform_tree(nodes, &block)
 end
 
 RSpec.describe Page do
-  subject(:page) { create :page, items: items }
+  subject(:page) { create(:page, items: items) }
 
-  let(:first) { build :katalyst_content_item, heading: "First" }
-  let(:last) { build :katalyst_content_item, heading: "Last" }
+  let(:first) { build(:katalyst_content_item, heading: "First") }
+  let(:last) { build(:katalyst_content_item, heading: "Last") }
   let(:items) { [first, last] }
 
   it { is_expected.to validate_presence_of(:title) }
@@ -124,7 +124,7 @@ RSpec.describe Page do
 
   describe "add item" do
     let(:update) do
-      update = create :katalyst_content_item, container: page, heading: "Update"
+      update = create(:katalyst_content_item, container: page, heading: "Update")
       page.update(items_attributes: page.draft_nodes + [{ id: update.id }])
       update
     end
@@ -139,7 +139,7 @@ RSpec.describe Page do
 
     context "with controller formatted attributes" do
       let(:update) do
-        update     = create :katalyst_content_item, container: page, heading: "Update"
+        update     = create(:katalyst_content_item, container: page, heading: "Update")
         attributes = { "0" => { id: first.id.to_s, index: "0", depth: "0" },
                        "1" => { id: update.id.to_s, index: "2", depth: "0" },
                        "2" => { id: last.id.to_s, index: "1", depth: "0" } }
@@ -170,7 +170,7 @@ RSpec.describe Page do
 
   describe "swap two items" do
     let(:update) do
-      update = create :katalyst_content_item, container: page, heading: "Update"
+      update = create(:katalyst_content_item, container: page, heading: "Update")
       page.update(items_attributes: [{ id: first.id },
                                      { id: update.id }])
     end
@@ -316,7 +316,7 @@ RSpec.describe Page do
     end
 
     context "with multiple item changes" do
-      let(:multiple_items) { create_list :katalyst_content_item, 2, container: page }
+      let(:multiple_items) { create_list(:katalyst_content_item, 2, container: page) }
       let(:item_attributes) { [{ id: multiple_items.first.id, depth: 0 }, { id: multiple_items.last.id, depth: 1 }] }
 
       include_context "when in the future"
@@ -331,22 +331,22 @@ RSpec.describe Page do
   end
 
   describe "#published_text" do
-    subject(:page) { create :page, items: items }
+    subject(:page) { create(:page, items: items) }
 
     context "with heading" do
-      let(:items) { build_list :katalyst_content_content, 1, heading: "HEADING", content: "BODY" }
+      let(:items) { build_list(:katalyst_content_content, 1, heading: "HEADING", content: "BODY") }
 
       it { expect(page).to have_attributes(published_text: "HEADING\nBODY") }
     end
 
     context "without heading" do
-      let(:items) { build_list :katalyst_content_content, 1, heading: "HEADING", show_heading: false, content: "BODY" }
+      let(:items) { build_list(:katalyst_content_content, 1, heading: "HEADING", show_heading: false, content: "BODY") }
 
       it { expect(page).to have_attributes(published_text: "BODY") }
     end
 
     context "with multiple items" do
-      let(:items) { build_list :katalyst_content_content, 3, show_heading: false, content: "BODY" }
+      let(:items) { build_list(:katalyst_content_content, 3, show_heading: false, content: "BODY") }
 
       it { expect(page).to have_attributes(published_text: "BODY\nBODY\nBODY") }
     end

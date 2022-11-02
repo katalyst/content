@@ -10,7 +10,7 @@ RSpec.describe "katalyst/content/editor/container" do
   # > sending the mouse press, mouse move and mouse release, because  the drag
   # > and drop events are generated from the OS level.
   xit "can add a item" do
-    page = create :page
+    page = create(:page)
 
     visit katalyst_content.page_path(page)
 
@@ -35,8 +35,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can remove a item" do
-    item = build :katalyst_content_item
-    container = create :page, items: [item]
+    item = build(:katalyst_content_item)
+    container = create(:page, items: [item])
 
     expect(container.draft_items).not_to be_empty
 
@@ -57,8 +57,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can edit a item" do
-    item = build :katalyst_content_item
-    container = create :page, items: [item]
+    item = build(:katalyst_content_item)
+    container = create(:page, items: [item])
 
     expect(container.draft_items).not_to be_empty
 
@@ -82,8 +82,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can re-order items" do
-    items = build_list :katalyst_content_item, 2
-    container = create :page, items: items
+    items = build_list(:katalyst_content_item, 2)
+    container = create(:page, items: items)
 
     expect(container.items.map(&:heading)).to eq([items.first.heading, items.last.heading])
 
@@ -113,7 +113,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
   it "can nest items in sections" do
     items = [build(:katalyst_content_section), build(:katalyst_content_content)]
-    container = create :page, items: items
+    container = create(:page, items: items)
 
     expect(container.draft_items.map(&:depth)).to eq([0, 0])
 
@@ -134,8 +134,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "cannot nest items that are not containers" do
-    items = build_list :katalyst_content_content, 2
-    container = create :page, items: items
+    items = build_list(:katalyst_content_content, 2)
+    container = create(:page, items: items)
 
     expect(container.draft_items.map(&:depth)).to eq([0, 0])
 
@@ -145,8 +145,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can save without publishing" do
-    item = build :katalyst_content_item
-    container = create :page, items: [item]
+    item = build(:katalyst_content_item)
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 
@@ -166,8 +166,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can show errors on save" do
-    item = build :katalyst_content_item
-    container = create :page, items: [item]
+    item = build(:katalyst_content_item)
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 
@@ -185,8 +185,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can revert a change" do
-    item = build :katalyst_content_item
-    container = create :page, items: [item]
+    item = build(:katalyst_content_item)
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 
@@ -210,8 +210,8 @@ RSpec.describe "katalyst/content/editor/container" do
   end
 
   it "can publish a change" do
-    item = build :katalyst_content_item
-    container = create :page, items: [item]
+    item = build(:katalyst_content_item)
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 

@@ -13,6 +13,10 @@ module Katalyst
         render locals: { item: @container.items.build(item_params) }
       end
 
+      def edit
+        render locals: { item: @item }
+      end
+
       def create
         @item = item = @container.items.build(item_params)
         if item.save
@@ -20,10 +24,6 @@ module Katalyst
         else
           render :new, status: :unprocessable_entity, locals: { item: item }
         end
-      end
-
-      def edit
-        render locals: { item: @item }
       end
 
       def update

@@ -4,8 +4,8 @@ require "rails_helper"
 
 RSpec.describe "katalyst/content/editor/content" do
   it "can add an anchor link" do
-    item = build :katalyst_content_content, content: "testing link editing"
-    container = create :page, items: [item]
+    item = build(:katalyst_content_content, content: "testing link editing")
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 
@@ -36,8 +36,8 @@ RSpec.describe "katalyst/content/editor/content" do
   end
 
   it "can add a heading" do
-    item = build :katalyst_content_content, content: "testing headings"
-    container = create :page, items: [item]
+    item = build(:katalyst_content_content, content: "testing headings")
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 
@@ -66,8 +66,8 @@ RSpec.describe "katalyst/content/editor/content" do
 
   # regression test for headings not being detected on first interaction
   it "can modify an existing heading" do
-    item = build :katalyst_content_content, content: "<h4>testing headings</h4>"
-    container = create :page, items: [item]
+    item = build(:katalyst_content_content, content: "<h4>testing headings</h4>")
+    container = create(:page, items: [item])
 
     visit admin_page_path(container)
 

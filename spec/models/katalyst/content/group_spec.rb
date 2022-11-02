@@ -4,9 +4,9 @@ require "rails_helper"
 require_relative "item_examples"
 
 RSpec.describe Katalyst::Content::Group do
-  subject(:group) { build :katalyst_content_group, container: page }
+  subject(:group) { build(:katalyst_content_group, container: page) }
 
-  let(:page) { create :page }
+  let(:page) { create(:page) }
 
   it_behaves_like "a item" do
     let(:item) { group }

@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Katalyst::Content::Content do
-  subject(:content) { build :katalyst_content_content, container: page }
+  subject(:content) { build(:katalyst_content_content, container: page) }
 
-  let(:page) { create :page }
+  let(:page) { create(:page) }
 
   it_behaves_like "a item" do
     let(:item) { content }
@@ -17,14 +17,14 @@ RSpec.describe Katalyst::Content::Content do
     it { is_expected.to have_attributes(to_plain_text: "#{content.heading}\n#{content.content.to_plain_text}") }
 
     context "when heading is hidden" do
-      subject(:content) { build :katalyst_content_content, container: page, show_heading: false }
+      subject(:content) { build(:katalyst_content_content, container: page, show_heading: false) }
 
       it { is_expected.to have_attributes(to_plain_text: content.content.to_plain_text.to_s) }
     end
   end
 
   describe "#dup" do
-    subject(:content) { create :katalyst_content_content, container: page }
+    subject(:content) { create(:katalyst_content_content, container: page) }
 
     it "preserves page association on dup" do
       expect(content.dup).to have_attributes(content.attributes.slice("parent_id", "parent_type"))

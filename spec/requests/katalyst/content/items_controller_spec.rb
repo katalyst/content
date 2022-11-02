@@ -5,9 +5,9 @@ require "rails_helper"
 RSpec.describe Katalyst::Content::ItemsController do
   subject { action && response }
 
-  let(:container) { create :page }
+  let(:container) { create(:page) }
   let(:default_item_params) { { type: item.class.name, container_id: container.id, container_type: "Page" } }
-  let(:item) { build :katalyst_content_content, container: container }
+  let(:item) { build(:katalyst_content_content, container: container) }
   let(:item_params) { default_item_params }
 
   shared_examples "has attachment" do |attribute = :image|
@@ -48,7 +48,7 @@ RSpec.describe Katalyst::Content::ItemsController do
     it { expect { action }.to change(Katalyst::Content::Content, :count).by(1) }
 
     context "with figure" do
-      let(:item) { build :katalyst_content_figure, container: container }
+      let(:item) { build(:katalyst_content_figure, container: container) }
       let(:item_params) { attributes_for(:katalyst_content_figure).merge(default_item_params) }
 
       it { is_expected.to be_successful }
@@ -68,14 +68,14 @@ RSpec.describe Katalyst::Content::ItemsController do
 
   describe "GET /items/:id/edit" do
     let(:action) { get katalyst_content.edit_item_path(item) }
-    let(:item) { create :katalyst_content_content, container: container }
+    let(:item) { create(:katalyst_content_content, container: container) }
 
     it { is_expected.to be_successful }
   end
 
   describe "PATCH /items/:id" do
     let(:action) { patch katalyst_content.item_path(item), params: { item: item_params }, as: :turbo_stream }
-    let!(:item) { create :katalyst_content_content, container: container }
+    let!(:item) { create(:katalyst_content_content, container: container) }
     let(:item_params) { { heading: "A new level" }.merge(default_item_params) }
 
     it { is_expected.to be_successful }
@@ -95,7 +95,7 @@ RSpec.describe Katalyst::Content::ItemsController do
     end
 
     context "with figure" do
-      let(:item) { create :katalyst_content_figure, container: container }
+      let(:item) { create(:katalyst_content_figure, container: container) }
       let(:item_params) { { image: image_upload("simple.png") }.merge(default_item_params) }
 
       it_behaves_like "changes attachment"

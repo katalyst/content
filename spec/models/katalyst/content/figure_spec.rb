@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Katalyst::Content::Figure do
-  subject(:figure) { build :katalyst_content_figure, container: page }
+  subject(:figure) { build(:katalyst_content_figure, container: page) }
 
-  let(:page) { create :page }
+  let(:page) { create(:page) }
 
   it_behaves_like "a item" do
     let(:item) { figure }
@@ -28,14 +28,14 @@ RSpec.describe Katalyst::Content::Figure do
     end
 
     context "when heading is hidden" do
-      subject(:figure) { build :katalyst_content_figure, container: page, show_heading: false }
+      subject(:figure) { build(:katalyst_content_figure, container: page, show_heading: false) }
 
       it { is_expected.to have_attributes(to_plain_text: "Image: #{figure.alt}\nCaption: #{figure.caption}") }
     end
   end
 
   describe "#dup" do
-    subject(:figure) { create :katalyst_content_figure, container: page }
+    subject(:figure) { create(:katalyst_content_figure, container: page) }
 
     it "preserves page association on dup" do
       expect(figure.dup).to have_attributes(figure.attributes.slice("parent_id", "parent_type"))

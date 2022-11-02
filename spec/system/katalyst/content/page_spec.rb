@@ -15,7 +15,7 @@ RSpec.describe "katalyst/content/page" do
       HTML
       ),
     ]
-    container = create :page, items: items
+    container = create(:page, items: items)
 
     visit page_path(container.slug)
 
@@ -43,7 +43,7 @@ RSpec.describe "katalyst/content/page" do
       HTML
       ),
     ]
-    container = create :page, items: items
+    container = create(:page, items: items)
 
     visit page_path(container.slug)
 

@@ -40,21 +40,21 @@ RSpec.describe Admin::PagesController do
 
   describe "GET /admin/pages/:id" do
     let(:action) { get admin_page_path(page) }
-    let(:page) { create :page }
+    let(:page) { create(:page) }
 
     it { is_expected.to be_successful }
   end
 
   describe "GET /admin/pages/:id/edit" do
     let(:action) { get edit_admin_page_path(page) }
-    let(:page) { create :page }
+    let(:page) { create(:page) }
 
     it { is_expected.to be_successful }
   end
 
   describe "PATCH /admin/pages/:id" do
     let(:action) { patch admin_page_path(page), params: { commit: "save", page: page_params } }
-    let(:page) { create :page }
+    let(:page) { create(:page) }
     let(:page_params) { { title: "updated" } }
 
     it { is_expected.to redirect_to(admin_page_path(page)) }
@@ -63,7 +63,7 @@ RSpec.describe Admin::PagesController do
 
   describe "DELETE /admin/pages/:id" do
     let(:action) { delete admin_page_path(page) }
-    let!(:page) { create :page }
+    let!(:page) { create(:page) }
 
     it { is_expected.to have_http_status(:see_other) }
     it { is_expected.to redirect_to(admin_pages_path) }

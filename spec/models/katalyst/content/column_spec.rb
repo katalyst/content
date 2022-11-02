@@ -4,9 +4,9 @@ require "rails_helper"
 require_relative "item_examples"
 
 RSpec.describe Katalyst::Content::Column do
-  subject(:column) { build :katalyst_content_section, container: page }
+  subject(:column) { build(:katalyst_content_section, container: page) }
 
-  let(:page) { create :page }
+  let(:page) { create(:page) }
 
   it_behaves_like "a item" do
     let(:item) { column }
