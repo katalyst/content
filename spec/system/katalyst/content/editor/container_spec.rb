@@ -180,7 +180,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
     click_on "Save"
 
-    expect(page).to have_text("items are missing or invalid")
+    expect(page).to have_text("Items are missing or invalid")
     expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
   end
 

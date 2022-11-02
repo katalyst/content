@@ -12,7 +12,7 @@ module Katalyst
               tag.h2("Errors in content") +
                 tag.ul(class: "errors") do
                   container.errors.each do |error|
-                    concat(tag.li(error.full_message))
+                    concat(tag.li(error.message))
                   end
                 end
             end

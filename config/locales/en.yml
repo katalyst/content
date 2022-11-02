@@ -5,7 +5,7 @@ en:
         heading: "Alternate text"
     errors:
       messages:
-        missing_item: Content items are missing or invalid
+        missing_item: Items are missing or invalid
       models:
         katalyst/content/item:
           content_type_invalid: file type not supported
