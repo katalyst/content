@@ -4,16 +4,31 @@ module Katalyst
   module Content
     module FrontendHelper
       def render_content(version)
-        render partial: version.tree.select(&:visible?)
+        without_partial_path_prefix do
+          render partial: version.tree.select(&:visible?)
+        end
       end
 
       def render_content_items(items)
         items = items.select(&:visible?)
-        render partial: items if items.any?
+        without_partial_path_prefix do
+          render partial: items if items.any?
+        end
       end
 
       def content_item_tag(item, **options, &block)
         FrontendBuilder.new(self, item).render(**options, &block)
+      end
+
+      private
+
+      def without_partial_path_prefix
+        current = prefix_partial_path_with_controller_namespace
+
+        self.prefix_partial_path_with_controller_namespace = false
+        yield
+      ensure
+        self.prefix_partial_path_with_controller_namespace = current
       end
     end
 
