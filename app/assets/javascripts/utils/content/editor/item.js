@@ -42,7 +42,7 @@ export default class Item {
    * @returns {number} logical nesting depth of node in container
    */
   get depth() {
-    return parseInt(this.node.dataset[`contentDepth`]);
+    return parseInt(this.node.dataset[`contentDepth`]) || 0;
   }
 
   get #depthInput() {
