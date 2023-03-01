@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    katalyst-content (1.0.0)
+    katalyst-content (1.0.1)
       active_storage_validations
 
 GEM
