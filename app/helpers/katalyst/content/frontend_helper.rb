@@ -3,9 +3,18 @@
 module Katalyst
   module Content
     module FrontendHelper
+      # Render all items from a content version as HTML
+      # @param version [Katalyst::Content::Version] The content version to render
+      # @return [ActiveSupport::SafeBuffer,String,nil] Content as HTML
+      # Example usage:
+      #   <%= render_content(version) %>
       def render_content(version)
-        without_partial_path_prefix do
-          render partial: version.tree.select(&:visible?)
+        capture do
+          cache version do
+            without_partial_path_prefix do
+              concat render partial: version.tree.select(&:visible?)
+            end
+          end
         end
       end
 
