@@ -22,8 +22,7 @@
 
   &[data-state="published"] .status-text[data-published],
   &[data-state="unpublished"] .status-text[data-unpublished],
-  &[data-state="draft"] .status-text[data-draft],
-  &[data-state="dirty"] .status-text[data-dirty] {
+  &[data-state="draft"] .status-text[data-draft] {
     display: unset;
   }
 

@@ -31,10 +31,6 @@ $status-draft-background-color: #fefaf3 !default;
 $status-draft-border-color: #ffa800 !default;
 $status-draft-color: #ffa800 !default;
 
-$status-dirty-background-color: #eee !default;
-$status-dirty-border-color: #888 !default;
-$status-dirty-color: #aaa !default;
-
 [data-controller="content--editor--container"] {
   --row-height: #{$row-height};
   --row-inset: #{$row-inset};
@@ -165,12 +161,6 @@ $status-dirty-color: #aaa !default;
     --background: #{$status-draft-background-color};
     --color: #{$status-draft-border-color};
     --border: #{$status-draft-color};
-  }
-
-  &[data-state="dirty"] {
-    --background: #{$status-dirty-background-color};
-    --color: #{$status-dirty-border-color};
-    --border: #{$status-dirty-color};
   }
 }
 

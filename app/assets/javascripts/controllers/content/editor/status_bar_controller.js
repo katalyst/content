@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class StatusBarController extends Controller {
+  static targets = ["discard", "revert", "save", "publish"];
+
   connect() {
     // cache the version's state in the controller on connect
     this.versionState = this.element.dataset.state;
@@ -14,7 +16,7 @@ export default class StatusBarController extends Controller {
 
   update({ dirty }) {
     if (dirty) {
-      this.element.dataset.state = "dirty";
+      this.saveTarget.click();
     } else {
       this.element.dataset.state = this.versionState;
     }

@@ -52,7 +52,7 @@ export default class ContainerController extends Controller {
       child.depth += delta;
     });
 
-    this.#update();
+    this.#update(event.target.dataset.contentItemId !== "");
     event.preventDefault();
   }
 
@@ -108,7 +108,7 @@ export default class ContainerController extends Controller {
   /**
    * Re-apply rules to items to enable/disable appropriate actions.
    */
-  #update() {
+  #update(notify = true) {
     // debounce requests to ensure that we only update once per tick
     this.updateRequested = true;
     setTimeout(() => {
@@ -119,7 +119,7 @@ export default class ContainerController extends Controller {
       this.container.items.forEach((item) => engine.normalize(item));
       this.container.items.forEach((item) => engine.update(item));
 
-      this.#notifyChange();
+      if (notify) this.#notifyChange();
     }, 0);
   }
 

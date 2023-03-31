@@ -13,7 +13,6 @@ module Katalyst
             concat status(:published, last_update: l(container.updated_at, format: :short))
             concat status(:unpublished)
             concat status(:draft)
-            concat status(:dirty)
             concat actions
           end
         end
@@ -47,6 +46,7 @@ module Katalyst
                        name:  "commit",
                        value: action,
                        form:  container_form_id,
+                       data:  { "#{STATUS_BAR_CONTROLLER}-target" => action.to_s },
                        **options)
           end
         end

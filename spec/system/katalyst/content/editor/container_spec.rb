@@ -45,7 +45,7 @@ RSpec.describe "katalyst/content/editor/container" do
     # find and click nest – checks for data-deny-remove to ensure rules have been applied
     find("li:not([data-deny-remove]) [data-action$='#remove']").click
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
@@ -70,7 +70,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
     expect(page).to have_selector("li", text: "Updated")
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
@@ -100,7 +100,7 @@ RSpec.describe "katalyst/content/editor/container" do
     expect(page).to have_selector("li[data-content-index='1'][data-content-item-id='#{items.first.id}']")
 
     # check that state has changed
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
@@ -122,7 +122,7 @@ RSpec.describe "katalyst/content/editor/container" do
     # find and click nest – checks for data-deny-nest to ensure rules have been applied
     find("li[data-content-item-id='#{items.last.id}']:not([data-deny-nest]) [data-action$='#nest']").click
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
@@ -156,32 +156,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     expect(page).to have_selector("li", text: "Updated")
 
-    click_on "Save"
-
     expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     container.reload
 
     expect(container.draft_items).to contain_exactly(having_attributes(heading: "Updated"))
-  end
-
-  it "can show errors on save" do
-    item = build(:katalyst_content_item)
-    container = create(:page, items: [item])
-
-    visit admin_page_path(container)
-
-    find("a[title='Edit']").click
-    fill_in "Heading", with: "Updated"
-    click_on "Done"
-
-    expect(page).to have_selector("li", text: "Updated")
-    container.items.reload.destroy_all
-
-    click_on "Save"
-
-    expect(page).to have_text("Items are missing or invalid")
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
   end
 
   it "can revert a change" do
@@ -195,8 +174,6 @@ RSpec.describe "katalyst/content/editor/container" do
     click_on "Done"
 
     expect(page).to have_selector("li", text: "Updated")
-
-    click_on "Save"
 
     expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
@@ -220,8 +197,6 @@ RSpec.describe "katalyst/content/editor/container" do
     click_on "Done"
 
     expect(page).to have_selector("li", text: "Updated")
-
-    click_on "Save"
 
     expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 

@@ -24,7 +24,7 @@ RSpec.describe "katalyst/content/editor/content" do
 
     click_on "Done"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
@@ -53,7 +53,7 @@ RSpec.describe "katalyst/content/editor/content" do
     click_on "Heading"
     click_on "Done"
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
     click_on "Publish"
 
