@@ -42,4 +42,12 @@ export default class ItemController extends Controller {
   reindex() {
     this.dispatch("reindex", { bubbles: true, prefix: "content" });
   }
+
+  preview() {
+    this.dispatch("preview", {
+      bubbles: true,
+      prefix: "item",
+      detail: { id: this.item.itemId },
+    });
+  }
 }

@@ -59,6 +59,13 @@ module Katalyst
         Editor::ImageField.new(self, item.container).build(item, method, **options, &block)
       end
 
+      def content_editor_preview(path)
+        tag.iframe(src: path, width: "100%", height: "100%", data: {
+                     controller: "content--editor--preview",
+                     action:     "item:preview@document->content--editor--preview#preview",
+                   })
+      end
+
       # When rendering item forms do not include the controller namespace prefix (katalyst/content)
       def prefix_partial_path_with_controller_namespace
         false

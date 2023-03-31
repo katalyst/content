@@ -58,6 +58,7 @@ module Katalyst
 
         def default_options(options)
           add_option(options, :data, :controller, ITEM_CONTROLLER)
+          add_option(options, :data, :action, "mousedown->#{ITEM_CONTROLLER}#preview")
 
           options
         end

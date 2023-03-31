@@ -63,7 +63,10 @@ module Katalyst
         {
           id:    item.heading&.parameterize,
           class: ["content-item", item.model_name.param_key, item.background, options[:class]],
-          data:  { content_index: item.index, content_depth: item.depth, **options.fetch(:data, {}) },
+          data:  { content_id:    item.id,
+                   content_index: item.index,
+                   content_depth: item.depth,
+                   **options.fetch(:data, {}) },
           **options.except(:class, :data, :root),
         }
       end
