@@ -5,10 +5,14 @@
   <% last = items.pop %>
   <div class="columns-container">
     <div class="column">
-      <%= render_content_items items %>
+      <% if items.any? %>
+        <%= render_content_items items %>
+      <% elsif last %>
+        <%= render_content_items [last] %>
+      <% end %>
     </div>
     <div class="column">
-      <%= render_content_items [last] if last %>
+      <%= render_content_items [last] if last && items.any? %>
     </div>
   </div>
 <% end %>
