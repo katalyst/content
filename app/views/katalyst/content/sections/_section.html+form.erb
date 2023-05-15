@@ -8,8 +8,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :show_heading %>
-    <%= form.check_box :show_heading %>
+    <%= form.label :heading_style %>
+    <%= form.collection_radio_buttons :heading_style, Katalyst::Content.config.heading_styles, :itself, :itself %>
   </div>
 
   <div class="field">

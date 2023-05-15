@@ -28,7 +28,7 @@ RSpec.describe Katalyst::Content::Figure do
     end
 
     context "when heading is hidden" do
-      subject(:figure) { build(:katalyst_content_figure, container: page, show_heading: false) }
+      subject(:figure) { build(:katalyst_content_figure, heading_style: "none", container: page) }
 
       it { is_expected.to have_attributes(to_plain_text: "Image: #{figure.alt}\nCaption: #{figure.caption}") }
     end

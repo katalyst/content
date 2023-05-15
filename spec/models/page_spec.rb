@@ -340,13 +340,15 @@ RSpec.describe Page do
     end
 
     context "without heading" do
-      let(:items) { build_list(:katalyst_content_content, 1, heading: "HEADING", show_heading: false, content: "BODY") }
+      let(:items) do
+        build_list(:katalyst_content_content, 1, heading_style: "none", heading: "HEADING", content: "BODY")
+      end
 
       it { expect(page).to have_attributes(published_text: "BODY") }
     end
 
     context "with multiple items" do
-      let(:items) { build_list(:katalyst_content_content, 3, show_heading: false, content: "BODY") }
+      let(:items) { build_list(:katalyst_content_content, 3, heading_style: "none", content: "BODY") }
 
       it { expect(page).to have_attributes(published_text: "BODY\nBODY\nBODY") }
     end

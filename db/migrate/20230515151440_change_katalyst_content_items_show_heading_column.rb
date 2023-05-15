@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+class ChangeKatalystContentItemsShowHeadingColumn < ActiveRecord::Migration[7.0]
+  def up
+    add_column :katalyst_content_items, :heading_style, :integer, null: false, default: 0
+    Katalyst::Content::Item.where(show_heading: true).update_all(heading_style: 1)
+    remove_column :katalyst_content_items, :show_heading, :boolean
+  end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
+  end
+end

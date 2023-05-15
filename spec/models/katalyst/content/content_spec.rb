@@ -17,7 +17,7 @@ RSpec.describe Katalyst::Content::Content do
     it { is_expected.to have_attributes(to_plain_text: "#{content.heading}\n#{content.content.to_plain_text}") }
 
     context "when heading is hidden" do
-      subject(:content) { build(:katalyst_content_content, container: page, show_heading: false) }
+      subject(:content) { build(:katalyst_content_content, heading_style: "none", container: page) }
 
       it { is_expected.to have_attributes(to_plain_text: content.content.to_plain_text.to_s) }
     end

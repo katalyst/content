@@ -16,7 +16,7 @@ RSpec.describe Katalyst::Content::Group do
     it { is_expected.to have_attributes(to_plain_text: group.heading) }
 
     context "when heading is hidden" do
-      before { group.show_heading = false }
+      subject(:group) { build(:katalyst_content_group, heading_style: "none", container: page) }
 
       it { is_expected.to have_attributes(to_plain_text: nil) }
     end

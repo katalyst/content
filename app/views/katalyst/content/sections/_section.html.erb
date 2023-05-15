@@ -1,5 +1,5 @@
 <%= content_item_tag section do %>
-  <%= tag.h2 section.heading if section.show_heading? %>
+  <%= tag.h2 section.heading, class: section.heading_style_class if section.show_heading? %>
 
   <div>
     <%= render_content_items section.children %>
