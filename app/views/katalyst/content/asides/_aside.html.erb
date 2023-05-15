@@ -1,5 +1,5 @@
 <%= content_item_tag aside do %>
-  <%= tag.h3 aside.heading if aside.show_heading? %>
+  <%= tag.h3 aside.heading, class: aside.heading_style_class if aside.show_heading? %>
 
   <% items = aside.children.select(&:visible?) %>
   <% last = items.pop %>

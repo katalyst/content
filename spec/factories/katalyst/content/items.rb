@@ -3,7 +3,7 @@
 FactoryBot.define do
   trait :content_item_defaults do
     heading { Faker::Lorem.word }
-    show_heading { true }
+    heading_style { "default" }
     background { Katalyst::Content.config.backgrounds.sample }
     depth { 0 }
   end

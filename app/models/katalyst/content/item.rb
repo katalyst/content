@@ -8,12 +8,16 @@ module Katalyst
         Katalyst::Content.config
       end
 
+      enum heading_style: config.heading_styles, _prefix: :heading
+
       belongs_to :container, polymorphic: true
 
       validates :heading, presence: true
+      validates :heading_style, inclusion: { in: config.heading_styles }
       validates :background, presence: true, inclusion: { in: config.backgrounds }, if: :validate_background?
 
       after_initialize :initialize_tree
+      before_validation :set_defaults
 
       attr_accessor :parent, :children, :index, :depth
 
@@ -23,7 +27,7 @@ module Katalyst
           container_id
           type
           heading
-          show_heading
+          heading_style
           background
           visible
         ]
@@ -31,6 +35,14 @@ module Katalyst
 
       def to_plain_text
         heading if show_heading? && visible?
+      end
+
+      def show_heading?
+        !heading_none?
+      end
+
+      def heading_style_class
+        heading_style unless heading_default?
       end
 
       def layout?
@@ -42,6 +54,10 @@ module Katalyst
       def initialize_tree
         self.parent   ||= nil
         self.children ||= []
+      end
+
+      def set_defaults
+        self.heading_style = "none" if heading_style.blank?
       end
 
       def validate_background?

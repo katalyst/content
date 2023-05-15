@@ -16,7 +16,7 @@ RSpec.describe Katalyst::Content::Aside do
     it { is_expected.to have_attributes(to_plain_text: aside.heading) }
 
     context "when heading is hidden" do
-      before { aside.show_heading = false }
+      subject(:aside) { build(:katalyst_content_section, heading_style: "none", container: page) }
 
       it { is_expected.to have_attributes(to_plain_text: nil) }
     end

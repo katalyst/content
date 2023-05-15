@@ -1,5 +1,5 @@
 <%= content_item_tag column do %>
-  <%= tag.h3 column.heading if column.show_heading? %>
+  <%= tag.h3 column.heading, class: column.heading_style_class if column.show_heading? %>
 
   <% items = column.children.select(&:visible?) %>
   <% last = items.pop %>

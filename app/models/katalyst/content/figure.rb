@@ -26,7 +26,7 @@ module Katalyst
       end
 
       def self.permitted_params
-        super - %i[show_heading] + %i[image caption]
+        super - %i[heading_style] + %i[image caption]
       end
 
       alias_attribute :alt, :heading

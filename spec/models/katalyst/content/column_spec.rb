@@ -16,7 +16,7 @@ RSpec.describe Katalyst::Content::Column do
     it { is_expected.to have_attributes(to_plain_text: column.heading) }
 
     context "when heading is hidden" do
-      before { column.show_heading = false }
+      subject(:column) { build(:katalyst_content_section, heading_style: "none", container: page) }
 
       it { is_expected.to have_attributes(to_plain_text: nil) }
     end

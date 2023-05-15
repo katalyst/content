@@ -8,6 +8,7 @@ module Katalyst
       include ActiveSupport::Configurable
 
       config_accessor(:backgrounds) { %w[light dark] }
+      config_accessor(:heading_styles) { %w[none default] }
       config_accessor(:items) do
         %w[
           Katalyst::Content::Content
