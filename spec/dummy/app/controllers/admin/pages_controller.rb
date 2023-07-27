@@ -8,9 +8,16 @@ module Admin
     helper Katalyst::Tables::Frontend
 
     def index
-      sort, pages = table_sort(Page.all)
+      collection = Katalyst::Tables::Collection::Base.new(sorting: :title).with_params(params).apply(Page.all)
+      table      = Katalyst::Turbo::TableComponent.new(collection: collection,
+                                                       id:         "index-table",
+                                                       class:      "index-table",
+                                                       caption:    true)
 
-      render locals: { pages: pages, sort: sort }
+      respond_to do |format|
+        format.turbo_stream { render(table) } if self_referred?
+        format.html { render :index, locals: { table: table } }
+      end
     end
 
     def new

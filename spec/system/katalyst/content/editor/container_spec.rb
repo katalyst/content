@@ -9,10 +9,10 @@ RSpec.describe "katalyst/content/editor/container" do
   # > Right now the Action API cannot generate the drag and drop actions by
   # > sending the mouse press, mouse move and mouse release, because  the drag
   # > and drop events are generated from the OS level.
-  xit "can add a item" do
-    page = create(:page)
+  it "can add a item", pending: "requires d&d" do
+    container = create(:page)
 
-    visit katalyst_content.page_path(page)
+    visit admin_page_path(container)
 
     add_new_item = find("div[data-controller$='new-item']:first-child")
     drop_target = find("ol[data-controller$='list']")

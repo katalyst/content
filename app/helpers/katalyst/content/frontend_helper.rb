@@ -25,8 +25,8 @@ module Katalyst
         end
       end
 
-      def content_item_tag(item, **options, &block)
-        FrontendBuilder.new(self, item).render(**options, &block)
+      def content_item_tag(item, ...)
+        FrontendBuilder.new(self, item).render(...)
       end
 
       private

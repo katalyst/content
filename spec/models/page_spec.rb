@@ -88,7 +88,7 @@ RSpec.describe Page do
       published = page.published_version
       draft     = page.draft_version
       _unused   = page.versions.create
-      expect(page.versions.active).to contain_exactly(*[published, draft].uniq.compact)
+      expect(page.versions.active).to match_array([published, draft].uniq.compact)
     end
   end
 

@@ -5,7 +5,7 @@ module Katalyst
     module EditorHelper
       def content_editor_new_items(container:)
         Katalyst::Content.config.items.map do |item_class|
-          item_class = item_class.is_a?(String) ? item_class.safe_constantize : item_class
+          item_class = item_class.safe_constantize if item_class.is_a?(String)
           item_class.new(container: container)
         end
       end
@@ -55,8 +55,8 @@ module Katalyst
         defaults.deep_merge(options)
       end
 
-      def content_editor_image_field(item:, method:, **options, &block)
-        Editor::ImageField.new(self, item.container).build(item, method, **options, &block)
+      def content_editor_image_field(...)
+        Editor::ImageField.new(self, item.container).build(...)
       end
 
       # When rendering item forms do not include the controller namespace prefix (katalyst/content)

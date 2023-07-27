@@ -1,0 +1,9 @@
+<%= row.cell :title do |cell| %>
+  <%= link_to cell.value, [:admin, page] %>
+<% end %>
+<%= row.cell :slug, label: "Preview" do |cell| %>
+  <%= link_to page_path(cell.value), page_path(cell.value) %>
+<% end %>
+<%= row.cell :actions, label: "" do |cell| %>
+  <%= link_to "Edit", [:edit, :admin, page] %>
+<% end %>
