@@ -49,7 +49,7 @@ RSpec.describe "katalyst/content/page" do
 
     within("#aside-heading") do
       expect(page).to have_text("Aside heading")
-      expect(page).to have_selector("aside", text: "This is a aside text")
+      expect(page).to have_css("aside", text: "This is a aside text")
     end
 
     expect(page).to have_text("This is a sub text")

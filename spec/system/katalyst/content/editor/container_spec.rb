@@ -18,14 +18,14 @@ RSpec.describe "katalyst/content/editor/container" do
     drop_target = find("ol[data-controller$='list']")
     add_new_item.drag_to(drop_target)
 
-    expect(page).to have_selector("[data-controller$='list'] li[data-content-item]")
+    expect(page).to have_css("[data-controller$='list'] li[data-content-item]")
 
     fill_in "Heading", with: "Magic"
-    click_on "Done"
+    click_button "Done"
 
-    expect(page).to have_selector("li", text: "Magic")
+    expect(page).to have_css("li", text: "Magic")
 
-    click_on "Publish"
+    click_button "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -45,9 +45,9 @@ RSpec.describe "katalyst/content/editor/container" do
     # find and click nest – checks for data-deny-remove to ensure rules have been applied
     find("li:not([data-deny-remove]) [data-action$='#remove']").click
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
-    click_on "Publish"
+    click_button "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -66,13 +66,13 @@ RSpec.describe "katalyst/content/editor/container" do
 
     find("a[title='Edit']").click
     fill_in "Heading", with: "Updated"
-    click_on "Done"
+    click_button "Done"
 
-    expect(page).to have_selector("li", text: "Updated")
+    expect(page).to have_css("li", text: "Updated")
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
-    click_on "Publish"
+    click_button "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -100,9 +100,9 @@ RSpec.describe "katalyst/content/editor/container" do
     expect(page).to have_selector("li[data-content-index='1'][data-content-item-id='#{items.first.id}']")
 
     # check that state has changed
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
-    click_on "Publish"
+    click_button "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -122,9 +122,9 @@ RSpec.describe "katalyst/content/editor/container" do
     # find and click nest – checks for data-deny-nest to ensure rules have been applied
     find("li[data-content-item-id='#{items.last.id}']:not([data-deny-nest]) [data-action$='#nest']").click
 
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
-    click_on "Publish"
+    click_button "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -141,7 +141,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    expect(page).not_to have_selector("li[data-content-item]:not([data-deny-nest]")
+    expect(page).not_to have_css("li[data-content-item]:not([data-deny-nest]")
   end
 
   it "can save without publishing" do
@@ -152,11 +152,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     find("a[title='Edit']").click
     fill_in "Heading", with: "Updated"
-    click_on "Done"
+    click_button "Done"
 
-    expect(page).to have_selector("li", text: "Updated")
+    expect(page).to have_css("li", text: "Updated")
 
-    click_on "Save"
+    click_button "Save"
 
     expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
@@ -173,15 +173,15 @@ RSpec.describe "katalyst/content/editor/container" do
 
     find("a[title='Edit']").click
     fill_in "Heading", with: "Updated"
-    click_on "Done"
+    click_button "Done"
 
-    expect(page).to have_selector("li", text: "Updated")
+    expect(page).to have_css("li", text: "Updated")
     container.items.reload.destroy_all
 
-    click_on "Save"
+    click_button "Save"
 
     expect(page).to have_text("Items are missing or invalid")
-    expect(page).to have_selector("span", class: "status-text", text: "Unsaved changes", visible: :visible)
+    expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
   end
 
   it "can revert a change" do
@@ -192,15 +192,15 @@ RSpec.describe "katalyst/content/editor/container" do
 
     find("a[title='Edit']").click
     fill_in "Heading", with: "Updated"
-    click_on "Done"
+    click_button "Done"
 
-    expect(page).to have_selector("li", text: "Updated")
+    expect(page).to have_css("li", text: "Updated")
 
-    click_on "Save"
+    click_button "Save"
 
     expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
-    click_on "Revert"
+    click_button "Revert"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -217,15 +217,15 @@ RSpec.describe "katalyst/content/editor/container" do
 
     find("a[title='Edit']").click
     fill_in "Heading", with: "Updated"
-    click_on "Done"
+    click_button "Done"
 
-    expect(page).to have_selector("li", text: "Updated")
+    expect(page).to have_css("li", text: "Updated")
 
-    click_on "Save"
+    click_button "Save"
 
     expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
 
-    click_on "Publish"
+    click_button "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 

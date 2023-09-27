@@ -10,8 +10,7 @@ RSpec.describe Katalyst::Content::FrontendHelper do
 
   before do
     allow(Rails).to receive(:cache).and_return(memory_store)
-    allow(controller).to receive(:perform_caching).and_return(true)
-    allow(controller).to receive(:cache_store).and_return(memory_store)
+    allow(controller).to receive_messages(perform_caching: true, cache_store: memory_store)
     Rails.cache.clear
   end
 
