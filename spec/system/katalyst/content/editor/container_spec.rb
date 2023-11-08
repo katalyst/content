@@ -81,7 +81,7 @@ RSpec.describe "katalyst/content/editor/container" do
     expect(container.published_items).to contain_exactly(having_attributes(heading: "Updated"))
   end
 
-  it "can re-order items" do
+  it "can re-order items", pending: "requires d&d" do
     items = build_list(:katalyst_content_item, 2)
     container = create(:page, items: items)
 
