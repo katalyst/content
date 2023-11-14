@@ -1,5 +1,10 @@
 import { Controller } from "@hotwired/stimulus";
-import Trix from "trix";
+import "trix";
+
+// Note, action_text 7.1.2 changes how Trix is bundled and loaded. This
+// seems to have broken the default export from trix. This is a workaround
+// that relies on the backwards compatibility of the old export to window.Trix.
+const Trix = window.Trix;
 
 // Stimulus controller doesn't do anything, but having one ensures that trix
 // will be lazy loaded when a trix-editor is added to the dom.
