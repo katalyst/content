@@ -12,6 +12,17 @@ export default class TrixController extends Controller {
   trixInitialize(e) {
     // noop, useful as an extension point for registering behaviour on load
   }
+
+  trixPaste(e) {
+    const pastedHtml = e.paste.html;
+    const pasted = document.createElement("div");
+    pasted.innerHTML = pastedHtml;
+    if (pasted.querySelector("img")) {
+      console.debug("please do not paste this image again");
+      // Undo the paste
+      e.target.editor.undo();
+    }
+  }
 }
 
 // Add H4 as an acceptable tag
