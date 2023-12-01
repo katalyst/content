@@ -49,7 +49,10 @@ module Katalyst
           data: {
             direct_upload_url: direct_uploads_url,
             controller:        "content--editor--trix",
-            action:            "trix-initialize->content--editor--trix#trixInitialize",
+            action:            <<~ACTIONS,
+              trix-initialize->content--editor--trix#trixInitialize
+              trix-paste->content--editor--trix#trixPaste
+            ACTIONS
           },
         }
         defaults.deep_merge(options)
