@@ -1,32 +1,46 @@
 @use "icon" as *;
 
+// provide size for container queries
+#content--editor--item-frame {
+  container-type: inline-size;
+}
+
 .content--editor--new-items {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, calc((100% - 1rem)/3));
+  grid-auto-rows: minmax(5rem, auto);
   gap: 0.5rem;
 
   [role="listitem"] {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 1fr auto;
     text-align: center;
     transform: translate3d(0, 0, 0);
     cursor: grab;
     background: white;
-    box-shadow: rgb(0 0 0 / 25%) 0 1px 1px, rgb(0 0 0 / 31%) 0 0 2px;
-    min-height: 5rem;
-    padding: 1.5rem;
+    padding: 0.5rem;
+    white-space: nowrap;
+    border-radius: 0.5rem;
+
+    label {
+      font-weight: 400;
+      font-size: 0.8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0;
+    }
 
     &:hover {
       box-shadow: rgb(0 0 0 / 25%) 0 1px 2px, rgb(0 0 0 / 31%) 0 0 5px;
     }
 
     &::before {
+      display: block;
       @extend %icon;
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2rem;
+      height: 2rem;
       position: unset;
+      margin: 0 auto;
     }
 
     &[data-item-type="content"]:before {
@@ -52,5 +66,17 @@
     &[data-item-type="aside"]:before {
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 64 64' fill='none' stroke='black' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='6' y='12' width='36' height='44' stroke-width='4' /%3E%3Crect x='42' y='12' width='16' height='44' stroke-width='4' /%3E%3C/svg%3E");
     }
+  }
+}
+
+@media (max-width: 75rem) {
+  .content--editor--new-items {
+    grid-template-columns: repeat(2, calc((100% - 0.5rem) / 2));
+  }
+}
+
+@media (max-width: 60rem) {
+  .content--editor--new-items {
+    grid-template-columns: 1fr;
   }
 }
