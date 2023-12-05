@@ -58,7 +58,7 @@ $status-dirty-color: #aaa !default;
 }
 
 [data-controller="content--editor--list"] {
-  min-height: var(--row-height);
+  min-height: calc(var(--row-height) * 8);
 
   // tree items
   & > li {
