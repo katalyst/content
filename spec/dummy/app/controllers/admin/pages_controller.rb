@@ -9,14 +9,14 @@ module Admin
 
     def index
       collection = Katalyst::Tables::Collection::Base.new(sorting: :title).with_params(params).apply(Page.all)
-      table      = Katalyst::Turbo::TableComponent.new(collection: collection,
+      table      = Katalyst::Turbo::TableComponent.new(collection:,
                                                        id:         "index-table",
                                                        class:      "index-table",
                                                        caption:    true)
 
       respond_to do |format|
         format.turbo_stream { render(table) } if self_referred?
-        format.html { render :index, locals: { table: table } }
+        format.html { render :index, locals: { table: } }
       end
     end
 
@@ -37,13 +37,13 @@ module Admin
     def show
       page = Page.find(params[:id])
 
-      render locals: { page: page }
+      render locals: { page: }
     end
 
     def edit
       page = Page.find(params[:id])
 
-      render locals: { page: page }
+      render locals: { page: }
     end
 
     # PATCH /admins/pages/:slug

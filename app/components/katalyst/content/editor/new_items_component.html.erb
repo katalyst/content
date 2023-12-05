@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "content--editor--item-frame" do %>
   <div class="content--editor--new-items" role="listbox">
-    <%= render partial: "katalyst/content/editor/new_item", collection: content_editor_new_items(container: container), as: :item %>
+    <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
   </div>
 <% end %>

@@ -1,6 +1,6 @@
 <%= form_with model: content, scope: :item, url: path do |form| %>
-  <%= render "hidden_fields", form: form %>
-  <%= render "form_errors", form: form %>
+  <%= render "hidden_fields", form: %>
+  <%= render "form_errors", form: %>
 
   <div class="field">
     <%= form.label :heading %>
@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.rich_text_area :content, content_editor_rich_text_options %>
+    <%= form.rich_text_area :content, content_editor_rich_text_attributes %>
   </div>
 
   <%= form.submit "Done" %>

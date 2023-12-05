@@ -3,7 +3,9 @@
 module Katalyst
   module Content
     module Editor
-      class Base
+      class BaseComponent < ViewComponent::Base
+        include Katalyst::HtmlAttributes
+
         CONTAINER_CONTROLLER  = "content--editor--container"
         LIST_CONTROLLER       = "content--editor--list"
         ITEM_CONTROLLER       = "content--editor--item"
@@ -12,15 +14,18 @@ module Katalyst
 
         TURBO_FRAME = "content--editor--item-frame"
 
-        attr_accessor :template, :container
+        attr_accessor :container, :item
 
         delegate :config, to: ::Katalyst::Content
-        delegate_missing_to :template
 
-        def initialize(template, container)
-          self.template  = template
-          self.container = container
+        def initialize(container:, item: nil, **)
+          super(**)
+
+          @container = container
+          @item = item
         end
+
+        def call; end
 
         def container_form_id
           dom_id(container, :items)
@@ -30,13 +35,11 @@ module Katalyst
           "#{container.model_name.param_key}[items_attributes][]"
         end
 
-        private
-
-        def add_option(options, key, *path)
-          if path.length > 1
-            add_option(options[key] ||= {}, *path)
+        def inspect
+          if item.present?
+            "<#{self.class.name} container: #{container.inspect}, item: #{item.inspect}>"
           else
-            options[key] = [options[key], *path].compact.join(" ")
+            "<#{self.class.name} container: #{container.inspect}>"
           end
         end
       end

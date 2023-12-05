@@ -6,7 +6,7 @@ RSpec.describe Katalyst::Content::DirectUploadsController do
   subject { action && response }
 
   describe "#create" do
-    let(:action) { post katalyst_content.direct_uploads_url, params: params }
+    let(:action) { post katalyst_content.direct_uploads_url, params: }
     let(:params) do
       {
         blob:          blob_params,

@@ -16,4 +16,10 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
   config.include ActiveStorageValidations::Matchers
   config.include FileHelper, type: :request
+
+  config.define_derived_metadata(file_path: %r{spec/components}) do |metadata|
+    metadata[:type] ||= :component
+  end
+
+  config.include ViewComponent::TestHelpers, type: :component
 end

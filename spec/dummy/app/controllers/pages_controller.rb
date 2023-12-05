@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   helper Katalyst::Content::FrontendHelper
 
   def show
-    render locals: { page: page }
+    render locals: { page: }
   end
 
   private

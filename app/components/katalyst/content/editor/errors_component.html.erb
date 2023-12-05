@@ -1,0 +1,12 @@
+<turbo-frame id="<%= dom_id(container, :errors) %>">
+  <% if container.errors.any? %>
+    <%= tag.div(class: "content-errors", **html_attributes) do %>
+      <h2>Errors in content</h2>
+      <ul class="errors">
+        <% container.errors.each do |error| %>
+          <li class="error"><%= error.message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</turbo-frame>

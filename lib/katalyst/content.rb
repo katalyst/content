@@ -2,7 +2,6 @@
 
 require "katalyst/content/config"
 require "katalyst/content/engine"
-require "katalyst/content/version"
 
 module Katalyst
   module Content

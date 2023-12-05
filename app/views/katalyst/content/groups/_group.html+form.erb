@@ -1,6 +1,6 @@
 <%= form_with model: group, scope: :item, url: path do |form| %>
-  <%= render "hidden_fields", form: form %>
-  <%= render "form_errors", form: form %>
+  <%= render "hidden_fields", form: %>
+  <%= render "form_errors", form: %>
 
   <div class="field">
     <%= form.label :heading %>

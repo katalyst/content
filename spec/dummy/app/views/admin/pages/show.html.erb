@@ -14,4 +14,4 @@
   <%= content_editor_list container: page %>
 <% end %>
 
-<%= render "katalyst/content/editor/new_items", container: page %>
+<%= render Katalyst::Content::Editor::NewItemsComponent.new(container: page) %>

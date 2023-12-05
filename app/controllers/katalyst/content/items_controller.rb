@@ -20,9 +20,9 @@ module Katalyst
       def create
         @item = item = @container.items.build(item_params)
         if item.save
-          render :update, locals: { item: item, previous: @container.items.build(type: item.type) }
+          render :update, locals: { item:, previous: @container.items.build(type: item.type) }
         else
-          render :new, status: :unprocessable_entity, locals: { item: item }
+          render :new, status: :unprocessable_entity, locals: { item: }
         end
       end
 
@@ -32,7 +32,7 @@ module Katalyst
         if @item.valid?
           previous = @item
           @item    = @item.dup.tap(&:save!)
-          render locals: { item: @item, previous: previous }
+          render locals: { item: @item, previous: }
         else
           render :edit, status: :unprocessable_entity, locals: { item: @item }
         end

@@ -1,0 +1,6 @@
+<%= form_with(model: container, url:, scope:, **html_attributes) do %>
+  <%# Hidden input ensures that if the container is empty then the controller receives an empty array. %>
+  <input type="hidden" name="<%= attributes_scope %>[id]">
+  <%= render Katalyst::Content::Editor::ErrorsComponent.new(container:) %>
+  <%= content %>
+<% end %>

@@ -51,9 +51,9 @@ module Katalyst
         self.item     = item
       end
 
-      def render(**options, &block)
-        content_tag tag, **default_options(**options) do
-          content_tag :div, &block
+      def render(**, &)
+        content_tag tag, **default_options(**) do
+          content_tag(:div, &)
         end
       end
 

@@ -2,17 +2,17 @@
 
 require "rails_helper"
 
-def transform_tree(nodes, &block)
+def transform_tree(nodes, &)
   output = []
   nodes.each do |node|
     output << yield(node)
-    output << transform_tree(node.children, &block) if node.children.any?
+    output << transform_tree(node.children, &) if node.children.any?
   end
   output
 end
 
 RSpec.describe Page do
-  subject(:page) { create(:page, items: items) }
+  subject(:page) { create(:page, items:) }
 
   let(:first) { build(:katalyst_content_item, heading: "First") }
   let(:last) { build(:katalyst_content_item, heading: "Last") }
@@ -331,7 +331,7 @@ RSpec.describe Page do
   end
 
   describe "#published_text" do
-    subject(:page) { create(:page, items: items) }
+    subject(:page) { create(:page, items:) }
 
     context "with heading" do
       let(:items) { build_list(:katalyst_content_content, 1, heading: "HEADING", content: "BODY") }

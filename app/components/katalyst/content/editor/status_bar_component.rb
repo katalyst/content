@@ -3,13 +3,15 @@
 module Katalyst
   module Content
     module Editor
-      class StatusBar < Base
+      class StatusBarComponent < BaseComponent
         ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
           content:change@document->#{STATUS_BAR_CONTROLLER}#change
         ACTIONS
 
-        def build(**options)
-          tag.div **default_options(**options) do
+        attr_reader :container
+
+        def call
+          tag.div(**html_attributes) do
             concat status(:published, last_update: l(container.updated_at, format: :short))
             concat status(:unpublished)
             concat status(:draft)
@@ -18,8 +20,8 @@ module Katalyst
           end
         end
 
-        def status(state, **options)
-          status_text  = t("views.katalyst.content.editor.#{state}_html", **options)
+        def status(state, **)
+          status_text  = t("views.katalyst.content.editor.#{state}_html", **)
           html_options = { class: "status-text", data: { state => "", turbo: false } }
 
           case state
@@ -41,24 +43,26 @@ module Katalyst
           end
         end
 
-        def action(action, **options)
+        def action(action, **)
           tag.li do
             button_tag(t("views.katalyst.content.editor.#{action}"),
                        name:  "commit",
                        value: action,
                        form:  container_form_id,
-                       **options)
+                       **)
           end
         end
 
         private
 
-        def default_options(**options)
-          add_option(options, :data, :controller, STATUS_BAR_CONTROLLER)
-          add_option(options, :data, :action, ACTIONS)
-          add_option(options, :data, :state, container.state)
-
-          options
+        def default_html_attributes
+          {
+            data: {
+              controller: STATUS_BAR_CONTROLLER,
+              action:     ACTIONS,
+              state:      container.state,
+            },
+          }
         end
       end
     end

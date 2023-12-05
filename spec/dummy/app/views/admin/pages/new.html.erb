@@ -1,7 +1,7 @@
 <%= link_to "Pages", [:admin, Page] %>
 
 <%= form_with model: page, url: [:admin, page] do |form| %>
-  <%= render "form", form: form %>
+  <%= render "form", form: %>
 
   <%= form.submit :save %>
 <% end %>

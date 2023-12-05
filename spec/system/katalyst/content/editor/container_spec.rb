@@ -83,7 +83,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
   it "can re-order items", pending: "requires d&d" do
     items = build_list(:katalyst_content_item, 2)
-    container = create(:page, items: items)
+    container = create(:page, items:)
 
     expect(container.items.map(&:heading)).to eq([items.first.heading, items.last.heading])
 
@@ -113,7 +113,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
   it "can nest items in sections" do
     items = [build(:katalyst_content_section), build(:katalyst_content_content)]
-    container = create(:page, items: items)
+    container = create(:page, items:)
 
     expect(container.draft_items.map(&:depth)).to eq([0, 0])
 
@@ -135,7 +135,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
   it "cannot nest items that are not containers" do
     items = build_list(:katalyst_content_content, 2)
-    container = create(:page, items: items)
+    container = create(:page, items:)
 
     expect(container.draft_items.map(&:depth)).to eq([0, 0])
 
