@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    katalyst-content (1.2.0.pre.beta)
+    katalyst-content (2.0.0)
       active_storage_validations
       katalyst-html-attributes
       view_component

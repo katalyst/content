@@ -5,19 +5,37 @@ applications.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install the gem as usual
 
 ```ruby
-gem 'katalyst-content'
+gem "katalyst-content"
 ```
 
-And then execute:
+Mount the engine in your `routes.rb` file:
 
-    $ bundle install
+```ruby
+mount Katalyst::Content::Engine, at: "content"
+```
 
-Or install it yourself as:
+Add the Gem's migrations to your application:
 
-    $ gem install katalyst-content
+```ruby
+rake katalyst_content:install:migrations
+```
+
+Add the Gem's javascript and CSS to your build pipeline. This assumes that
+you're using `rails-dartsass` and `importmaps` to manage your assets.
+
+```javascript
+// app/javascript/controllers/application.js
+import { application } from "controllers/application";
+import content from "@katalyst/content";
+application.load(content);
+```
+
+```sass
+@use "katalyst/content";
+```
 
 ## Usage
 
@@ -80,11 +98,67 @@ FactoryBot.define do
 end
 ```
 
+Create a controller for editing content. This example assumes you're rendering the editor on the 'show' route of an
+admin controller.
+
+```ruby
+class Admin::PagesController < Admin::BaseController
+  before_action :set_page, only: %i[show update]
+  
+  def show; end
+
+  def update
+    @page.attributes = page_params
+
+    unless @page.valid?
+      return respond_to do |format|
+        format.turbo_stream { render @editor.errors, status: :unprocessable_entity }
+      end
+    end
+
+    case params[:commit]
+    when "publish"
+      @page.save!
+      @page.publish!
+    when "save"
+      @page.save!
+    when "revert"
+      @page.revert!
+    end
+
+    redirect_to [:admin, @page], status: :see_other
+  end
+  
+  private
+  
+  def set_page
+    @page = Page.find(params[:id])
+    @editor = Katalyst::Content::EditorComponent.new(container: @page)
+  end
+
+  def page_params
+    params.require(:page).permit(items_attributes: %i[id index depth])
+  end
+end
+```
+
+And the view:
+
+```erb
+<%# app/views/admin/pages/show.html.erb %>
+<%= render @editor.status_bar %>
+<%= render @editor %>
+<%# We suggest you render new items in a sidebar %>
+<%= render @editor.new_items %>
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake` to run the tests.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the
+version number and run `bundle exec rake release`, which will create a git tag for the version, push git commits and
+the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 

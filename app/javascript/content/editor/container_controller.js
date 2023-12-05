@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
-import Item from "utils/content/editor/item";
-import Container from "utils/content/editor/container";
-import RulesEngine from "utils/content/editor/rules-engine";
+import Item from "./item";
+import Container from "./container";
+import RulesEngine from "./rules_engine";
 
 export default class ContainerController extends Controller {
   static targets = ["container"];

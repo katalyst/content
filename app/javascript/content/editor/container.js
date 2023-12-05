@@ -1,4 +1,4 @@
-import Item from "utils/content/editor/item";
+import Item from "./item";
 
 /**
  * @param nodes {NodeList}
