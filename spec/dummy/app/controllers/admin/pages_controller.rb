@@ -35,9 +35,10 @@ module Admin
     end
 
     def show
-      page = Page.find(params[:id])
+      page   = Page.find(params[:id])
+      editor = Katalyst::Content::EditorComponent.new(container: page)
 
-      render locals: { page: }
+      render locals: { page:, editor: }
     end
 
     def edit
@@ -53,8 +54,11 @@ module Admin
       page.attributes = page_params
 
       unless page.valid?
-        return render turbo_stream: helpers.content_editor_errors(container: page),
-                      status:       :unprocessable_entity
+        editor = Katalyst::Content::EditorComponent.new(container: page)
+
+        return respond_to do |format|
+          format.turbo_stream { render editor.errors, status: :unprocessable_entity }
+        end
       end
 
       case params[:commit]
@@ -67,7 +71,7 @@ module Admin
         page.revert!
       end
 
-      redirect_to [:admin, page]
+      redirect_to [:admin, page], status: :see_other
     end
 
     def destroy

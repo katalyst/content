@@ -20,7 +20,8 @@ module Katalyst
       def create
         @item = item = @container.items.build(item_params)
         if item.save
-          render :update, locals: { item:, previous: @container.items.build(type: item.type) }
+          editor = Katalyst::Content::EditorComponent.new(container: @item.container, item: @item)
+          render :update, locals: { editor:, item:, previous: @container.items.build(type: item.type) }
         else
           render :new, status: :unprocessable_entity, locals: { item: }
         end
@@ -32,7 +33,9 @@ module Katalyst
         if @item.valid?
           previous = @item
           @item    = @item.dup.tap(&:save!)
-          render locals: { item: @item, previous: }
+          editor   = Katalyst::Content::EditorComponent.new(container: @item.container, item: @item)
+
+          render locals: { editor:, item: @item, previous: }
         else
           render :edit, status: :unprocessable_entity, locals: { item: @item }
         end

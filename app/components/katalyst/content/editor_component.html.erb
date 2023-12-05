@@ -2,5 +2,8 @@
   <%# Hidden input ensures that if the container is empty then the controller receives an empty array. %>
   <input type="hidden" name="<%= attributes_scope %>[id]">
   <%= render Katalyst::Content::Editor::ErrorsComponent.new(container:) %>
-  <%= content %>
+
+  <%= render Katalyst::Content::Editor::TableComponent.new(container:) do |list| %>
+    <%= container.draft_items.each { |item| list.with_item(item) } %>
+  <% end %>
 <% end %>
