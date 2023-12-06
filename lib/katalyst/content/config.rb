@@ -21,6 +21,9 @@ module Katalyst
       end
       config_accessor(:image_mime_types) { %w[image/png image/gif image/jpeg image/webp] }
       config_accessor(:max_image_size) { 20 }
+
+      # Components
+      config_accessor(:errors_component) { "Katalyst::Content::Editor::ErrorsComponent" }
     end
   end
 end

@@ -32,7 +32,7 @@ module Katalyst
       end
 
       def errors
-        Editor::ErrorsComponent.new(container:)
+        Katalyst::Content.config.errors_component.constantize.new(container:)
       end
 
       def default_html_attributes
