@@ -160,14 +160,14 @@ GEM
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.6.0)
-    irb (1.10.0)
+    irb (1.10.1)
       rdoc
       reline (>= 0.3.8)
-    json (2.7.0)
+    json (2.7.1)
     katalyst-html-attributes (1.0.0)
       activesupport
       html-attributes-utils
-    katalyst-tables (2.2.11)
+    katalyst-tables (2.2.12)
       katalyst-html-attributes
       view_component
     language_server-protocol (3.17.0.3)
@@ -258,9 +258,9 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.1.0)
-    rdoc (6.6.0)
+    rdoc (6.6.1)
       psych (>= 4.0.0)
-    regexp_parser (2.8.2)
+    regexp_parser (2.8.3)
     reline (0.4.1)
       io-console (~> 0.5)
     rexml (3.2.6)
