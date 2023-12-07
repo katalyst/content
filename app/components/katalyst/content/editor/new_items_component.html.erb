@@ -1,5 +1,3 @@
-<%= turbo_frame_tag "content--editor--item-frame" do %>
-  <div class="content--editor--new-items" role="listbox">
-    <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
-  </div>
-<% end %>
+<div class="content--editor--new-items" role="listbox">
+  <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
+</div>

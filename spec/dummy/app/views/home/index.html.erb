@@ -1,5 +1,10 @@
-<h1 data-controller="hello">Dummy app</h1>
+<h1>Content</h1>
 
-<%= turbo_frame_tag "home", src: home_path(1) do %>
-
-<% end %>
+<nav>
+  <ul>
+    <li><%= link_to "Pages", admin_pages_path %></li>
+    <% Page.all.each do |page| %>
+      <li><%= link_to page.title, page %></li>
+    <% end %>
+  </ul>
+</nav>

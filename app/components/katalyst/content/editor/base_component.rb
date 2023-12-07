@@ -12,8 +12,6 @@ module Katalyst
         STATUS_BAR_CONTROLLER = "content--editor--status-bar"
         NEW_ITEM_CONTROLLER   = "content--editor--new-item"
 
-        TURBO_FRAME = "content--editor--item-frame"
-
         attr_accessor :container, :item
 
         delegate :config, to: ::Katalyst::Content

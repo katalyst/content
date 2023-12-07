@@ -7,23 +7,25 @@ module Katalyst
       before_action :set_item, except: %i[new create]
       before_action :set_editor_variant
 
+      attr_reader :container, :item, :editor
+
       helper EditorHelper
 
+      layout nil
+
       def new
-        render locals: { item: @container.items.build(item_params) }
+        render_editor
       end
 
       def edit
-        render locals: { item: @item }
+        render_editor
       end
 
       def create
-        @item = item = @container.items.build(item_params)
         if item.save
-          editor = Katalyst::Content::EditorComponent.new(container: @item.container, item: @item)
           render :update, locals: { editor:, item:, previous: @container.items.build(type: item.type) }
         else
-          render :new, status: :unprocessable_entity, locals: { item: }
+          render_editor status: :unprocessable_entity
         end
       end
 
@@ -33,11 +35,10 @@ module Katalyst
         if @item.valid?
           previous = @item
           @item    = @item.dup.tap(&:save!)
-          editor   = Katalyst::Content::EditorComponent.new(container: @item.container, item: @item)
 
-          render locals: { editor:, item: @item, previous: }
+          render locals: { editor:, item:, previous: }
         else
-          render :edit, status: :unprocessable_entity, locals: { item: @item }
+          render_editor status: :unprocessable_entity
         end
       end
 
@@ -59,14 +60,23 @@ module Katalyst
       def set_container
         @container = Item.new(item_params).container
         raise ActiveRecord::RecordNotFound unless @container
+
+        @item   = @container.items.build(item_params)
+        @editor = Katalyst::Content::EditorComponent.new(container:, item:)
       end
 
       def set_item
-        @item = Item.find(params[:id])
+        @item      = Item.find(params[:id])
+        @container = @item.container
+        @editor = Katalyst::Content::EditorComponent.new(container:, item:)
       end
 
       def set_editor_variant
         request.variant << :form
+      end
+
+      def render_editor(**)
+        render(:edit, locals: { item_editor: editor.item_editor(item:) }, **)
       end
     end
   end

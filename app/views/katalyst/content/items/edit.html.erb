@@ -1,4 +1,5 @@
-<%= turbo_frame_tag "content--editor--item-frame" do %>
-  <h3 class="heading-three">Edit <%= item.model_name.human.downcase %></h3>
-  <%= render item, path: katalyst_content.item_path(item) %>
+<%= render Kpop::FrameComponent.new do %>
+  <%= render Kpop::ModalComponent.new(title: item_editor.title) do %>
+    <%= render item_editor %>
+  <% end %>
 <% end %>

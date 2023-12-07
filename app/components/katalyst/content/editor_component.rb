@@ -27,6 +27,10 @@ module Katalyst
         Editor::NewItemsComponent.new(container:)
       end
 
+      def item_editor(item:)
+        Editor::ItemEditorComponent.new(container:, item:)
+      end
+
       def item(item:)
         Editor::ItemComponent.new(container:, item:)
       end

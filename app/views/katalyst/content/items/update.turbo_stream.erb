@@ -1,7 +1,4 @@
-<%= turbo_stream.replace "content--editor--item-frame" do %>
-  <%= render editor.new_items %>
-<% end %>
-
+<%= turbo_stream.kpop.dismiss %>
 <%= turbo_stream.replace dom_id(previous) do %>
   <%= render editor.item(item:) %>
 <% end %>

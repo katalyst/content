@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "katalyst-content"
-  spec.version = "2.0.1"
+  spec.version = "2.1.0"
   spec.authors = ["Katalyst Interactive"]
   spec.email   = ["developers@katalyst.com.au"]
 
@@ -17,5 +17,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "active_storage_validations"
   spec.add_dependency "katalyst-html-attributes"
+  spec.add_dependency "katalyst-kpop"
   spec.add_dependency "view_component"
 end

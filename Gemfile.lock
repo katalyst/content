@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    katalyst-content (2.0.1)
+    katalyst-content (2.1.0)
       active_storage_validations
       katalyst-html-attributes
+      katalyst-kpop
       view_component
 
 GEM
@@ -167,6 +168,10 @@ GEM
     katalyst-html-attributes (1.0.0)
       activesupport
       html-attributes-utils
+    katalyst-kpop (3.0.1)
+      katalyst-html-attributes
+      turbo-rails
+      view_component
     katalyst-tables (2.2.12)
       katalyst-html-attributes
       view_component

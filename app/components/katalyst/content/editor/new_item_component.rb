@@ -40,9 +40,8 @@ module Katalyst
             role:      "listitem",
             data:      {
               item_type:,
-              turbo_frame: TURBO_FRAME,
-              controller:  NEW_ITEM_CONTROLLER,
-              action:      ACTIONS,
+              controller: NEW_ITEM_CONTROLLER,
+              action:     ACTIONS,
             },
           }
         end

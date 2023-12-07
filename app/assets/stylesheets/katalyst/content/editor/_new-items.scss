@@ -1,10 +1,5 @@
 @use "icon" as *;
 
-// provide size for container queries
-#content--editor--item-frame {
-  container-type: inline-size;
-}
-
 .content--editor--new-items {
   display: grid;
   grid-template-columns: repeat(3, calc((100% - 1rem) / 3));

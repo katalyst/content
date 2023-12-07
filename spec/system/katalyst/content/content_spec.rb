@@ -6,6 +6,6 @@ RSpec.describe "katalyst/content/content" do
   it "loads dummy app" do
     visit root_path
 
-    expect(page).to have_text "Dummy app"
+    expect(page).to have_css("h1", text: "Content")
   end
 end
