@@ -59,10 +59,23 @@ RSpec.describe Katalyst::Content::ItemsController do
     end
 
     context "with invalid params" do
-      let(:item_params) { { heading: "" }.merge(default_item_params) }
+      let(:item) { build(:katalyst_content_figure, container:) }
+      let(:item_params) { attributes_for(:katalyst_content_figure, heading: "").merge(default_item_params) }
 
       it { is_expected.to be_unprocessable }
-      it { expect { action }.not_to change(Katalyst::Content::Content, :count) }
+      it { expect { action }.not_to change(Katalyst::Content::Figure, :count) }
+
+      it "creates the attachment" do
+        action
+        expect(assigns(:item).image).to be_a(ActiveStorage::Attached::One)
+      end
+
+      it "stores the attachment's id in the form" do
+        action
+        inputs = Capybara::Node::Simple.new(Nokogiri::HTML5.parse(response.body))
+                   .all("input[name='item[image]']", visible: false)
+        expect(inputs).to include(have_attributes(value: assigns(:item).image.signed_id))
+      end
     end
   end
 

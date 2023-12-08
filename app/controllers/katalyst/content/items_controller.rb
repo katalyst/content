@@ -25,6 +25,8 @@ module Katalyst
         if item.save
           render :update, locals: { editor:, item:, previous: @container.items.build(type: item.type) }
         else
+          store_attachments(item)
+
           render_editor status: :unprocessable_entity
         end
       end
@@ -38,6 +40,8 @@ module Katalyst
 
           render locals: { editor:, item:, previous: }
         else
+          store_attachments(item)
+
           render_editor status: :unprocessable_entity
         end
       end
@@ -77,6 +81,24 @@ module Katalyst
 
       def render_editor(**)
         render(:edit, locals: { item_editor: editor.item_editor(item:) }, **)
+      end
+
+      # Ensure that any attachments are stored before the item is returned to
+      # the editor, so that uploads are not lost if the item is invalid.
+      #
+      # This mimics the behaviour of direct uploads without requiring the JS
+      # integration.
+      def store_attachments(item)
+        item.attachment_changes.each_value do |change|
+          case change
+          when ActiveStorage::Attached::Changes::CreateOne
+            change.upload
+            change.blob.save!
+          when ActiveStorage::Attached::Changes::CreateMany
+            change.upload
+            change.blobs.each(&:save!)
+          end
+        end
       end
     end
   end

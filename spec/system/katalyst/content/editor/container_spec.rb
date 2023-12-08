@@ -68,7 +68,7 @@ RSpec.describe "katalyst/content/editor/container" do
     fill_in "Heading", with: "Updated"
     click_button "Done"
 
-    expect(page).to have_css("li", text: "Updated")
+    expect(page).to have_css("#items_page_#{container.id} > li", text: "Updated")
 
     expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
@@ -154,7 +154,7 @@ RSpec.describe "katalyst/content/editor/container" do
     fill_in "Heading", with: "Updated"
     click_button "Done"
 
-    expect(page).to have_css("li", text: "Updated")
+    expect(page).to have_css("#items_page_#{container.id} > li", text: "Updated")
 
     click_button "Save"
 
@@ -175,7 +175,7 @@ RSpec.describe "katalyst/content/editor/container" do
     fill_in "Heading", with: "Updated"
     click_button "Done"
 
-    expect(page).to have_css("li", text: "Updated")
+    expect(page).to have_css("#items_page_#{container.id} > li", text: "Updated")
     container.items.reload.destroy_all
 
     click_button "Save"
@@ -194,7 +194,7 @@ RSpec.describe "katalyst/content/editor/container" do
     fill_in "Heading", with: "Updated"
     click_button "Done"
 
-    expect(page).to have_css("li", text: "Updated")
+    expect(page).to have_css("#items_page_#{container.id} > li", text: "Updated")
 
     click_button "Save"
 
@@ -219,7 +219,7 @@ RSpec.describe "katalyst/content/editor/container" do
     fill_in "Heading", with: "Updated"
     click_button "Done"
 
-    expect(page).to have_css("li", text: "Updated")
+    expect(page).to have_css("#items_page_#{container.id} > li", text: "Updated")
 
     click_button "Save"
 

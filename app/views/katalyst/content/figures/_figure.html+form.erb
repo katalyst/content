@@ -4,6 +4,11 @@
 
   <div class="field">
     <%= form.label :image %>
+    <% if (image = form.object.image).attached? %>
+      <%= image.filename %>
+      <br>
+      <%= form.hidden_field :image, value: form.object.image.signed_id %>
+    <% end %>
     <%= form.file_field :image %>
   </div>
 
