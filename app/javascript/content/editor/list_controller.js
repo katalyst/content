@@ -1,4 +1,4 @@
-import {Controller} from "@hotwired/stimulus";
+import { Controller } from "@hotwired/stimulus";
 
 export default class ListController extends Controller {
   connect() {
@@ -80,7 +80,10 @@ export default class ListController extends Controller {
     // https://bugs.webkit.org/show_bug.cgi?id=66547
     this.enterCount--;
 
-    if (this.enterCount <= 0 && this.dragItem.dataset.hasOwnProperty("newItem")) {
+    if (
+      this.enterCount <= 0 &&
+      this.dragItem.dataset.hasOwnProperty("newItem")
+    ) {
       this.cancelDrag(event);
     }
   }
@@ -114,7 +117,7 @@ export default class ListController extends Controller {
       );
     }
 
-    this.dispatch("drop", {target: item, bubbles: true, prefix: "content"});
+    this.dispatch("drop", { target: item, bubbles: true, prefix: "content" });
   }
 
   /**
@@ -142,11 +145,11 @@ export default class ListController extends Controller {
   }
 
   reindex() {
-    this.dispatch("reindex", {bubbles: true, prefix: "content"});
+    this.dispatch("reindex", { bubbles: true, prefix: "content" });
   }
 
   reset() {
-    this.dispatch("reset", {bubbles: true, prefix: "content"});
+    this.dispatch("reset", { bubbles: true, prefix: "content" });
   }
 }
 
@@ -190,8 +193,9 @@ function copyAllowed(event) {
  * Given an event target, return the closest drop target, if any.
  */
 function dropTarget(e) {
-  return e && (
-    e.closest("[data-controller='content--editor--list'] > *") ||
-    e.closest("[data-controller='content--editor--list']")
+  return (
+    e &&
+    (e.closest("[data-controller='content--editor--list'] > *") ||
+      e.closest("[data-controller='content--editor--list']"))
   );
 }
