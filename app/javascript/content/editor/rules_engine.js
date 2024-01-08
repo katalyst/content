@@ -90,7 +90,7 @@ export default class RulesEngine {
       this.debug(
         `invalid depth on item ${item.index}: ${item.depth} => ${
           previous.depth + 1
-        }`
+        }`,
       );
 
       item.depth = previous.depth + 1;
@@ -108,7 +108,7 @@ export default class RulesEngine {
     const previous = item.previousItem;
     if (previous && previous.depth < item.depth && !previous.isLayout) {
       this.debug(
-        `invalid parent for item ${item.index}: ${item.depth} => ${previous.depth}`
+        `invalid parent for item ${item.index}: ${item.depth} => ${previous.depth}`,
       );
 
       item.depth = previous.depth;

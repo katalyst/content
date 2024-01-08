@@ -168,7 +168,7 @@ export default class Item {
     if (!listElement) listElement = createChildrenList(this.node);
 
     this.#expandedDescendants.forEach((child) =>
-      listElement.appendChild(child.node)
+      listElement.appendChild(child.node),
     );
   }
 
@@ -259,7 +259,7 @@ export default class Item {
     if (!this.hasCollapsedDescendants()) return [];
 
     return Array.from(this.#childrenListElement.children).map(
-      (node) => new Item(node)
+      (node) => new Item(node),
     );
   }
 }
