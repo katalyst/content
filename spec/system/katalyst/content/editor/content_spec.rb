@@ -18,15 +18,15 @@ RSpec.describe "katalyst/content/editor/content" do
 
     page.execute_script("document.querySelector('trix-editor').editor.setSelectedRange([8,12])")
 
-    click_button "Link"
+    click_on "Link"
     fill_in "Enter a URL…", with: "#anchor"
-    within(".trix-dialog.trix-active") { click_button "Link" }
+    within(".trix-dialog.trix-active") { click_on "Link" }
 
-    click_button "Done"
+    click_on "Done"
 
     expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
-    click_button "Publish"
+    click_on "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
@@ -50,12 +50,12 @@ RSpec.describe "katalyst/content/editor/content" do
 
     page.execute_script("document.querySelector('trix-editor').editor.setSelectedRange([0,0])")
 
-    click_button "Heading"
-    click_button "Done"
+    click_on "Heading"
+    click_on "Done"
 
     expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
-    click_button "Publish"
+    click_on "Publish"
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
