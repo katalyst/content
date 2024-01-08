@@ -59,7 +59,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_storage_validations (1.1.3)
+    active_storage_validations (1.1.4)
       activejob (>= 5.2.0)
       activemodel (>= 5.2.0)
       activestorage (>= 5.2.0)
@@ -89,7 +89,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
-    addressable (2.8.5)
+    addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     base64 (0.2.0)
@@ -100,7 +100,7 @@ GEM
       erubi (~> 1.4)
       parser (>= 2.4)
       smart_properties
-    bigdecimal (3.1.4)
+    bigdecimal (3.1.5)
     builder (3.2.4)
     capybara (3.39.2)
       addressable
@@ -132,9 +132,9 @@ GEM
       rubocop
       smart_properties
     erubi (1.12.0)
-    factory_bot (6.4.2)
+    factory_bot (6.4.5)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.4.2)
+    factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.2)
@@ -156,23 +156,23 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    importmap-rails (1.2.3)
+    importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.6.0)
-    irb (1.10.1)
+    io-console (0.7.1)
+    irb (1.11.0)
       rdoc
       reline (>= 0.3.8)
     json (2.7.1)
-    katalyst-html-attributes (1.0.0)
+    katalyst-html-attributes (1.0.1)
       activesupport
       html-attributes-utils
     katalyst-kpop (3.0.1)
       katalyst-html-attributes
       turbo-rails
       view_component
-    katalyst-tables (2.2.12)
+    katalyst-tables (2.3.1)
       katalyst-html-attributes
       view_component
     language_server-protocol (3.17.0.3)
@@ -191,22 +191,22 @@ GEM
     mini_mime (1.1.5)
     minitest (5.20.0)
     mutex_m (0.2.0)
-    net-imap (0.4.7)
+    net-imap (0.4.9.1)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0)
+    net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.15.5-arm64-darwin)
+    nokogiri (1.16.0-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-linux)
+    nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
-    parallel (1.23.0)
-    parser (3.2.2.4)
+    parallel (1.24.0)
+    parser (3.3.0.2)
       ast (~> 2.4.1)
       racc
     propshaft (0.8.0)
@@ -214,10 +214,10 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
-    psych (5.1.1.1)
+    psych (5.1.2)
       stringio
     public_suffix (5.0.4)
-    puma (6.4.0)
+    puma (6.4.1)
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (3.0.8)
@@ -263,10 +263,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.1.0)
-    rdoc (6.6.1)
+    rdoc (6.6.2)
       psych (>= 4.0.0)
-    regexp_parser (2.8.3)
-    reline (0.4.1)
+    regexp_parser (2.9.0)
+    reline (0.4.2)
       io-console (~> 0.5)
     rexml (3.2.6)
     rspec-core (3.12.2)
@@ -286,7 +286,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
-    rubocop (1.58.0)
+    rubocop (1.59.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -299,9 +299,9 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
-    rubocop-capybara (2.19.0)
+    rubocop-capybara (2.20.0)
       rubocop (~> 1.41)
-    rubocop-factory_bot (2.24.0)
+    rubocop-factory_bot (2.25.0)
       rubocop (~> 1.33)
     rubocop-katalyst (1.1.4)
       rubocop
@@ -309,17 +309,17 @@ GEM
       rubocop-rails
       rubocop-rake
       rubocop-rspec
-    rubocop-performance (1.19.1)
-      rubocop (>= 1.7.0, < 2.0)
-      rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.22.2)
+    rubocop-performance (1.20.1)
+      rubocop (>= 1.48.1, < 2.0)
+      rubocop-ast (>= 1.30.0, < 2.0)
+    rubocop-rails (2.23.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
       rubocop-ast (>= 1.30.0, < 2.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
-    rubocop-rspec (2.25.0)
+    rubocop-rspec (2.26.1)
       rubocop (~> 1.40)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
@@ -327,16 +327,16 @@ GEM
     ruby-vips (2.2.0)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
-    sass-embedded (1.69.5-arm64-darwin)
-      google-protobuf (~> 3.23)
-    sass-embedded (1.69.5-x86_64-linux-gnu)
-      google-protobuf (~> 3.23)
-    shoulda-matchers (5.3.0)
+    sass-embedded (1.69.7-arm64-darwin)
+      google-protobuf (~> 3.25)
+    sass-embedded (1.69.7-x86_64-linux-gnu)
+      google-protobuf (~> 3.25)
+    shoulda-matchers (6.0.0)
       activesupport (>= 5.2.0)
     smart_properties (1.17.0)
-    sqlite3 (1.6.9-arm64-darwin)
-    sqlite3 (1.6.9-x86_64-linux)
-    stimulus-rails (1.3.0)
+    sqlite3 (1.7.0-arm64-darwin)
+    sqlite3 (1.7.0-x86_64-linux)
+    stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
     thor (1.3.0)
@@ -348,7 +348,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
-    view_component (3.8.0)
+    view_component (3.9.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -395,4 +395,4 @@ DEPENDENCIES
   turbo-rails
 
 BUNDLED WITH
-   2.4.22
+   2.5.4

@@ -56,7 +56,7 @@ RSpec.describe Katalyst::Content::Figure do
         figure.image = Rack::Test::UploadedFile.new(Rails.root.parent.join("fixtures/images/sample.png"), "image/png")
         copy         = figure.dup
         copy.save!
-        expect(ActiveStorage::Blob.service).to be_exist(copy.image.blob.key)
+        expect(ActiveStorage::Blob.service).to exist(copy.image.blob.key)
       end
     end
   end

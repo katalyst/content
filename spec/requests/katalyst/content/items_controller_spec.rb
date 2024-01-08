@@ -13,14 +13,14 @@ RSpec.describe Katalyst::Content::ItemsController do
   shared_examples "has attachment" do |attribute = :image|
     it "saves #{attribute}" do
       action
-      expect(ActiveStorage::Blob.service).to be_exist(assigns(:item).send(attribute).blob.key)
+      expect(ActiveStorage::Blob.service).to exist(assigns(:item).send(attribute).blob.key)
     end
   end
 
   shared_examples "changes attachment" do |attribute = :image|
     it "saves #{attribute}" do
       action
-      expect(ActiveStorage::Blob.service).to be_exist(assigns(:item).send(attribute).blob.key)
+      expect(ActiveStorage::Blob.service).to exist(assigns(:item).send(attribute).blob.key)
     end
 
     it "changes #{attribute}" do
@@ -72,8 +72,11 @@ RSpec.describe Katalyst::Content::ItemsController do
 
       it "stores the attachment's id in the form" do
         action
+        # note: response.parsed_body strips out <template> tags
+        # rubocop:disable Rails/ResponseParsedBody
         inputs = Capybara::Node::Simple.new(Nokogiri::HTML5.parse(response.body))
                    .all("input[name='item[image]']", visible: false)
+        # rubocop:enable Rails/ResponseParsedBody
         expect(inputs).to include(have_attributes(value: assigns(:item).image.signed_id))
       end
     end
