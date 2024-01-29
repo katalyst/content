@@ -14,11 +14,6 @@ module Katalyst
           },
         }.merge_html(attributes)
       end
-
-      # When rendering item forms do not include the controller namespace prefix (katalyst/content)
-      def prefix_partial_path_with_controller_namespace
-        false
-      end
     end
   end
 end
