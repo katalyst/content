@@ -2,7 +2,7 @@
 
 module Katalyst
   module Content
-    class ItemsController < ApplicationController
+    class ItemsController < Katalyst::Content.config.base_controller.constantize
       before_action :set_container, only: %i[new create]
       before_action :set_item, except: %i[new create]
       before_action :set_editor_variant
@@ -10,8 +10,6 @@ module Katalyst
       attr_reader :container, :item, :editor
 
       helper EditorHelper
-
-      layout nil
 
       def new
         render_editor

@@ -24,6 +24,8 @@ module Katalyst
 
       # Components
       config_accessor(:errors_component) { "Katalyst::Content::Editor::ErrorsComponent" }
+
+      config_accessor(:base_controller) { "ApplicationController" }
     end
   end
 end
