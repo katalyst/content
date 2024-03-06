@@ -1,0 +1,18 @@
+[data-content--editor--table-target="content"] {
+  position: relative;
+  min-height: 8rem;
+
+  &::after {
+    content: "Paste table here";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+
+  &:has(table)::after {
+    content: unset;
+  }
+}

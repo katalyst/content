@@ -22,9 +22,12 @@
     <%= form.check_box :visible %>
   </div>
 
-  <div class="field">
+  <div class="field" data-controller="content--editor--table">
     <%= form.label :content %>
-    <%= form.text_area :content, placeholder: "Paste table here" %>
+    <div data-content--editor--table-target="content" contenteditable="true">
+      <%= form.object.content %>
+    </div>
+    <%= form.hidden_field :content, data: { content__editor__table_target: "input" } %>
   </div>
 
   <%= form.submit "Done" %>
