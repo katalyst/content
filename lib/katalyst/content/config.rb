@@ -27,6 +27,14 @@ module Katalyst
       config_accessor(:errors_component) { "Katalyst::Content::Editor::ErrorsComponent" }
 
       config_accessor(:base_controller) { "ApplicationController" }
+
+      # Sanitizer
+      config_accessor(:table_sanitizer_allowed_tags) do
+        %w[table thead tbody tr th td caption a strong em span br p text].freeze
+      end
+      config_accessor(:table_sanitizer_allowed_attributes) do
+        %w[colspan rowspan href].freeze
+      end
     end
   end
 end

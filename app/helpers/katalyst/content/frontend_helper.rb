@@ -3,6 +3,8 @@
 module Katalyst
   module Content
     module FrontendHelper
+      include TableHelper
+
       # Render all items from a content version as HTML
       # @param version [Katalyst::Content::Version] The content version to render
       # @return [ActiveSupport::SafeBuffer,String,nil] Content as HTML

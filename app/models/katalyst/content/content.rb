@@ -7,6 +7,8 @@ module Katalyst
 
       validates :content, presence: true
 
+      default_scope { with_rich_text_content }
+
       def initialize_copy(source)
         super
 

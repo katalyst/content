@@ -111,6 +111,8 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    compare-xml (0.66)
+      nokogiri (~> 1.8)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -367,6 +369,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  compare-xml
   cuprite
   dartsass-rails
   erb_lint

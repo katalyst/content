@@ -9,7 +9,6 @@ RSpec.describe Katalyst::Content::Table do
 
   it { is_expected.to be_valid }
   it { is_expected.to belong_to(:container).required }
-
   it { is_expected.to validate_presence_of(:content) }
 
   describe "#to_plain_text" do
@@ -21,6 +20,30 @@ RSpec.describe Katalyst::Content::Table do
       it { is_expected.to have_attributes(to_plain_text: nil) }
     end
   end
+
+  # rubocop:disable RSpec/ExampleLength
+  describe "#content" do
+    it "has table content" do
+      expect(table.content).to match_html(<<~HTML)
+        <table>
+          <caption>Contacts</caption>
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>john.doe@example.com</td>
+          </tr>
+          </tbody>
+        </table>
+      HTML
+    end
+  end
+  # rubocop:enable RSpec/ExampleLength
 
   describe "#dup" do
     it "preserves page association on dup" do

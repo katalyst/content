@@ -3,6 +3,8 @@
 module Katalyst
   module Content
     module EditorHelper
+      include TableHelper
+
       using Katalyst::HtmlAttributes::HasHtmlAttributes
 
       def content_editor_rich_text_attributes(attributes = {})
