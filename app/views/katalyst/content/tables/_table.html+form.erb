@@ -1,4 +1,6 @@
-<%= form_with model: table, scope: :item, url: path do |form| %>
+<%= form_with model: table, scope: :item, url: path, data: {
+      controller: "content--editor--table",
+    } do |form| %>
   <%= render "hidden_fields", form: %>
   <%= render "form_errors", form: %>
 
@@ -22,17 +24,30 @@
     <%= form.check_box :visible %>
   </div>
 
-  <div class="field" data-controller="content--editor--table">
+  <div class="field">
     <%= form.label :content %>
+    <% content = sanitize_content_table(normalize_content_table(form.object, heading: false)) %>
     <div contenteditable="true"
          data-content--editor--table-target="content"
-         data-action="paste->content--editor--table#paste"><%= sanitize_content_table form.object %></div>
-    <%= form.hidden_field :content, data: { content__editor__table_target: "input" } %>
+         data-action="paste->content--editor--table#paste">
+      <%= content %>
+    </div>
+    <%= form.hidden_field :content, value: content, data: { content__editor__table_target: "input" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :heading_rows %>
+    <%= form.text_field :heading_rows, type: :number, data: { action: "input->content--editor--table#update" } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :heading_columns %>
+    <%= form.text_field :heading_columns, type: :number, data: { action: "input->content--editor--table#update" } %>
   </div>
 
   <%= form.submit "Done" %>
   <%= link_to "Discard", :back %>
   <%= form.button "Update",
                   formaction: table.persisted? ? content_routes.table_path : content_routes.tables_path,
-                  data: { action: "update" } %>
+                  data:       { content__editor__table_target: "update" } %>
 <% end %>

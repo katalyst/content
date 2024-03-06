@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 [data-content--editor--table-target="content"] {
   position: relative;
   min-height: 8rem;
@@ -14,5 +16,27 @@
 
   &:has(table)::after {
     content: unset;
+  }
+
+  table {
+    border-collapse: collapse;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  th,
+  td {
+    border: 1px solid $grey;
+    padding: 0.25rem 0.5rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  thead {
+    background-color: $grey;
+  }
+
+  tbody th {
+    background-color: $grey-light;
   }
 }

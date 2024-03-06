@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class TableController extends Controller {
-  static targets = ["content", "input"];
+  static targets = ["content", "input", "update"];
 
   constructor(config) {
     super(config);
@@ -14,7 +14,7 @@ export default class TableController extends Controller {
       attributes: true,
       childList: true,
       characterData: true,
-      subtree: true
+      subtree: true,
     });
   }
 
@@ -23,12 +23,12 @@ export default class TableController extends Controller {
   }
 
   change = (mutations) => {
-    this.inputTarget.value = this.contentTarget.innerHTML;
-  }
+    this.inputTarget.value = this.table.outerHTML;
+  };
 
   update = () => {
-    this.element.closest("form").querySelector("button[data-action='update']").click();
-  }
+    this.updateTarget.click();
+  };
 
   paste = (e) => {
     e.preventDefault();
@@ -36,5 +36,12 @@ export default class TableController extends Controller {
     this.inputTarget.value = e.clipboardData.getData("text/html");
 
     this.update();
+  };
+
+  /**
+   * @returns {HTMLTableElement} The table element from the content target
+   */
+  get table() {
+    return this.contentTarget.querySelector("table");
   }
 }

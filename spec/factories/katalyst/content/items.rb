@@ -42,9 +42,10 @@ FactoryBot.define do
 
   factory :katalyst_content_table, class: "Katalyst::Content::Table" do
     content_item_defaults
+    heading { "Contacts" }
+    heading_style { "none" }
     content { <<~HTML }
       <table>
-        <caption>Contacts</caption>
         <thead>
         <tr>
           <th>Name</th>
