@@ -13,6 +13,7 @@ module Katalyst
         %w[
           Katalyst::Content::Content
           Katalyst::Content::Figure
+          Katalyst::Content::Table
           Katalyst::Content::Section
           Katalyst::Content::Group
           Katalyst::Content::Column

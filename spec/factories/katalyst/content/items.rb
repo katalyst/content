@@ -39,4 +39,25 @@ FactoryBot.define do
   factory :katalyst_content_column, class: "Katalyst::Content::Column" do
     content_item_defaults
   end
+
+  factory :katalyst_content_table, class: "Katalyst::Content::Table" do
+    content_item_defaults
+    content { <<~HTML }
+      <table>
+        <caption>Contacts</caption>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>John Doe</td>
+          <td>john.doe@example.com</td>
+        </tr>
+        </tbody>
+      </table>
+    HTML
+  end
 end
