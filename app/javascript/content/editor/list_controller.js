@@ -84,7 +84,8 @@ export default class ListController extends Controller {
       this.enterCount <= 0 &&
       this.dragItem.dataset.hasOwnProperty("newItem")
     ) {
-      this.cancelDrag(event);
+      this.dragItem.remove();
+      this.reset();
     }
   }
 

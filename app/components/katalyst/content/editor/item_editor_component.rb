@@ -10,6 +10,10 @@ module Katalyst
           def prefix_partial_path_with_controller_namespace
             false
           end
+
+          def content_routes
+            katalyst_content
+          end
         end
 
         def call

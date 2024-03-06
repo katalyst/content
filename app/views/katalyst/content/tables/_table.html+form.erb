@@ -24,12 +24,15 @@
 
   <div class="field" data-controller="content--editor--table">
     <%= form.label :content %>
-    <div data-content--editor--table-target="content" contenteditable="true">
-      <%= form.object.content %>
-    </div>
+    <div contenteditable="true"
+         data-content--editor--table-target="content"
+         data-action="paste->content--editor--table#paste"><%= sanitize_content_table form.object %></div>
     <%= form.hidden_field :content, data: { content__editor__table_target: "input" } %>
   </div>
 
   <%= form.submit "Done" %>
   <%= link_to "Discard", :back %>
+  <%= form.button "Update",
+                  formaction: table.persisted? ? content_routes.table_path : content_routes.tables_path,
+                  data: { action: "update" } %>
 <% end %>
