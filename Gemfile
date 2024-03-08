@@ -29,6 +29,7 @@ end
 
 group :test do
   gem "capybara"
+  gem "compare-xml"
   gem "cuprite"
   gem "faker"
   gem "rails-controller-testing"
