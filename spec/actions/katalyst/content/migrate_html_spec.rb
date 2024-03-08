@@ -4,7 +4,7 @@ require "rails_helper"
 
 # rubocop:disable RSpec/ExampleLength
 RSpec.describe Katalyst::Content::MigrateHtml do
-  subject { described_class.new }
+  subject(:migration) { described_class.new }
 
   let(:page) { create(:page) }
 
@@ -14,7 +14,7 @@ RSpec.describe Katalyst::Content::MigrateHtml do
     content = <<~HTML
       Some plain text without any tags.
     HTML
-    subject.call(page, content)
+    migration.call(page, content)
     expect(page.published_items).to contain_exactly(
       have_attributes(heading:       "Some plain text without any tags",
                       heading_style: "none",
@@ -26,7 +26,7 @@ RSpec.describe Katalyst::Content::MigrateHtml do
     content = <<~HTML
       <p>Some <strong>rich text</strong> with <em>inline tags</em>.</p>
     HTML
-    subject.call(page, content)
+    migration.call(page, content)
     expect(page.published_items).to contain_exactly(
       have_attributes(heading:       "Some rich text with inline tags",
                       heading_style: "none",
@@ -39,7 +39,7 @@ RSpec.describe Katalyst::Content::MigrateHtml do
       <p>Some <strong>rich text</strong> with <em>inline tags</em>.</p>
       <p>Some <strong>more</strong> content.</p>
     HTML
-    subject.call(page, content)
+    migration.call(page, content)
     expect(page.published_items).to contain_exactly(
       have_attributes(heading:       "Some rich text with inline tags",
                       heading_style: "none",
@@ -55,7 +55,7 @@ RSpec.describe Katalyst::Content::MigrateHtml do
       <h3>This is a new content block</h3>
       <p>Some <strong>more</strong> content.</p>
     HTML
-    subject.call(page, content)
+    migration.call(page, content)
     expect(page.published_items).to contain_exactly(
       have_attributes(heading:       "This is a content title",
                       heading_style: "default",
@@ -77,7 +77,7 @@ RSpec.describe Katalyst::Content::MigrateHtml do
       <h2>This is a section title</h2>
       <p>Some content.</p>
     HTML
-    subject.call(page, content)
+    migration.call(page, content)
     expect(page.published_items).to contain_exactly(
       have_attributes(type:          "Katalyst::Content::Section",
                       heading:       "This is a section title",

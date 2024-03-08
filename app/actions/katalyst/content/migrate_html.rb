@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/PerceivedComplexity
 module Katalyst
   module Content
     class MigrateHtml
@@ -99,10 +100,10 @@ module Katalyst
         end
 
         content.content = if content.content.present?
-          content.content.read_attribute_before_type_cast(:body) + node.to_html
-        else
-          node.to_html
-        end
+                            content.content.read_attribute_before_type_cast(:body) + node.to_html
+                          else
+                            node.to_html
+                          end
 
         content.heading ||= heading_for(content.content)
 
@@ -131,3 +132,4 @@ module Katalyst
     end
   end
 end
+# rubocop:enable Metrics/PerceivedComplexity
