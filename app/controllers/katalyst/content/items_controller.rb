@@ -6,6 +6,7 @@ module Katalyst
       before_action :set_container, only: %i[new create]
       before_action :set_item, except: %i[new create]
       before_action :set_editor_variant
+      before_action :require_kpop, only: %i[new edit]
 
       attr_reader :container, :item, :editor
 
@@ -102,6 +103,10 @@ module Katalyst
       # When rendering item forms do not include the controller namespace prefix (katalyst/content)
       def prefix_partial_path_with_controller_namespace
         false
+      end
+
+      def kpop_fallback_location
+        main_app.root_path
       end
     end
   end
