@@ -1,7 +1,15 @@
 import { Controller } from "@hotwired/stimulus";
 
+const EDITOR = `
+<div class="content--editor--table-editor"
+   contenteditable="true"
+   data-content--editor--table-target="content"
+   data-action="paste->content--editor--table#paste"
+   id="item-content-field">
+</div>`;
+
 export default class TableController extends Controller {
-  static targets = ["content", "input", "update"];
+  static targets = ["input", "update"];
 
   constructor(config) {
     super(config);
@@ -10,7 +18,15 @@ export default class TableController extends Controller {
   }
 
   connect() {
-    this.observer.observe(this.contentTarget, {
+    const template = document.createElement("TEMPLATE");
+    template.innerHTML = EDITOR;
+    this.content = template.content.firstElementChild;
+    this.content.innerHTML = this.inputTarget.value;
+    this.content.className += ` ${this.inputTarget.className}`;
+    this.inputTarget.insertAdjacentElement("beforebegin", this.content);
+    this.inputTarget.hidden = true;
+
+    this.observer.observe(this.content, {
       attributes: true,
       childList: true,
       characterData: true,
@@ -20,6 +36,8 @@ export default class TableController extends Controller {
 
   disconnect() {
     this.observer.disconnect();
+    this.content.remove();
+    delete this.content;
   }
 
   change = (mutations) => {
@@ -44,6 +62,6 @@ export default class TableController extends Controller {
    * @returns {HTMLTableElement} The table element from the content target
    */
   get table() {
-    return this.contentTarget.querySelector("table");
+    return this.content.querySelector("table");
   }
 }

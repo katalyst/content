@@ -27,11 +27,6 @@
   <div class="field">
     <%= form.label :content %>
     <% content = sanitize_content_table(normalize_content_table(form.object, heading: false)) %>
-    <div contenteditable="true"
-         data-content--editor--table-target="content"
-         data-action="paste->content--editor--table#paste">
-      <%= content %>
-    </div>
     <%= form.hidden_field :content, value: content, data: { content__editor__table_target: "input" } %>
   </div>
 
