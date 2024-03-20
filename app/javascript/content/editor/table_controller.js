@@ -23,7 +23,7 @@ export default class TableController extends Controller {
   }
 
   change = (mutations) => {
-    this.inputTarget.value = this.table.outerHTML;
+    this.inputTarget.value = this.table?.outerHTML;
   };
 
   update = () => {
@@ -31,6 +31,8 @@ export default class TableController extends Controller {
   };
 
   paste = (e) => {
+    if (e.clipboardData.getData("text/html").indexOf("<table") === -1) return;
+
     e.preventDefault();
 
     this.inputTarget.value = e.clipboardData.getData("text/html");
