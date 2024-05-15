@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    katalyst-content (2.3.2)
+    katalyst-content (2.4.0)
       active_storage_validations
       katalyst-html-attributes
       katalyst-kpop
