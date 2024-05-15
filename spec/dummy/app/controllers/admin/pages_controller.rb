@@ -2,22 +2,13 @@
 
 module Admin
   class PagesController < ApplicationController
-    include Katalyst::Tables::Backend
-
     helper Katalyst::Content::EditorHelper
     helper Katalyst::Tables::Frontend
 
     def index
       collection = Katalyst::Tables::Collection::Base.new(sorting: :title).with_params(params).apply(Page.all)
-      table      = Katalyst::Turbo::TableComponent.new(collection:,
-                                                       id:         "index-table",
-                                                       class:      "index-table",
-                                                       caption:    true)
 
-      respond_to do |format|
-        format.turbo_stream { render(table) } if self_referred?
-        format.html { render :index, locals: { table: } }
-      end
+      render locals: { collection: }
     end
 
     def new
