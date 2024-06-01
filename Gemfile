@@ -11,7 +11,7 @@ gem "katalyst-tables"
 gem "propshaft"
 gem "rails"
 gem "rake"
-gem "sqlite3", "~> 1.7"
+gem "sqlite3", "~> 2.0"
 gem "stimulus-rails"
 gem "turbo-rails"
 
