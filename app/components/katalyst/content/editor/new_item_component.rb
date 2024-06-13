@@ -13,7 +13,7 @@ module Katalyst
         ACTIONS
 
         def initialize(item:, container: item.container)
-          super(item:, container:)
+          super
         end
 
         def item_component(**)

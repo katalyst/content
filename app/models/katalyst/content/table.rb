@@ -25,7 +25,7 @@ module Katalyst
       end
 
       def valid?(context = nil)
-        super(context)
+        super
       end
 
       def to_plain_text
