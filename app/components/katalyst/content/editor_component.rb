@@ -7,6 +7,7 @@ module Katalyst
         submit->#{CONTAINER_CONTROLLER}#reindex
         content:drop->#{CONTAINER_CONTROLLER}#drop
         content:reindex->#{CONTAINER_CONTROLLER}#reindex
+        turbo:render@document->#{CONTAINER_CONTROLLER}#connect
         content:reset->#{CONTAINER_CONTROLLER}#reset
       ACTIONS
 

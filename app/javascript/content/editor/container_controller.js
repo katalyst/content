@@ -7,9 +7,9 @@ import RulesEngine from "./rules_engine";
 export default class ContainerController extends Controller {
   static targets = ["container"];
 
+  // Caution: connect is called on attachment, but also on morph/render
   connect() {
     this.state = this.container.state;
-
     this.reindex();
   }
 
