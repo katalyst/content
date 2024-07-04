@@ -146,7 +146,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
   it "can save without publishing" do
     item = build(:katalyst_content_item)
-    container = create(:page, items: [item])
+    container = create(:page, :unpublished, items: [item])
 
     visit admin_page_path(container)
 
@@ -158,7 +158,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
     click_on "Save"
 
-    expect(page).to have_link(class: "status-text", text: "Draft", visible: :visible)
+    expect(page).to have_link(class: "status-text", text: "Unpublished", visible: :visible)
 
     container.reload
 
@@ -167,7 +167,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
   it "can show errors on save" do
     item = build(:katalyst_content_item)
-    container = create(:page, items: [item])
+    container = create(:page, :unpublished, items: [item])
 
     visit admin_page_path(container)
 
