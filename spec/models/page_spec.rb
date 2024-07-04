@@ -2,21 +2,21 @@
 
 require "rails_helper"
 
-def transform_tree(nodes, &)
-  output = []
-  nodes.each do |node|
-    output << yield(node)
-    output << transform_tree(node.children, &) if node.children.any?
-  end
-  output
-end
-
 RSpec.describe Page do
   subject(:page) { create(:page, items:) }
 
   let(:first) { build(:katalyst_content_item, heading: "First") }
   let(:last) { build(:katalyst_content_item, heading: "Last") }
   let(:items) { [first, last] }
+
+  def transform_tree(nodes, &)
+    output = []
+    nodes.each do |node|
+      output << yield(node)
+      output << transform_tree(node.children, &) if node.children.any?
+    end
+    output
+  end
 
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_uniqueness_of(:slug).ignoring_case_sensitivity }

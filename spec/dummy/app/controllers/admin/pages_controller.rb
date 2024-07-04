@@ -6,7 +6,7 @@ module Admin
     helper Katalyst::Tables::Frontend
 
     def index
-      collection = Katalyst::Tables::Collection::Base.new(sorting: :title).with_params(params).apply(Page.all)
+      collection = Collection.with_params(params).apply(Page)
 
       render locals: { collection: }
     end
@@ -79,6 +79,16 @@ module Admin
       return {} if params[:page].blank?
 
       params.require(:page).permit(:title, :slug, items_attributes: %i[id index depth])
+    end
+
+    class Collection < Katalyst::Tables::Collection::Base
+      include Katalyst::Tables::Collection::Query
+
+      config.sorting = :title
+
+      attribute :title, :string
+      attribute :slug, :string
+      attribute :content_text, :string
     end
   end
 end

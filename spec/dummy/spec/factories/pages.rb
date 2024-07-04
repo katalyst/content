@@ -3,14 +3,22 @@
 FactoryBot.define do
   factory :page do
     transient do
-      _publish { true }
+      state { "published" }
     end
 
     title { Faker::Beer.unique.name }
     slug { title.parameterize }
 
     trait :unpublished do
-      _publish { false }
+      state { "unpublished" }
+    end
+
+    trait :published do
+      state { "published" }
+    end
+
+    trait :draft do
+      state { "draft" }
     end
 
     after(:build) do |page, _context|
@@ -22,9 +30,14 @@ FactoryBot.define do
         { id: item.id, index:, depth: item.depth }
       end
 
-      if context._publish
+      case context.state
+      when "unpublished"
+        page.save!
+      when "published"
         page.publish!
-      else
+      when "draft"
+        page.publish!
+        page.items_attributes = page.published_version.nodes.as_json
         page.save!
       end
     end

@@ -4,4 +4,18 @@
   </div>
 </nav>
 
-<%= table_with(collection:, class: "index-table") %>
+<%= table_query_with(collection:) %>
+
+<%= table_with(collection:) do |row, page| %>
+  <%= row.text :title do |cell| %>
+    <%= link_to cell.value, [:admin, page] %>
+  <% end %>
+  <%= row.text :slug %>
+  <%= row.enum :state %>
+  <%= row.text :actions, label: "" do |cell| %>
+    <span>
+      <%= link_to "Preview", page_path(page.slug) %> |
+      <%= link_to "Edit", [:edit, :admin, page] %>
+      </span>
+  <% end %>
+<% end %>
