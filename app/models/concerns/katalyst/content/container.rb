@@ -8,6 +8,8 @@ module Katalyst
       included do # rubocop:disable Metrics/BlockLength
         include Katalyst::Content::GarbageCollection
 
+        after_initialize :set_state
+        after_save :set_state
         before_destroy :unset_versions
 
         belongs_to :draft_version,
@@ -47,34 +49,63 @@ module Katalyst
                  dependent:  :destroy,
                  validate:   true
 
+        attribute :state, :string
+        enum :state, %i[published draft unpublished].index_with(&:to_s)
+
+        # Find records by their state
+        scope :state, ->(values) do
+          type = attribute_types[:state]
+
+          scope = values.map do |v|
+            case type.cast(v)
+            when "published"
+              unscoped.published
+            when "draft"
+              unscoped.draft
+            when "unpublished"
+              unscoped.unpublished
+            else
+              none
+            end
+          end.reduce(:or) || none
+
+          merge(scope)
+        end
+
+        # Published is all records that have a published version and no unpublished saved changes.
+        scope :published, -> { where(arel_table[:published_version_id].eq(arel_table[:draft_version_id])) }
+
+        # Draft is all records who have a published version
+        scope :draft, -> { where(arel_table[:published_version_id].not_eq(arel_table[:draft_version_id])) }
+
+        # An unpublished record has a draft version but not published version.
+        # This could be a new record or a record that has been unpublished.
+        scope :unpublished, -> { where(published_version_id: nil) }
+
         scope :order_by_state, ->(dir) do
-          dir            = :asc unless %w[asc desc].include?(dir.to_s)
-          unpublished    = arel_table[:published_version_id].eq(nil)
-          draft          = arel_table[:published_version_id].not_eq(arel_table[:draft_version_id])
-          case_statement = Arel::Nodes::Case.new
-                             .when(unpublished).then(3)
-                             .when(draft).then(2)
-                             .else(1)
-          order(case_statement.public_send(dir)).order(updated_at: dir)
+          stmt = Arel::Nodes::Case.new
+          dir  = :asc unless %w[asc desc].include?(dir.to_s)
+
+          unpublished = arel_table[:published_version_id].eq(nil)
+          stmt        = stmt.when(unpublished).then(3)
+
+          published = arel_table[:published_version_id].eq(arel_table[:draft_version_id])
+          stmt      = stmt.when(published).then(2)
+
+          # draft
+          stmt = stmt.else(1)
+
+          order(stmt.public_send(dir)).order(updated_at: dir)
         end
 
-        scope :published, -> { where.not(published_version_id: nil) }
-      end
-
-      # A resource is in draft mode if it has an unpublished draft or it has no published version.
-      # @return the current state of the resource, either `published` or `draft`
-      def state
-        if !published_version_id
-          :unpublished
-        elsif published_version_id != draft_version_id
-          :draft
-        else
-          :published
+        # Returns true if there is a published version. Note that this includes drafts.
+        def published?
+          super || draft?
         end
-      end
 
-      def published?
-        published_version_id.present?
+        def state=(_)
+          raise NotImplementedError, "state cannot be set directly, use publish!, revert! etc"
+        end
       end
 
       # Promotes the draft version to become the published version
@@ -126,6 +157,17 @@ module Katalyst
         else
           draft_version
         end
+      end
+
+      def set_state
+        state = if !published_version_id
+                  :unpublished
+                elsif published_version_id == draft_version_id
+                  :published
+                else
+                  :draft
+                end
+        _write_attribute("state", state)
       end
     end
   end

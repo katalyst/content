@@ -29,7 +29,7 @@ RSpec.describe Page do
                           .with_message(I18n.t("activerecord.errors.messages.missing_item"), against: :items)
   end
 
-  it { is_expected.to have_attributes(state: :published) }
+  it { is_expected.to have_attributes(state: "published") }
   it { expect(page.draft_version).to eq(page.published_version) }
 
   it "stores the expect json (id/depth but no index)" do
@@ -78,9 +78,40 @@ RSpec.describe Page do
     it { expect { update }.to change(page, :slug) }
   end
 
-  describe "#published?" do
-    it { expect(create(:page)).to be_published }
-    it { expect(create(:page, :unpublished)).not_to be_published }
+  context "when unpublished" do
+    let!(:page) { create(:page, :unpublished) }
+
+    it { expect(page).to have_attributes(state: "unpublished") }
+    it { expect(page).to be_unpublished }
+    it { expect(page).not_to be_published }
+    it { expect(page).not_to be_draft }
+    it { expect(described_class.unpublished).to contain_exactly(page) }
+    it { expect(described_class.published).not_to include(page) }
+    it { expect(described_class.draft).not_to include(page) }
+  end
+
+  context "when published" do
+    let!(:page) { create(:page, :published) }
+
+    it { expect(page).to have_attributes(state: "published") }
+    it { expect(page).not_to be_unpublished }
+    it { expect(page).to be_published }
+    it { expect(page).not_to be_draft }
+    it { expect(described_class.unpublished).not_to include(page) }
+    it { expect(described_class.published).to contain_exactly(page) }
+    it { expect(described_class.draft).not_to include(page) }
+  end
+
+  context "when draft" do
+    let!(:page) { create(:page, :draft) }
+
+    it { expect(page).to have_attributes(state: "draft") }
+    it { expect(page).not_to be_unpublished }
+    it { expect(page).to be_published }
+    it { expect(page).to be_draft }
+    it { expect(described_class.unpublished).not_to include(page) }
+    it { expect(described_class.published).not_to include(page) }
+    it { expect(described_class.draft).to contain_exactly(page) }
   end
 
   describe ".versions.active" do
@@ -110,7 +141,7 @@ RSpec.describe Page do
 
   shared_examples "a versioned change" do
     it "changes state" do
-      expect { update }.to change(page, :state).from(:published).to(:draft)
+      expect { update }.to change(page, :state).from("published").to("draft")
     end
 
     it "creates a new version" do
