@@ -88,7 +88,7 @@ module Admin
 
       attribute :title, :string
       attribute :slug, :string
-      attribute :content_text, :string
+      attribute :state, :enum, scope: :state
     end
   end
 end

@@ -18,6 +18,7 @@
   }
 
   input:not([type="submit"]):not([type="button"]),
+  &[data-controller=tables--query] .query-input .highlight,
   textarea {
     @include input;
   }

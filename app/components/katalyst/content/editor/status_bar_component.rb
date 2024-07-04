@@ -25,7 +25,7 @@ module Katalyst
           status_text  = t("views.katalyst.content.editor.#{state}_html", **)
           html_options = { class: "status-text", data: { state => "", turbo: false } }
 
-          case state
+          case state.to_sym
           when :published
             link_to status_text, url_for(container), **html_options
           when :unpublished, :draft
@@ -38,7 +38,7 @@ module Katalyst
         def actions
           tag.menu do
             concat action(:discard, class: "button button--text")
-            concat action(:revert, class: "button button--text") if container.state == :draft
+            concat action(:revert, class: "button button--text") if container.draft?
             concat action(:save, class: "button button--secondary")
             concat action(:publish, class: "button button--primary")
           end
