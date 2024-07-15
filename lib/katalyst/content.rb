@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 require "active_support"
-require "katalyst/html_attributes"
-require "katalyst/kpop"
-
-require "katalyst/content/config"
-require "katalyst/content/engine"
 
 module Katalyst
   module Content
+    extend ActiveSupport::Autoload
     extend self
+
+    autoload :Config
 
     def config
       @config ||= Config.new
@@ -20,3 +18,5 @@ module Katalyst
     end
   end
 end
+
+require "katalyst/content/engine"

@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-require "rails"
+require "katalyst/html_attributes"
+require "katalyst/kpop"
+require "rails/engine"
 
 module Katalyst
   module Content
     class Engine < ::Rails::Engine
       isolate_namespace Katalyst::Content
+      config.eager_load_namespaces << Katalyst::Content
 
       initializer "katalyst-content.factories", after: "factory_bot.set_factory_paths" do
         FactoryBot.definition_file_paths << Engine.root.join("spec/factories") if defined?(FactoryBot)
