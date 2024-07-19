@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 import "trix";
 
+
 // Note, action_text 7.1.2 changes how Trix is bundled and loaded. This
 // seems to have broken the default export from trix. This is a workaround
 // that relies on the backwards compatibility of the old export to window.Trix.
@@ -88,6 +89,6 @@ Trix.config.toolbar.getDefaultHTML = () => {
  *
  * Note: in Trix 2 this is likely to no longer be necessary.
  */
-document.querySelectorAll("trix-toolbar").forEach((e) => {
-  e.innerHTML = Trix.config.toolbar.getDefaultHTML();
-});
+// document.querySelectorAll("trix-toolbar").forEach((e) => {
+//   e.innerHTML = Trix.config.toolbar.getDefaultHTML();
+// });
