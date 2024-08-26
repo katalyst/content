@@ -4,6 +4,8 @@ module Katalyst
   module Content
     # STI base class for content items
     class Item < ApplicationRecord
+      include HasStyle
+
       def self.config
         Katalyst::Content.config
       end
