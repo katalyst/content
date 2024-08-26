@@ -8,7 +8,7 @@ module Katalyst
         Katalyst::Content.config
       end
 
-      enum heading_style: config.heading_styles, _prefix: :heading
+      enum :heading_style, config.heading_styles, prefix: :heading
 
       belongs_to :container, polymorphic: true
 
