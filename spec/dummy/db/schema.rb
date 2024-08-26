@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_05_15_151440) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_26_042004) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_05_15_151440) do
     t.datetime "updated_at", null: false
     t.string "caption"
     t.integer "heading_style", default: 0, null: false
+    t.json "style", default: {}, null: false
     t.index ["container_type", "container_id"], name: "index_katalyst_content_items_on_container"
   end
 
