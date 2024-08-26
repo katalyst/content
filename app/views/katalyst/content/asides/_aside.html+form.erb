@@ -22,6 +22,11 @@
     <%= form.check_box :visible %>
   </div>
 
+  <div class="field">
+    <%= form.label :reverse %>
+    <%= form.check_box :reverse %>
+  </div>
+
   <%= form.submit "Done" %>
   <%= link_to "Discard", :back %>
 <% end %>

@@ -4,7 +4,7 @@
   <% if aside.children.any? %>
     <% items = aside.children.select(&:visible?) %>
     <% last = items.pop %>
-    <div role="aside-container">
+    <div role="aside-container" <%= "class=reverse" if aside.reverse %>>
       <div>
         <%= render_content_items items %>
       </div>
