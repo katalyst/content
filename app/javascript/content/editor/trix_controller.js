@@ -10,8 +10,61 @@ const Trix = window.Trix;
 // will be lazy loaded when a trix-editor is added to the dom.
 export default class TrixController extends Controller {
   trixInitialize(e) {
-    // noop, useful as an extension point for registering behaviour on load
+    this.element.addEventListener(
+      "turbo:before-morph-attribute",
+      this.suppressMorph,
+    );
+    this.element.addEventListener(
+      "turbo:before-morph-element",
+      this.suppressMorph,
+    );
+
+    if (this.element.toolbarElement) {
+      this.element.toolbarElement.addEventListener(
+        "turbo:before-morph-attribute",
+        this.suppressMorph,
+      );
+      this.element.toolbarElement.addEventListener(
+        "turbo:before-morph-element",
+        this.suppressMorph,
+      );
+    }
   }
+
+  disconnect() {
+    this.element.removeEventListener(
+      "turbo:before-morph-attribute",
+      this.suppressMorph,
+    );
+    this.element.removeEventListener(
+      "turbo:before-morph-element",
+      this.suppressMorph,
+    );
+
+    if (this.element.toolbarElement) {
+      this.element.toolbarElement.removeEventListener(
+        "turbo:before-morph-attribute",
+        this.suppressMorph,
+      );
+      this.element.toolbarElement.removeEventListener(
+        "turbo:before-morph-element",
+        this.suppressMorph,
+      );
+    }
+  }
+
+  suppressMorph = (e) => {
+    // https://github.com/hotwired/turbo-rails/issues/533
+    // Note that this will prevent updates from the server from making their way
+    // to the trix element. Once the upstream issue is resolved we should remove
+    // this compatibility patch.
+    if (
+      e.target.tagName === "TRIX-EDITOR" ||
+      e.target.tagName === "TRIX-TOOLBAR"
+    ) {
+      e.preventDefault();
+    }
+  };
 }
 
 // Add H4 as an acceptable tag
