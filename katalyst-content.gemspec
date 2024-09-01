@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.metadata["rubygems_mfa_required"] = "true"
 
-  spec.add_dependency "activerecord", ">= 7.0", "< 7.2"
+  spec.add_dependency "activerecord", ">= 7.0", "< 7.3"
   spec.add_dependency "active_storage_validations"
   spec.add_dependency "katalyst-html-attributes"
   spec.add_dependency "katalyst-kpop"
