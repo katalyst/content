@@ -11,6 +11,8 @@
 @use "trix";
 @use "trix-rails";
 
+$max-nesting: 8 !default;
+
 [data-controller="content--editor--container"] {
   --row-height: #{$row-height};
   --row-inset: #{$row-inset};
@@ -67,7 +69,7 @@
     }
 
     // Depth spacing
-    @for $i from 1 through 6 {
+    @for $i from 1 through $max-nesting {
       &[data-content-depth="#{$i}"] .tree {
         padding-left: calc(var(--row-inset) * #{$i});
       }
