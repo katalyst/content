@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   mount Katalyst::Content::Engine, at: "content"
 
-  resources :home, only: [:index, :show]
+  resources :home, only: %i[index show]
 
   namespace :admin do
     resources :pages
