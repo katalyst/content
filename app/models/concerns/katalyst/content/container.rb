@@ -49,8 +49,24 @@ module Katalyst
                  dependent:  :destroy,
                  validate:   true
 
+        # Rails 7.2 dropped support for ActiveModel enums. This is a temporary workaround.
+        # Intended behaviour:
+        # attribute :state, :string
+        # enum :state, %i[published draft unpublished].index_with(&:to_s)
         attribute :state, :string
-        enum :state, %i[published draft unpublished].index_with(&:to_s)
+
+        # Returns true if there is a published version. Note that this includes drafts.
+        def published?
+          %w[published draft].include?(state)
+        end
+
+        def draft?
+          state == "draft"
+        end
+
+        def unpublished?
+          state == "unpublished"
+        end
 
         # Find records by their state
         scope :state, ->(values) do
@@ -96,11 +112,6 @@ module Katalyst
           stmt = stmt.else(1)
 
           order(stmt.public_send(dir)).order(updated_at: dir)
-        end
-
-        # Returns true if there is a published version. Note that this includes drafts.
-        def published?
-          super || draft?
         end
 
         def state=(_)
