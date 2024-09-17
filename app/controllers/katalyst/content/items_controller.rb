@@ -87,15 +87,32 @@ module Katalyst
       #
       # This mimics the behaviour of direct uploads without requiring the JS
       # integration.
+      #
+      # Note: this idea comes from various blogs who have documented this approach, such as
+      # https://medium.com/@TETRA2000/active-storage-how-to-retain-uploaded-files-on-form-resubmission-91b57be78d53
+      #
+      # In Rails 7.2 the simple version of this approach was broken to work around a bug that Rails plans to address
+      # in a future release.
+      # https://github.com/rails/rails/commit/82d4ad5da336a18a55a05a50b851e220032369a0
+      #
+      # The work around is to decouple the blobs from their attachments before saving by duping
+      # them. This approach feels a bit hairy and might need to be replaced by a 'standard' direct upload approach
+      # in the future.
+      #
+      # The reason we use this approach currently is to avoid needing a separate direct upload controller for
+      # content which would potentially introduce a back door where un-trusted users are allowed to upload
+      # attachments.
       def store_attachments(item)
         item.attachment_changes.each_value do |change|
           case change
           when ActiveStorage::Attached::Changes::CreateOne
             change.upload
-            change.blob.save!
+            change.attachment.blob = change.blob.dup.tap(&:save!)
           when ActiveStorage::Attached::Changes::CreateMany
             change.upload
-            change.blobs.each(&:save!)
+            change.attachments.zip(change.blobs).each do |attachment, blob|
+              attachment.blob = blob.dup.tap(&:save!)
+            end
           end
         end
       end
