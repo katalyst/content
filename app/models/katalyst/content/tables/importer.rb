@@ -78,7 +78,8 @@ module Katalyst
         def header_row_caption?
           !at_css("caption") &&
             (tr = at_css("thead > tr:first-child"))&.elements&.count == 1 &&
-            (tr.elements.first.attributes["colspan"]&.value&.to_i&.> 1)
+            (colspan = tr.elements.first.attributes["colspan"]&.value) &&
+            colspan.to_i > 1
         end
 
         def normalize_emphasis!
