@@ -13,7 +13,7 @@ RSpec.describe Katalyst::Content::Figure do
 
   it { is_expected.to validate_presence_of(:image) }
 
-  it { is_expected.to validate_content_type_of(:image).allowing(Katalyst::Content.config.image_mime_types) }
+  it { is_expected.to validate_content_type_of(:image).allowing(*Katalyst::Content.config.image_mime_types) }
   it { is_expected.to validate_content_type_of(:image).rejecting("text/plain", "text/xml") }
 
   it "validates attachment size" do
