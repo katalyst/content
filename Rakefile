@@ -31,6 +31,11 @@ end
 desc "Compile assets"
 task build: ["yarn:build", "app:dartsass:build"]
 
-task default: %i[lint build spec] do
+desc "Run security checks"
+task security: :environment do
+  sh "bundle exec brakeman -q -w2"
+end
+
+task default: %i[lint build spec security] do
   puts "🎉 build complete! 🎉"
 end
