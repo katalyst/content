@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "active_storage_validations"
 require "active_support"
 
 module Katalyst
