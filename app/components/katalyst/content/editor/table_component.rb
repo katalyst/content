@@ -7,8 +7,6 @@ module Katalyst
         ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
           dragstart->#{LIST_CONTROLLER}#dragstart
           dragover->#{LIST_CONTROLLER}#dragover
-          dragenter->#{LIST_CONTROLLER}#dragenter
-          dragleave->#{LIST_CONTROLLER}#dragleave
           drop->#{LIST_CONTROLLER}#drop
           dragend->#{LIST_CONTROLLER}#dragend
           keyup.esc@document->#{LIST_CONTROLLER}#dragend

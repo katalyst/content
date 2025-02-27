@@ -24,8 +24,10 @@ module Katalyst
         Editor::StatusBarComponent.new(container:)
       end
 
+      # @deprecated this component is now part of the editor
       def new_items
-        Editor::NewItemsComponent.new(container:)
+        # no-op, no longer required
+        Class.new { define_method(:render_in) { |_| nil } }.new
       end
 
       def item_editor(item:)

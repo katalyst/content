@@ -9,7 +9,7 @@ module Katalyst
         with_collection_parameter :item
 
         ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
-          dragstart->#{NEW_ITEM_CONTROLLER}#dragstart
+          #{NEW_ITEMS_CONTROLLER}#add
         ACTIONS
 
         def initialize(item:, container: item.container)
@@ -36,12 +36,10 @@ module Katalyst
 
         def default_html_attributes
           {
-            draggable: "true",
-            role:      "listitem",
-            data:      {
+            role: "listitem",
+            data: {
               item_type:,
-              controller: NEW_ITEM_CONTROLLER,
-              action:     ACTIONS,
+              action:    ACTIONS,
             },
           }
         end

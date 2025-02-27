@@ -22,6 +22,8 @@ $max-nesting: 8 !default;
   --icon-active-color: #{$icon-active-color};
   --icon-passive-color: #{$icon-passive-color};
 
+  position: relative;
+
   ol,
   li {
     margin: 0;
@@ -36,8 +38,6 @@ $max-nesting: 8 !default;
 }
 
 [data-controller="content--editor--list"] {
-  min-height: calc(var(--row-height) * 8);
-
   // tree items
   & > li {
     display: block;

@@ -3,22 +3,13 @@
 require "rails_helper"
 
 RSpec.describe "katalyst/content/editor/container" do
-  # Disabled because we need an HTML5 drag/drop implementation of `drag_to`.
-  # Checked selenium, cuprite, and apparition and none of them have one
-  # https://bugs.chromium.org/p/chromium/issues/detail?id=850071
-  # > Right now the Action API cannot generate the drag and drop actions by
-  # > sending the mouse press, mouse move and mouse release, because  the drag
-  # > and drop events are generated from the OS level.
-  it "can add a item", pending: "requires d&d" do
+  it "can add a item" do
     container = create(:page)
 
     visit admin_page_path(container)
 
-    add_new_item = find("div[data-controller$='new-item']:first-child")
-    drop_target = find("ol[data-controller$='list']")
-    add_new_item.drag_to(drop_target)
-
-    expect(page).to have_css("[data-controller$='list'] li[data-content-item]")
+    click_on "Add content"
+    click_on "Section"
 
     fill_in "Heading", with: "Magic"
     click_on "Done"
@@ -29,9 +20,9 @@ RSpec.describe "katalyst/content/editor/container" do
 
     expect(page).to have_link(class: "status-text", text: "Published", visible: :visible)
 
-    page.reload
+    container.reload
 
-    expect(page.published_items).to contain_exactly(having_attributes(title: "Magic"))
+    expect(container.published_items).to contain_exactly(having_attributes(heading: "Magic"))
   end
 
   it "can remove a item" do

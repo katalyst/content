@@ -33,3 +33,7 @@ form {
 
   @include form.form;
 }
+
+[hidden] {
+  display: none;
+}
