@@ -1,7 +1,7 @@
 import ContainerController from "./editor/container_controller";
 import ItemController from "./editor/item_controller";
 import ListController from "./editor/list_controller";
-import NewItemController from "./editor/new_item_controller";
+import NewItemsController from "./editor/new_items_controller";
 import StatusBarController from "./editor/status_bar_controller";
 import TableController from "./editor/table_controller";
 import TrixController from "./editor/trix_controller";
@@ -20,8 +20,8 @@ const Definitions = [
     controllerConstructor: ListController,
   },
   {
-    identifier: "content--editor--new-item",
-    controllerConstructor: NewItemController,
+    identifier: "content--editor--new-items",
+    controllerConstructor: NewItemsController,
   },
   {
     identifier: "content--editor--status-bar",

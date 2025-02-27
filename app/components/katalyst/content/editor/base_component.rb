@@ -10,7 +10,7 @@ module Katalyst
         LIST_CONTROLLER       = "content--editor--list"
         ITEM_CONTROLLER       = "content--editor--item"
         STATUS_BAR_CONTROLLER = "content--editor--status-bar"
-        NEW_ITEM_CONTROLLER   = "content--editor--new-item"
+        NEW_ITEMS_CONTROLLER  = "content--editor--new-items"
 
         attr_accessor :container, :item
 

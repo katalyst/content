@@ -6,4 +6,6 @@
   <%= render Katalyst::Content::Editor::TableComponent.new(container:) do |list| %>
     <%= container.draft_items&.each { |item| list.with_item(item) } %>
   <% end %>
+
+  <%= render Katalyst::Content::Editor::NewItemsComponent.new(container:) %>
 <% end %>

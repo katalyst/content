@@ -1,22 +1,12 @@
-<%= tag.div(**html_attributes) do %>
-  <label><%= label %></label>
+<%= tag.button(**html_attributes) do %>
+  <%= label %>
   <%#
-    # Template is stored inside the new item dom, and copied into drag
-    # events when the user initiates drag so that it can be copied into the
-    # editor list on drop.
-    #
+    # Template is stored inside the new item dom, and copied into the dom when
+    # the user selects the item.
   %>
-  <template data-<%= NEW_ITEM_CONTROLLER %>-target="template">
+  <template>
     <%= render row_component do %>
       <%= render item_component %>
     <% end %>
   </template>
-<% end %>
-<%#
-  # Remove items that are incomplete when rendering new items, this
-  # causes incomplete items to be removed from the list when the user
-  # cancels adding a new item by pressing 'discard' in the new item form.
-%>
-<%= turbo_stream.replace dom_id(item) do %>
-  <%= render item_component(data: { delete: "" }) %>
 <% end %>

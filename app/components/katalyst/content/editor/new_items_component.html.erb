@@ -1,3 +1,30 @@
-<div class="content--editor--new-items" role="listbox">
-  <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
+<div class="content--editor--new-items"
+     data-controller="<%= NEW_ITEMS_CONTROLLER %>"
+     data-action="turbo:before-morph-element-><%= NEW_ITEMS_CONTROLLER %>#morph">
+  <%= tag.button(aria:  { controls: "#{NEW_ITEMS_CONTROLLER}-dialog" },
+                 class: "content--editor--add-button",
+                 data:  { action: "#{NEW_ITEMS_CONTROLLER}#open" }) do %>
+    Add content
+  <% end %>
+  <%= tag.button(aria:  { controls: "#{NEW_ITEMS_CONTROLLER}-dialog", label: "Add content here" },
+                 class: "content--editor--inline-add-button",
+                 data:  {
+                   action: <<~ACTIONS,
+                     #{NEW_ITEMS_CONTROLLER}#open
+                   ACTIONS
+                   "#{NEW_ITEMS_CONTROLLER}_target" => "inlineButton",
+                 },
+                 hidden: "") %>
+  <dialog id="<%= NEW_ITEMS_CONTROLLER %>-dialog">
+    <div class="repel">
+      Add item
+      <button autofocus
+              data-action="<%= NEW_ITEMS_CONTROLLER %>#close">
+        Close
+      </button>
+    </div>
+    <div role="list">
+      <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
+    </div>
+  </dialog>
 </div>
