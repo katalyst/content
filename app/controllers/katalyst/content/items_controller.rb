@@ -48,8 +48,8 @@ module Katalyst
       private
 
       def item_params_type
-        type = params.require(:item).fetch(:type, "")
-        if Katalyst::Content.config.items.include?(type)
+        requested_type = params.require(:item).fetch(:type, "")
+        if (type = Katalyst::Content.config.items.find { |t| t == requested_type })
           type.safe_constantize
         else
           Item
