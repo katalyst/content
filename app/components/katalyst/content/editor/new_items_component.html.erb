@@ -12,7 +12,7 @@
     <%= tag.button(aria: { controls: "#{NEW_ITEMS_CONTROLLER}-dialog", label: "Add content here" },
                    data: { action: "#{NEW_ITEMS_CONTROLLER}#open" }) %>
   <% end %>
-  <%= tag.dialog(id: "#{NEW_ITEMS_CONTROLLER}-dialog", data: { action: "click->#{NEW_ITEMS_CONTROLLER}#close"}) do %>
+  <%= tag.dialog(id: "#{NEW_ITEMS_CONTROLLER}-dialog", data: { action: "click->#{NEW_ITEMS_CONTROLLER}#close" }) do %>
     <%= tag.div(role: "list", data: { action: "click->#{NEW_ITEMS_CONTROLLER}#noop:stop" }) do %>
       <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
     <% end %>

@@ -132,7 +132,8 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    expect(page).to have_no_css("li[data-content-item]:not([data-deny-nest]")
+    expect(page).to have_css("li[data-content-item]")
+    expect(page).to have_no_css("li[data-content-item]:not([data-deny-nest])")
   end
 
   it "can save without publishing" do
