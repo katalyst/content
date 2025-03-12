@@ -1,9 +1,9 @@
 @use "base";
 @use "katalyst/tables";
-@use "katalyst/content";
 @use "layouts";
 @use "utils";
 @use "utils/breakpoints";
+@use "trix";
 
 :root {
   /* Color styles */
