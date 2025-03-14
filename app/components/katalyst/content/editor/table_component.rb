@@ -4,7 +4,7 @@ module Katalyst
   module Content
     module Editor
       class TableComponent < BaseComponent
-        
+
         renders_many :items, ->(item) do
           row = RowComponent.new(item:, container:)
           row.with_content(render(ItemComponent.new(item:, container:)))
@@ -26,6 +26,7 @@ module Katalyst
               ],
               content__editor__container_target: "container",
             },
+            role:  "list",
           }
         end
       end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "katalyst/html_attributes"
-require "katalyst/kpop"
 require "rails/engine"
 
 module Katalyst
