@@ -1,5 +1,6 @@
 import ContainerController from "./editor/container_controller";
 import ItemController from "./editor/item_controller";
+import ItemEditorController from "./editor/item_editor_controller";
 import ListController from "./editor/list_controller";
 import NewItemsController from "./editor/new_items_controller";
 import StatusBarController from "./editor/status_bar_controller";
@@ -14,6 +15,10 @@ const Definitions = [
   {
     identifier: "content--editor--item",
     controllerConstructor: ItemController,
+  },
+  {
+    identifier: "content--editor--item-editor",
+    controllerConstructor: ItemEditorController,
   },
   {
     identifier: "content--editor--list",

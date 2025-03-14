@@ -6,25 +6,18 @@ module Katalyst
       class ItemEditorComponent < BaseComponent
         include ::Turbo::FramesHelper
 
-        module Helpers
-          def prefix_partial_path_with_controller_namespace
-            false
-          end
-
-          def content_routes
-            katalyst_content
-          end
-        end
+        alias_method :model, :item
 
         def call
-          tag.div(**html_attributes) do
-            helpers.extend(Helpers)
-            helpers.render(item, path:)
-          end
+          render("form", model:, scope:, url:, id:)
         end
 
         def id
-          "item-editor-#{item.id}"
+          dom_id(item, :form)
+        end
+
+        def scope
+          :item
         end
 
         def title
@@ -35,19 +28,12 @@ module Katalyst
           end
         end
 
-        def path
+        def url
           if item.persisted?
             view_context.katalyst_content.item_path(item)
           else
             view_context.katalyst_content.items_path
           end
-        end
-
-        def default_html_attributes
-          {
-            id:,
-            class: "content--item-editor",
-          }
         end
       end
     end

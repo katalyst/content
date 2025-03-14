@@ -272,7 +272,7 @@ export default class Item {
  */
 function createChildrenList(node) {
   const childrenList = document.createElement("ol");
-  childrenList.setAttribute("class", "hidden");
+  childrenList.toggleAttribute("hidden", true);
 
   // if objectType is "rich-content" set richContentChildren as a data attribute
   childrenList.dataset[`contentChildren`] = "";

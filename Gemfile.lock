@@ -5,7 +5,6 @@ PATH
       active_storage_validations
       activerecord
       katalyst-html-attributes
-      katalyst-kpop
       view_component
 
 GEM
@@ -121,9 +120,6 @@ GEM
     cuprite (0.15.1)
       capybara (~> 3.0)
       ferrum (~> 0.15.0)
-    dartsass-rails (0.5.1)
-      railties (>= 6.0.0)
-      sass-embedded (~> 1.63)
     date (3.4.1)
     diff-lcs (1.6.0)
     drb (2.2.1)
@@ -151,12 +147,6 @@ GEM
     ffi (1.17.1-x86_64-linux-gnu)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    google-protobuf (4.30.0-arm64-darwin)
-      bigdecimal
-      rake (>= 13)
-    google-protobuf (4.30.0-x86_64-linux)
-      bigdecimal
-      rake (>= 13)
     html-attributes-utils (1.0.2)
       activesupport (>= 6.1.4.4)
     i18n (1.14.7)
@@ -177,10 +167,6 @@ GEM
     katalyst-html-attributes (1.1.1)
       activesupport
       html-attributes-utils
-    katalyst-kpop (3.2.7)
-      katalyst-html-attributes
-      turbo-rails
-      view_component
     katalyst-tables (3.8.0)
       katalyst-html-attributes
       view_component
@@ -354,10 +340,6 @@ GEM
     ruby-vips (2.2.3)
       ffi (~> 1.12)
       logger
-    sass-embedded (1.85.1-arm64-darwin)
-      google-protobuf (~> 4.29)
-    sass-embedded (1.85.1-x86_64-linux-gnu)
-      google-protobuf (~> 4.29)
     securerandom (0.4.1)
     sentry-rails (5.23.0)
       railties (>= 5.0)
@@ -411,7 +393,6 @@ DEPENDENCIES
   capybara
   compare-xml
   cuprite
-  dartsass-rails
   erb_lint
   factory_bot_rails
   faker

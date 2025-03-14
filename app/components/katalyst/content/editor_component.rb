@@ -3,6 +3,7 @@
 module Katalyst
   module Content
     class EditorComponent < Editor::BaseComponent
+      include ::Turbo::FramesHelper
 
       attr_reader :url, :scope
 
@@ -37,8 +38,9 @@ module Katalyst
 
       def default_html_attributes
         {
-          id:   container_form_id,
-          data: {
+          id:    container_form_id,
+          class: "content--editor",
+          data:  {
             controller: "content--editor--container",
             action:     %w[
               submit->content--editor--container#reindex

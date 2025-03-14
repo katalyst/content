@@ -1,0 +1,79 @@
+.content--editor {
+  [data-icon="outdent"] {
+    -webkit-mask: url("/katalyst/content/icons/outdent.svg");
+    mask: url("/katalyst/content/icons/outdent.svg");
+  }
+
+  [data-icon="indent"] {
+    -webkit-mask: url("/katalyst/content/icons/indent.svg");
+    mask: url("/katalyst/content/icons/indent.svg");
+  }
+
+  [data-icon="collapse"] {
+    -webkit-mask: url("/katalyst/content/icons/collapse.svg");
+    mask: url("/katalyst/content/icons/collapse.svg");
+    aspect-ratio: 12/16;
+  }
+
+  [data-icon="expand"] {
+    -webkit-mask: url("/katalyst/content/icons/expand.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/expand.svg") no-repeat center;
+    aspect-ratio: 12/16;
+  }
+
+  [data-icon="edit"] {
+    -webkit-mask: url("/katalyst/content/icons/edit.svg");
+    mask: url("/katalyst/content/icons/edit.svg");
+  }
+
+  [data-icon="remove"] {
+    -webkit-mask: url("/katalyst/content/icons/remove.svg");
+    mask: url("/katalyst/content/icons/remove.svg");
+    aspect-ratio: 14/16;
+  }
+
+  [data-icon="hidden"] {
+    -webkit-mask: url("/katalyst/content/icons/hidden.svg");
+    mask: url("/katalyst/content/icons/hidden.svg");
+  }
+
+  [data-icon="theme"] {
+    -webkit-mask: url("/katalyst/content/icons/theme.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/theme.svg") no-repeat center;
+  }
+
+  [data-icon="content"] {
+    -webkit-mask: url("/katalyst/content/icons/content.svg");
+    mask: url("/katalyst/content/icons/content.svg");
+  }
+
+  [data-icon="figure"] {
+    -webkit-mask: url("/katalyst/content/icons/figure.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/figure.svg") no-repeat center;
+  }
+
+  [data-icon="table"] {
+    -webkit-mask: url("/katalyst/content/icons/table.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/table.svg") no-repeat center;
+  }
+
+  [data-icon="section"] {
+    -webkit-mask: url("/katalyst/content/icons/section.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/section.svg") no-repeat center;
+  }
+
+  [data-icon="group"] {
+    -webkit-mask: url("/katalyst/content/icons/group.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/group.svg") no-repeat center;
+  }
+
+  [data-icon="column"] {
+    -webkit-mask: url("/katalyst/content/icons/column.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/column.svg") no-repeat center;
+  }
+
+  [data-icon="aside"] {
+    -webkit-mask: url("/katalyst/content/icons/aside.svg") no-repeat center;
+    mask: url("/katalyst/content/icons/aside.svg") no-repeat center;
+  }
+}

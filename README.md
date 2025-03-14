@@ -24,7 +24,7 @@ rake katalyst_content:install:migrations
 ```
 
 Add the Gem's javascript and CSS to your build pipeline. This assumes that
-you're using `rails-dartsass` and `importmaps` to manage your assets.
+you're using `propshaft` and `importmaps` to manage your assets.
 
 ```javascript
 // app/javascript/controllers/application.js
@@ -33,7 +33,16 @@ import content from "@katalyst/content";
 application.load(content);
 ```
 
-```sass
+Import the styles as css:
+
+```css
+@import url("/katalyst/content.css");
+```
+
+Or, if you're using `dartsass-rails`:
+
+```scss
+// app/assets/stylesheets/application.scss
 @use "katalyst/content";
 ```
 

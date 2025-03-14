@@ -9,3 +9,8 @@
 
   <%= render Katalyst::Content::Editor::NewItemsComponent.new(container:) %>
 <% end %>
+
+<%= turbo_frame_tag(
+      "content--editor--item-editor",
+      data: { controller: "content--editor--item-editor" },
+    ) %>

@@ -4,7 +4,6 @@ module Katalyst
   module Content
     module Editor
       class TableComponent < BaseComponent
-        
         renders_many :items, ->(item) do
           row = RowComponent.new(item:, container:)
           row.with_content(render(ItemComponent.new(item:, container:)))
@@ -15,7 +14,8 @@ module Katalyst
 
         def default_html_attributes
           {
-            data: {
+            class: "katalyst--content--editor",
+            data:  {
               controller:                        "content--editor--list",
               action:                            %w[
                 dragstart->content--editor--list#dragstart
@@ -26,6 +26,7 @@ module Katalyst
               ],
               content__editor__container_target: "container",
             },
+            role:  "list",
           }
         end
       end

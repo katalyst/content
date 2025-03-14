@@ -6,7 +6,6 @@ module Katalyst
       before_action :set_container, only: %i[new create]
       before_action :set_item, except: %i[new create]
       before_action :set_editor_variant
-      before_action :require_kpop, only: %i[new edit]
 
       attr_reader :container, :item, :editor
 

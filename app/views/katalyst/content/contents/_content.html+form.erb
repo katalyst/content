@@ -1,32 +1,28 @@
-<%= form_with model: content, scope: :item, url: path do |form| %>
-  <%= render "hidden_fields", form: %>
-  <%= render "form_errors", form: %>
+<%# locals: (form:, content:) %>
 
-  <div class="field">
-    <%= form.label :heading %>
-    <%= form.text_field :heading %>
-  </div>
+<%= render "form_errors", form: %>
 
-  <div class="field">
-    <%= form.label :heading_style %>
-    <%= form.collection_radio_buttons :heading_style, Katalyst::Content.config.heading_styles, :itself, :itself %>
-  </div>
+<div class="field">
+  <%= form.label :heading %>
+  <%= form.text_field :heading %>
+</div>
 
-  <div class="field">
-    <%= form.label :background %>
-    <%= form.select :background, Katalyst::Content.config.backgrounds %>
-  </div>
+<div class="field">
+  <%= form.label :heading_style %>
+  <%= form.collection_radio_buttons :heading_style, Katalyst::Content.config.heading_styles, :itself, :itself %>
+</div>
 
-  <div class="field">
-    <%= form.label :visible %>
-    <%= form.check_box :visible %>
-  </div>
+<div class="field">
+  <%= form.label :background %>
+  <%= form.select :background, Katalyst::Content.config.backgrounds %>
+</div>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.rich_text_area :content, content_editor_rich_text_attributes %>
-  </div>
+<div class="field">
+  <%= form.label :visible %>
+  <%= form.check_box :visible %>
+</div>
 
-  <%= form.submit "Done" %>
-  <%= link_to "Discard", :back %>
-<% end %>
+<div class="field">
+  <%= form.label :content %>
+  <%= form.rich_text_area :content, content_editor_rich_text_attributes %>
+</div>

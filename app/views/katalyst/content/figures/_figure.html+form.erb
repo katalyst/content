@@ -1,37 +1,33 @@
-<%= form_with model: figure, scope: :item, url: path do |form| %>
-  <%= render "hidden_fields", form: %>
-  <%= render "form_errors", form: %>
+<%# locals: (form:, figure:) %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <% if (image = form.object.image).attached? %>
-      <%= image.filename %>
-      <br>
-      <%= form.hidden_field :image, value: form.object.image.signed_id %>
-    <% end %>
-    <%= form.file_field :image %>
-  </div>
+<%= render "form_errors", form: %>
 
-  <div class="field">
-    <%= form.label :heading %>
-    <%= form.text_field :heading %>
-  </div>
+<div class="field">
+  <%= form.label :image %>
+  <% if (image = form.object.image).attached? %>
+    <%= image.filename %>
+    <br>
+    <%= form.hidden_field :image, value: form.object.image.signed_id %>
+  <% end %>
+  <%= form.file_field :image %>
+</div>
 
-  <div class="field">
-    <%= form.label :background %>
-    <%= form.select :background, Katalyst::Content.config.backgrounds %>
-  </div>
+<div class="field">
+  <%= form.label :heading %>
+  <%= form.text_field :heading %>
+</div>
 
-  <div class="field">
-    <%= form.label :visible %>
-    <%= form.check_box :visible %>
-  </div>
+<div class="field">
+  <%= form.label :background %>
+  <%= form.select :background, Katalyst::Content.config.backgrounds %>
+</div>
 
-  <div class="field">
-    <%= form.label :caption %>
-    <%= form.text_field :caption %>
-  </div>
+<div class="field">
+  <%= form.label :visible %>
+  <%= form.check_box :visible %>
+</div>
 
-  <%= form.submit "Done" %>
-  <%= link_to "Discard", :back %>
-<% end %>
+<div class="field">
+  <%= form.label :caption %>
+  <%= form.text_field :caption %>
+</div>

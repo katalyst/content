@@ -1,20 +1,42 @@
 <div class="content--editor--new-items"
      data-controller="content--editor--new-items"
      data-action="turbo:before-morph-element->content--editor--new-items#morph">
-  <%= tag.button(aria:  { controls: "content--editor--new-items-dialog" },
-                 class: "content--editor--add-button",
-                 data:  { action: "content--editor--new-items#open" }) do %>
-    Add content
-  <% end %>
-  <%= tag.div(class:  "content--editor--inline-add",
-              data:   { "content--editor--new-items_target" => "inline" },
-              hidden: "") do %>
-    <%= tag.button(aria: { controls: "content--editor--new-items-dialog", label: "Add content here" },
-                   data: { action: "content--editor--new-items#open" }) %>
-  <% end %>
-  <%= tag.dialog(id: "content--editor--new-items-dialog", data: { action: "click->content--editor--new-items#close" }) do %>
-    <%= tag.div(role: "list", data: { action: "click->content--editor--new-items#noop:stop" }) do %>
-      <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
-    <% end %>
-  <% end %>
+  <button aria-controls="content--editor--new-items-dialog"
+          class="button"
+          data-action="click->content--editor--new-items#open"
+          data-button-padding="tight"
+          data-text-button>
+    <icon aria-hidden="true" class="icon" data-icon="add">&nbsp;</icon>
+    Add item
+  </button>
+  <div class="content--editor--inline-add" data-content--editor--new-items-target="inline" hidden>
+    <button aria-controls="content--editor--new-items-dialog"
+            class="button"
+            data-action="content--editor--new-items#open"
+            data-button-padding="tight">
+      <icon aria-hidden="true" class="icon" data-icon="add">&nbsp;</icon>
+      <span class="visually-hidden">Add item here</span>
+    </button>
+  </div>
+  <dialog id="content--editor--new-items-dialog" class="modal" data-action="click->content--editor--new-items#close">
+    <article class="flow" data-action="click->content--editor--new-items#noop:stop">
+      <header class="repel" data-nowrap>
+        <h2>Add item</h2>
+        <button class="button"
+                data-action="click->content--editor--new-items#close"
+                data-button-padding="tight"
+                data-text-button>
+          <icon aria-hidden="true" class="icon" data-icon="close">&nbsp;</icon>
+          <span class="visually-hidden">Close</span>
+        </button>
+      </header>
+      <main>
+        <%= tag.div(role: "list", data: { action: "click->content--editor--new-items#noop:stop" }) do %>
+          <ul role="list" class="items-list">
+            <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
+          </ul>
+        <% end %>
+      </main>
+    </article>
+  </dialog>
 </div>

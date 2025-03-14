@@ -9,7 +9,10 @@ RSpec.describe "katalyst/content/editor/content" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
 
     # wait for editor to load
     expect(page).to have_button(text: "Link")
@@ -41,7 +44,10 @@ RSpec.describe "katalyst/content/editor/content" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
 
     # wait for editor to load
     expect(page).to have_button(text: "Heading")
@@ -71,7 +77,10 @@ RSpec.describe "katalyst/content/editor/content" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
 
     # wait for editor to load
     expect(page).to have_css("trix-editor h4")

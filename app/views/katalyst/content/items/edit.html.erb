@@ -3,6 +3,44 @@
   <%= csrf_meta_tags %>
 <% end %>
 
-<%= render Kpop::ModalComponent.new(title: item_editor.title, layout: "side-panel") do %>
-  <%= render item_editor %>
+<%= turbo_frame_tag(
+      "content--editor--item-editor",
+      data: { controller: "content--editor--item-editor" },
+    ) do %>
+  <dialog class="modal"
+          data-content--editor--item-editor-target="dialog"
+          data-action="
+            click->content--editor--item-editor#dismiss
+            close->content--editor--item-editor#dismiss
+          "
+          data-item-id="<%= dom_id(item_editor.item) %>"
+          <%= "data-item-persisted" if item_editor.item.persisted? %>>
+    <article class="flow" data-action="click->content--editor--item-editor#noop:stop">
+      <header class="repel" data-nowrap>
+        <h2><%= item_editor.title %></h2>
+        <button form="<%= item_editor.id %>"
+                formmethod="dialog"
+                class="button"
+                data-button-padding="tight"
+                data-text-button>
+          <icon aria-hidden="true" class="icon" data-icon="close">&nbsp;</icon>
+          <span class="visually-hidden">Close</span>
+        </button>
+      </header>
+      <main>
+        <%= render item_editor %>
+      </main>
+      <footer class="actions" data-reverse>
+        <button form="<%= item_editor.id %>" class="button" data-close-dialog>
+          Done
+        </button>
+        <button form="<%= item_editor.id %>"
+                formmethod="dialog"
+                class="button"
+                data-ghost-button>
+          Discard
+        </button>
+      </footer>
+    </article>
+  </dialog>
 <% end %>

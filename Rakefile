@@ -29,7 +29,7 @@ namespace :yarn do
 end
 
 desc "Compile assets"
-task build: ["yarn:build", "app:dartsass:build"]
+task build: ["yarn:build"]
 
 desc "Run security checks"
 task security: :environment do

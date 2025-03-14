@@ -1,7 +1,6 @@
-<%= form_with model: table, scope: :item, url: path, data: {
-      controller: "content--editor--table",
-    } do |form| %>
-  <%= render "hidden_fields", form: %>
+<%# locals: (form:, table:) %>
+
+<div class="flow" data-controller="content--editor--table">
   <%= render "form_errors", form: %>
 
   <div class="field">
@@ -40,9 +39,8 @@
     <%= form.text_field :heading_columns, type: :number, data: { action: "input->content--editor--table#update" } %>
   </div>
 
-  <%= form.submit "Done" %>
-  <%= link_to "Discard", :back %>
   <%= form.button "Update",
-                  formaction: table.persisted? ? content_routes.table_path : content_routes.tables_path,
-                  data:       { content__editor__table_target: "update" } %>
-<% end %>
+                  class:      "button",
+                  formaction: table.persisted? ? katalyst_content.table_path : katalyst_content.tables_path,
+                  data:       { ghost_button: "", content__editor__table_target: "update" } %>
+</div>

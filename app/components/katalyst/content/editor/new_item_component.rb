@@ -28,14 +28,17 @@ module Katalyst
           item.model_name.param_key
         end
 
+        alias icon_name item_type
+
         private
 
         def default_html_attributes
           {
-            role: "listitem",
-            data: {
-              item_type:,
-              action:    "content--editor--new-items#add",
+            class: "button",
+            role:  "listitem",
+            data:  {
+              ghost_button: "",
+              action:       "content--editor--new-items#add",
             },
           }
         end

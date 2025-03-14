@@ -8,7 +8,7 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    click_on "Add content"
+    click_on "Add item"
     click_on "Section"
 
     fill_in "Heading", with: "Magic"
@@ -33,8 +33,10 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    # find and click nest – checks for data-deny-remove to ensure rules have been applied
-    find("li:not([data-deny-remove]) [data-action$='#remove']").click
+    within(".content--editor--item:not([data-deny-remove])") do |row|
+      row.hover
+      row.find("[data-icon='remove']").click
+    end
 
     expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
@@ -55,7 +57,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
+
     fill_in "Heading", with: "Updated"
     click_on "Done"
 
@@ -110,8 +116,10 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    # find and click nest – checks for data-deny-nest to ensure rules have been applied
-    find("li[data-content-item-id='#{items.last.id}']:not([data-deny-nest]) [data-action$='#nest']").click
+    within(".content--editor--item:not([data-deny-nest])") do |row|
+      row.hover
+      row.find("[data-icon='indent']").click
+    end
 
     expect(page).to have_css("span", class: "status-text", text: "Unsaved changes", visible: :visible)
 
@@ -142,7 +150,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
+
     fill_in "Heading", with: "Updated"
     click_on "Done"
 
@@ -163,7 +175,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
+
     fill_in "Heading", with: "Updated"
     click_on "Done"
 
@@ -182,7 +198,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
+
     fill_in "Heading", with: "Updated"
     click_on "Done"
 
@@ -207,7 +227,11 @@ RSpec.describe "katalyst/content/editor/container" do
 
     visit admin_page_path(container)
 
-    find("a[title='Edit']").click
+    within(".content--editor--item:not([data-deny-edit])") do |row|
+      row.hover
+      row.find("[data-icon='edit']").click
+    end
+
     fill_in "Heading", with: "Updated"
     click_on "Done"
 
