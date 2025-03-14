@@ -8,10 +8,6 @@ module Katalyst
 
         with_collection_parameter :item
 
-        ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
-          #{NEW_ITEMS_CONTROLLER}#add
-        ACTIONS
-
         def initialize(item:, container: item.container)
           super
         end
@@ -39,7 +35,7 @@ module Katalyst
             role: "listitem",
             data: {
               item_type:,
-              action:    ACTIONS,
+              action:    "content--editor--new-items#add",
             },
           }
         end

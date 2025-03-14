@@ -4,11 +4,6 @@ module Katalyst
   module Content
     module Editor
       class StatusBarComponent < BaseComponent
-        ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
-          content:change@document->#{STATUS_BAR_CONTROLLER}#change
-          turbo:morph-element->#{STATUS_BAR_CONTROLLER}#morph
-        ACTIONS
-
         attr_reader :container
 
         def call
@@ -59,8 +54,11 @@ module Katalyst
         def default_html_attributes
           {
             data: {
-              controller: STATUS_BAR_CONTROLLER,
-              action:     ACTIONS,
+              controller: "content--editor--status-bar",
+              action:     %w[
+                content:change@document->content--editor--status-bar#change
+                turbo:morph-element->content--editor--status-bar#morph
+              ],
               state:      container.state,
             },
           }

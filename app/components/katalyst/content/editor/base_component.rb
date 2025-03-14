@@ -6,12 +6,6 @@ module Katalyst
       class BaseComponent < ViewComponent::Base
         include Katalyst::HtmlAttributes
 
-        CONTAINER_CONTROLLER  = "content--editor--container"
-        LIST_CONTROLLER       = "content--editor--list"
-        ITEM_CONTROLLER       = "content--editor--item"
-        STATUS_BAR_CONTROLLER = "content--editor--status-bar"
-        NEW_ITEMS_CONTROLLER  = "content--editor--new-items"
-
         attr_accessor :container, :item
 
         delegate :config, to: ::Katalyst::Content

@@ -3,13 +3,6 @@
 module Katalyst
   module Content
     class EditorComponent < Editor::BaseComponent
-      ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
-        submit->#{CONTAINER_CONTROLLER}#reindex
-        content:drop->#{CONTAINER_CONTROLLER}#drop
-        content:reindex->#{CONTAINER_CONTROLLER}#reindex
-        turbo:render@document->#{CONTAINER_CONTROLLER}#connect
-        content:reset->#{CONTAINER_CONTROLLER}#reset
-      ACTIONS
 
       attr_reader :url, :scope
 
@@ -46,8 +39,14 @@ module Katalyst
         {
           id:   container_form_id,
           data: {
-            controller: CONTAINER_CONTROLLER,
-            action:     ACTIONS,
+            controller: "content--editor--container",
+            action:     %w[
+              submit->content--editor--container#reindex
+              content:drop->content--editor--container#drop
+              content:reindex->content--editor--container#reindex
+              turbo:render@document->content--editor--container#connect
+              content:reset->content--editor--container#reset
+            ],
           },
         }
       end

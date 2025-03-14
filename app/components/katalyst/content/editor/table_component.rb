@@ -4,14 +4,7 @@ module Katalyst
   module Content
     module Editor
       class TableComponent < BaseComponent
-        ACTIONS = <<~ACTIONS.gsub(/\s+/, " ").freeze
-          dragstart->#{LIST_CONTROLLER}#dragstart
-          dragover->#{LIST_CONTROLLER}#dragover
-          drop->#{LIST_CONTROLLER}#drop
-          dragend->#{LIST_CONTROLLER}#dragend
-          keyup.esc@document->#{LIST_CONTROLLER}#dragend
-        ACTIONS
-
+        
         renders_many :items, ->(item) do
           row = RowComponent.new(item:, container:)
           row.with_content(render(ItemComponent.new(item:, container:)))
@@ -23,9 +16,15 @@ module Katalyst
         def default_html_attributes
           {
             data: {
-              controller:                       LIST_CONTROLLER,
-              action:                           ACTIONS,
-              "#{CONTAINER_CONTROLLER}_target": "container",
+              controller:                        "content--editor--list",
+              action:                            %w[
+                dragstart->content--editor--list#dragstart
+                dragover->content--editor--list#dragover
+                drop->content--editor--list#drop
+                dragend->content--editor--list#dragend
+                keyup.esc@document->content--editor--list#dragend
+              ],
+              content__editor__container_target: "container",
             },
           }
         end

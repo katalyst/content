@@ -1,19 +1,19 @@
 <div class="content--editor--new-items"
-     data-controller="<%= NEW_ITEMS_CONTROLLER %>"
-     data-action="turbo:before-morph-element-><%= NEW_ITEMS_CONTROLLER %>#morph">
-  <%= tag.button(aria:  { controls: "#{NEW_ITEMS_CONTROLLER}-dialog" },
+     data-controller="content--editor--new-items"
+     data-action="turbo:before-morph-element->content--editor--new-items#morph">
+  <%= tag.button(aria:  { controls: "content--editor--new-items-dialog" },
                  class: "content--editor--add-button",
-                 data:  { action: "#{NEW_ITEMS_CONTROLLER}#open" }) do %>
+                 data:  { action: "content--editor--new-items#open" }) do %>
     Add content
   <% end %>
   <%= tag.div(class:  "content--editor--inline-add",
-              data:   { "#{NEW_ITEMS_CONTROLLER}_target" => "inline" },
+              data:   { "content--editor--new-items_target" => "inline" },
               hidden: "") do %>
-    <%= tag.button(aria: { controls: "#{NEW_ITEMS_CONTROLLER}-dialog", label: "Add content here" },
-                   data: { action: "#{NEW_ITEMS_CONTROLLER}#open" }) %>
+    <%= tag.button(aria: { controls: "content--editor--new-items-dialog", label: "Add content here" },
+                   data: { action: "content--editor--new-items#open" }) %>
   <% end %>
-  <%= tag.dialog(id: "#{NEW_ITEMS_CONTROLLER}-dialog", data: { action: "click->#{NEW_ITEMS_CONTROLLER}#close" }) do %>
-    <%= tag.div(role: "list", data: { action: "click->#{NEW_ITEMS_CONTROLLER}#noop:stop" }) do %>
+  <%= tag.dialog(id: "content--editor--new-items-dialog", data: { action: "click->content--editor--new-items#close" }) do %>
+    <%= tag.div(role: "list", data: { action: "click->content--editor--new-items#noop:stop" }) do %>
       <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
     <% end %>
   <% end %>

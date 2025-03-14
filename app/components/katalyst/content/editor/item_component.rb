@@ -20,7 +20,7 @@ module Katalyst
           {
             id:   dom_id(item),
             data: {
-              controller: ITEM_CONTROLLER,
+              controller: "content--editor--item",
             },
           }
         end
