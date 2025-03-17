@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    katalyst-content (2.8.0)
+    katalyst-content (3.0.0.alpha.1)
       active_storage_validations
       activerecord
       katalyst-html-attributes
