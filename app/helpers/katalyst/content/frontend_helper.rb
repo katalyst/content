@@ -5,6 +5,8 @@ module Katalyst
     module FrontendHelper
       include TableHelper
 
+      using Katalyst::HtmlAttributes::HasHtmlAttributes
+
       # Render all items from a content version as HTML
       # @param version [Katalyst::Content::Version] The content version to render
       # @return [ActiveSupport::SafeBuffer,String,nil] Content as HTML
@@ -14,16 +16,24 @@ module Katalyst
         capture do
           cache version do
             without_partial_path_prefix do
-              concat render partial: version.tree.select(&:visible?)
+              concat(render_content_items(*version.tree.select(&:visible?)))
             end
           end
         end
       end
 
-      def render_content_items(items)
-        items = items.select(&:visible?)
-        without_partial_path_prefix do
-          render partial: items if items.any?
+      def render_content_items(*items, wrapper_tag: :div, theme: nil, **)
+        items = items.flatten.select(&:visible?)
+
+        grouped_items = items.slice_when { |first, second| first.background != second.background }
+
+        grouped_items.each do |siblings|
+          content_theme = (siblings.first.background if siblings.first.background != theme)
+          concat(content_items_tag(wrapper_tag, content_theme:, **) do
+            without_partial_path_prefix do
+              concat(render(partial: siblings))
+            end
+          end)
         end
       end
 
@@ -31,7 +41,15 @@ module Katalyst
         FrontendBuilder.new(self, item).render(...)
       end
 
-      private
+      def content_items_tag(tag, content_theme:, **attributes, &)
+        html_attributes = {
+          class: "content-items",
+          data:  {
+            content_theme:,
+          },
+        }.merge_html(attributes)
+        content_tag(tag, **html_attributes, &)
+      end
 
       def without_partial_path_prefix
         current = prefix_partial_path_with_controller_namespace
@@ -44,6 +62,8 @@ module Katalyst
     end
 
     class FrontendBuilder
+      include Katalyst::HtmlAttributes
+
       attr_accessor :template, :item
 
       delegate_missing_to :@template
@@ -53,32 +73,25 @@ module Katalyst
         self.item     = item
       end
 
-      def render(**, &)
-        content_tag tag, **default_options(**) do
-          content_tag(:div, &)
-        end
+      def render(tag: self.tag, **, &)
+        update_html_attributes(**)
+
+        content_tag(tag, **html_attributes, &)
       end
 
       private
 
-      def default_options(**options)
+      def default_html_attributes
         {
-          id:    item.heading&.parameterize,
-          class: ["content-item", item.model_name.param_key, item.background, options[:class]],
-          data:  { content_index: item.index, content_depth: item.depth, **options.fetch(:data, {}) },
-          **options.except(:class, :data, :root),
+          id:    item.dom_id,
+          class: ["content-item",
+                  ("wrapper" if item.depth.zero?)],
+          data:  {
+            content_index:     item.index,
+            content_depth:     item.depth,
+            content_item_type: item.item_type,
+          },
         }
-      end
-
-      def tag
-        case item
-        when Figure
-          :figure
-        when Section
-          :section
-        else
-          :div
-        end
       end
     end
   end

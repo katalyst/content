@@ -20,9 +20,7 @@ module Katalyst
 
         def add(node)
           if node.depth == depth
-            node.parent = current
-            children << node
-            self
+            add_sibling(node)
           elsif node.depth > depth
             push(children.last)
             add(node)
@@ -30,6 +28,21 @@ module Katalyst
             pop
             add(node)
           end
+        end
+
+        def add_sibling(node)
+          node.parent = current
+
+          previous = children.last
+
+          children << node
+
+          if previous
+            previous.next_sibling = node
+            node.previous_sibling = previous
+          end
+
+          self
         end
 
         private

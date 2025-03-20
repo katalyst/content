@@ -1,16 +1,14 @@
-<%= content_item_tag aside do %>
+<%= content_item_tag(aside, data: { aside_reverse: ("" if aside.reverse) }) do %>
   <%= tag.h3 aside.heading, class: aside.heading_style_class if aside.show_heading? %>
 
   <% if aside.children.any? %>
     <% items = aside.children.select(&:visible?) %>
     <% last = items.pop %>
-    <div role="aside-container" <%= "class=reverse" if aside.reverse %>>
-      <div>
-        <%= render_content_items items %>
+    <div class="sidebar">
+      <div class="aside--main">
+        <%= render_content_items(*items, theme: aside.background, class: "flow") %>
       </div>
-      <aside>
-        <%= render_content_items [last] %>
-      </aside>
+      <%= render_content_items(last, tag: :aside, class: "aside--sidebar", theme: aside.background) %>
     </div>
   <% end %>
 <% end %>

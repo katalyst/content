@@ -21,7 +21,7 @@ module Katalyst
       after_initialize :initialize_tree
       before_validation :set_defaults
 
-      attr_accessor :parent, :children, :index, :depth
+      attr_accessor :parent, :children, :index, :depth, :previous_sibling, :next_sibling
 
       def self.permitted_params
         %i[
@@ -49,6 +49,14 @@ module Katalyst
 
       def layout?
         is_a? Layout
+      end
+
+      def dom_id
+        heading&.parameterize
+      end
+
+      def item_type
+        model_name.param_key
       end
 
       private

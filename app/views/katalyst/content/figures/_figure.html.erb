@@ -1,4 +1,4 @@
-<%= content_item_tag figure do %>
+<%= content_item_tag(figure, tag: :figure) do %>
   <%= image_tag figure.image, alt: figure.alt %>
   <%= tag.figcaption figure.caption if figure.caption.present? %>
 <% end %>
