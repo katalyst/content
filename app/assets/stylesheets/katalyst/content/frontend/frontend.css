@@ -1,0 +1,41 @@
+/* Themes */
+
+[data-content-theme] {
+  display: flow-root;
+}
+
+[data-content-theme="light"] {
+  background: var(--background, var(--background-color));
+  color: var(--text-color);
+
+  --text-color: var(--color-dark, black);
+  --background: linear-gradient(
+    var(--color-light, black),
+    var(--color-tint, black)
+  );
+  --link-color: var(--color-dark, black);
+}
+
+[data-content-theme="dark"] {
+  background: var(--background, var(--background-color));
+  color: var(--text-color);
+
+  --text-color: var(--color-light, white);
+  --background: linear-gradient(
+    var(--color-dark, black),
+    var(--color-dark-glare, black)
+  );
+  --link-color: var(--color-light, white);
+}
+
+/* Spacing */
+
+.content-item {
+  --flow-space: var(--space-m);
+}
+
+/* Figures */
+
+.content-item.figure {
+  margin-inline: 0;
+}

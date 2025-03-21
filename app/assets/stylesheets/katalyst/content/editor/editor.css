@@ -1,0 +1,200 @@
+@import url("icons.css");
+@import url("status-bar.css");
+@import url("table.css");
+
+.content--editor {
+  --row-inset: 2rem;
+  --row-hover-bg: var(--color-tint, #fff0eb);
+  --row-padding: 0 var(--space-2xs, 0.25rem);
+
+  position: relative;
+}
+
+/* Rows */
+
+.content--editor--item {
+  /* https://github.com/react-dnd/react-dnd/issues/832 */
+  transform: translate3d(0, 0, 0);
+
+  &:hover {
+    background: var(--row-hover-bg);
+  }
+
+  &[draggable] {
+    cursor: grab;
+  }
+
+  /* Dragged visuals */
+
+  &[data-dragging] {
+    box-shadow: inset 0 0 0 2px var(--color-tint, #fff0eb);
+
+    > * {
+      visibility: hidden;
+    }
+  }
+
+  /* Hidden items */
+
+  [data-invisible] {
+    color: var(--color-mid, #aaa);
+  }
+
+  /* row item controller */
+
+  > [data-controller] {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    padding: var(--row-padding);
+  }
+
+  /* row content */
+
+  .tree {
+    display: flex;
+    gap: var(--space-xs, 0.5rem);
+    align-items: baseline;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .actions-group {
+    display: flex;
+    gap: var(--space-3xs, 0.25em);
+    align-items: baseline;
+  }
+
+  /* Theme identifier */
+
+  .item-background {
+    display: inline-flex;
+    background-color: var(--theme-background-color);
+    color: var(--theme-text-color);
+    aspect-ratio: 1;
+    padding: var(--space-3xs);
+    border-radius: var(--radius-s);
+  }
+
+  .item-background.light {
+    --theme-text-color: black;
+    --theme-background-color: white;
+  }
+
+  .item-background.dark {
+    --theme-text-color: white;
+    --theme-background-color: black;
+  }
+
+  /* Depth */
+
+  &[data-content-depth="1"] .tree {
+    padding-left: calc(var(--row-inset) * 1);
+  }
+
+  &[data-content-depth="2"] .tree {
+    padding-left: calc(var(--row-inset) * 2);
+  }
+
+  &[data-content-depth="3"] .tree {
+    padding-left: calc(var(--row-inset) * 3);
+  }
+
+  &[data-content-depth="4"] .tree {
+    padding-left: calc(var(--row-inset) * 4);
+  }
+
+  &[data-content-depth="5"] .tree {
+    padding-left: calc(var(--row-inset) * 5);
+  }
+
+  &[data-content-depth="6"] .tree {
+    padding-left: calc(var(--row-inset) * 6);
+  }
+
+  /* Lower opacity for buttons you can't use */
+
+  &[data-deny-de-nest] .button:has([data-icon="outdent"]),
+  &[data-deny-nest] .button:has([data-icon="indent"]),
+  &[data-deny-remove] .button:has([data-icon="remove"]),
+  &[data-deny-drag] .button:has([data-icon="drag"]),
+  &[data-deny-edit] .button:has([data-icon="edit"]) {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  &:not(:hover) .actions-group .button {
+    opacity: 0;
+  }
+
+  /* Only show 1 of the collapse / expand button */
+
+  &[data-deny-collapse] .button:has([data-icon="collapse"]),
+  &[data-deny-expand] .button:has([data-icon="expand"]) {
+    display: none !important;
+    pointer-events: none;
+  }
+
+  /* Always show the expand button when there are hidden children */
+
+  &:has([data-content-children]) .button:has([data-icon="expand"]) {
+    opacity: 1 !important;
+  }
+}
+
+/* Inline add link */
+
+.content--editor--inline-add {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 0;
+  z-index: 1;
+  outline: 1px solid var(--color-dark-glare, #555);
+
+  button {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 0;
+    padding: 0.25rem;
+
+    animation: content--editor--pulse 200ms ease;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  button:active {
+    transform: translate(-50%, -50%) scale(99%);
+  }
+
+  &[hidden] button {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes content--editor--pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  80% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* New items picker */
+
+.content--editor--new-items {
+  .items-list {
+    display: flex;
+    gap: var(--space-2xs, 0.25rem);
+    flex-wrap: wrap;
+  }
+}

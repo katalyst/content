@@ -33,17 +33,22 @@ import content from "@katalyst/content";
 application.load(content);
 ```
 
-Import the styles as css:
+Import the editor styles as css:
 
 ```css
-@import url("/katalyst/content.css");
+/** In your admin/editor */
+@import url("/katalyst/content/editor.css");
+/** In your frontend */
+@import url("/katalyst/content/frontend.css");
 ```
 
 Or, if you're using `dartsass-rails`:
 
 ```scss
+// app/assets/stylesheets/admin.scss
+@use "katalyst/content/editor";
 // app/assets/stylesheets/application.scss
-@use "katalyst/content";
+@use "katalyst/content/frontend";
 ```
 
 ## Usage
