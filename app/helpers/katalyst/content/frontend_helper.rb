@@ -22,14 +22,14 @@ module Katalyst
         end
       end
 
-      def render_content_items(*items, wrapper_tag: :div, theme: nil, **)
+      def render_content_items(*items, tag: :div, theme: nil, **)
         items = items.flatten.select(&:visible?)
 
-        grouped_items = items.slice_when { |first, second| first.background != second.background }
+        grouped_items = items.slice_when { |first, second| first.theme != second.theme }
 
         grouped_items.each do |siblings|
-          content_theme = (siblings.first.background if siblings.first.background != theme)
-          concat(content_items_tag(wrapper_tag, content_theme:, **) do
+          content_theme = (siblings.first.theme if siblings.first.theme != theme)
+          concat(content_items_tag(tag, content_theme:, **) do
             without_partial_path_prefix do
               concat(render(partial: siblings))
             end
@@ -73,7 +73,7 @@ module Katalyst
         self.item     = item
       end
 
-      def render(tag: self.tag, **, &)
+      def render(tag: :div, **, &)
         update_html_attributes(**)
 
         content_tag(tag, **html_attributes, &)

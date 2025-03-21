@@ -16,7 +16,7 @@ module Katalyst
 
       validates :heading, presence: true
       validates :heading_style, inclusion: { in: config.heading_styles }
-      validates :background, presence: true, inclusion: { in: config.backgrounds }, if: :validate_background?
+      validates :theme, inclusion: { in: config.themes, allow_blank: true }
 
       after_initialize :initialize_tree
       before_validation :set_defaults
@@ -30,7 +30,7 @@ module Katalyst
           type
           heading
           heading_style
-          background
+          theme
           visible
         ]
       end
@@ -59,6 +59,10 @@ module Katalyst
         model_name.param_key
       end
 
+      def theme
+        super.presence || parent&.theme
+      end
+
       private
 
       def initialize_tree
@@ -68,10 +72,6 @@ module Katalyst
 
       def set_defaults
         self.heading_style = "none" if heading_style.blank?
-      end
-
-      def validate_background?
-        true
       end
     end
   end

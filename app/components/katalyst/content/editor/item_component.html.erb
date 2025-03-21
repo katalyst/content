@@ -4,9 +4,11 @@
 
     <strong class="heading" title="<%= item.heading %>"><%= item.heading %></strong>
 
-    <span class="item-background <%= item.background %>">
-      <icon class="icon" data-icon="theme" role="img">&nbsp;</icon>
-    </span>
+    <% if item.theme.present? %>
+      <span class="item-theme" data-content-theme="<%= item.theme %>">
+        <icon class="icon" data-icon="theme" role="img">&nbsp;</icon>
+      </span>
+    <% end %>
 
     <% unless item.visible? %>
       <icon class="icon" data-icon="hidden" title="Hidden" role="img">&nbsp;</icon>
@@ -27,7 +29,7 @@
       <icon class="icon" data-icon="indent" role="img">&nbsp;</icon>
     </button>
     <%= link_to(edit_item_link, class: "button", title: "Edit", value: "edit",
-                data: { text_button: "", button_padding: "tight", turbo_frame: "content--editor--item-editor" }) do %>
+                data:                  { text_button: "", button_padding: "tight", turbo_frame: "content--editor--item-editor" }) do %>
       <icon class="icon" data-icon="edit" role="img">&nbsp;</icon>
     <% end %>
     <button class="button" data-button-padding="tight" data-text-button data-action="content--editor--container#remove" title="Remove">

@@ -13,8 +13,7 @@ RSpec.shared_examples "a item" do
                       .with_prefix(:heading)
   end
 
-  it { is_expected.to validate_presence_of(:background) }
-  it { is_expected.to validate_inclusion_of(:background).in_array(Katalyst::Content.config.backgrounds) }
+  it { is_expected.to validate_inclusion_of(:theme).in_array(Katalyst::Content.config.themes).allow_blank }
 
   describe "#to_plain_text" do
     context "when item is not visible" do

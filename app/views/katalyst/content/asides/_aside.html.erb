@@ -6,9 +6,9 @@
     <% last = items.pop %>
     <div class="sidebar">
       <div class="aside--main">
-        <%= render_content_items(*items, theme: aside.background, class: "flow") %>
+        <%= render_content_items(*items, theme: aside.theme, class: "flow") %>
       </div>
-      <%= render_content_items(last, tag: :aside, class: "aside--sidebar", theme: aside.background) %>
+      <%= render_content_items(last, tag: :aside, class: "aside--sidebar", theme: aside.theme) %>
     </div>
   <% end %>
 <% end %>

@@ -7,7 +7,10 @@ module Katalyst
     class Config
       include ActiveSupport::Configurable
 
-      config_accessor(:backgrounds) { %w[light dark] }
+      config_accessor(:themes) { %w[light dark] }
+      alias_method :backgrounds, :themes
+      alias_method :backgrounds=, :themes=
+
       config_accessor(:heading_styles) { %w[none default] }
       config_accessor(:items) do
         %w[
