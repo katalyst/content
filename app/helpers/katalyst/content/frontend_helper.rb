@@ -16,7 +16,7 @@ module Katalyst
         capture do
           cache version do
             without_partial_path_prefix do
-              concat(render_content_items(*version.tree.select(&:visible?)))
+              concat(render_content_items(*version.tree.select(&:visible?), class: "flow"))
             end
           end
         end
@@ -84,14 +84,17 @@ module Katalyst
       def default_html_attributes
         {
           id:    item.dom_id,
-          class: ["content-item",
-                  ("wrapper" if item.depth.zero?)],
+          class: ["content-item", wrapper_class],
           data:  {
             content_index:     item.index,
             content_depth:     item.depth,
             content_item_type: item.item_type,
           },
         }
+      end
+
+      def wrapper_class
+        "wrapper" if item.depth.zero?
       end
     end
   end

@@ -1,7 +1,5 @@
 <%= content_item_tag group do %>
   <%= tag.h3 group.heading, class: group.heading_style_class if group.show_heading? %>
 
-  <div>
-    <%= render_content_items group.children %>
-  </div>
+  <%= render_content_items(*group.children, theme: group.theme, class: "flow") %>
 <% end %>

@@ -1,4 +1,4 @@
-<%= content_item_tag(section, tag: :section) do %>
+<%= content_item_tag(section, tag: :section, class: "flow") do %>
   <%= tag.h2(section.heading, class: section.heading_style_class) if section.show_heading? %>
 
   <%= render_content_items(*section.children, theme: section.theme, class: "flow") %>

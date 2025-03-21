@@ -6,13 +6,13 @@
   <div class="columns-container">
     <div class="column">
       <% if items.any? %>
-        <%= render_content_items items %>
+        <%= render_content_items(*items, theme: column.theme, class: "flow") %>
       <% elsif last %>
-        <%= render_content_items [last] %>
+        <%= render_content_items(last, theme: column.theme) %>
       <% end %>
     </div>
     <div class="column">
-      <%= render_content_items [last] if last && items.any? %>
+      <%= render_content_items(last, theme: column.theme) if last && items.any? %>
     </div>
   </div>
 <% end %>

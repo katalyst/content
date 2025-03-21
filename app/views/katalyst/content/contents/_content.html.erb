@@ -1,4 +1,4 @@
-<%= content_item_tag(content) do %>
+<%= content_item_tag(content, class: "flow") do %>
   <%= tag.h3(content.heading, class: content.heading_style_class) if content.show_heading? %>
 
   <%= content.content %>
