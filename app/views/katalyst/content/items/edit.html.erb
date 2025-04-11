@@ -31,15 +31,11 @@
         <%= render item_editor %>
       </main>
       <footer class="actions" data-reverse>
-        <button form="<%= item_editor.id %>" class="button" data-close-dialog>
-          Done
-        </button>
+        <button form="<%= item_editor.id %>" class="button" data-close-dialog><%= t(".submit") %></button>
         <button form="<%= item_editor.id %>"
                 formmethod="dialog"
                 class="button"
-                data-ghost-button>
-          Discard
-        </button>
+                data-ghost-button><%= t(".cancel") %></button>
       </footer>
     </article>
   </dialog>

@@ -7,7 +7,7 @@
           data-button-padding="tight"
           data-text-button>
     <icon aria-hidden="true" class="icon" data-icon="add">&nbsp;</icon>
-    Add item
+    <%= t(".add_item") %>
   </button>
   <div class="content--editor--inline-add" data-content--editor--new-items-target="inline" hidden>
     <button aria-controls="content--editor--new-items-dialog"
@@ -15,19 +15,19 @@
             data-action="content--editor--new-items#open"
             data-button-padding="tight">
       <icon aria-hidden="true" class="icon" data-icon="add">&nbsp;</icon>
-      <span class="visually-hidden">Add item here</span>
+      <span class="visually-hidden"><%= t(".add_item_inline") %></span>
     </button>
   </div>
   <dialog id="content--editor--new-items-dialog" class="modal" data-action="click->content--editor--new-items#close">
     <article class="flow" data-action="click->content--editor--new-items#noop:stop">
       <header class="repel" data-nowrap>
-        <h2>Add item</h2>
+        <h2><%= t(".add_item") %></h2>
         <button class="button"
                 data-action="click->content--editor--new-items#close"
                 data-button-padding="tight"
                 data-text-button>
           <icon aria-hidden="true" class="icon" data-icon="close">&nbsp;</icon>
-          <span class="visually-hidden">Close</span>
+          <span class="visually-hidden"><%= t(".close") %></span>
         </button>
       </header>
       <main>
