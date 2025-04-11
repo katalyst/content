@@ -30,8 +30,10 @@
           <span class="visually-hidden"><%= t(".close") %></span>
         </button>
       </header>
-      <main>
-        <%= tag.div(role: "list") do %>
+      <main class="flow">
+        <% if content? %>
+          <%= content %>
+        <% else %>
           <ul role="list" class="items-list">
             <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
           </ul>

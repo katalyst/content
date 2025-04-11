@@ -5,6 +5,10 @@ module Katalyst
     class EditorComponent < Editor::BaseComponent
       include ::Turbo::FramesHelper
 
+      renders_one :new_items, -> do
+        Katalyst::Content::Editor::NewItemsComponent.new(container:)
+      end
+
       attr_reader :url, :scope
 
       def initialize(container:, url: [:admin, container], scope: :container, **)
@@ -16,12 +20,6 @@ module Katalyst
 
       def status_bar
         Editor::StatusBarComponent.new(container:)
-      end
-
-      # @deprecated this component is now part of the editor
-      def new_items
-        # no-op, no longer required
-        Class.new { define_method(:render_in) { |_| nil } }.new
       end
 
       def item_editor(item:)

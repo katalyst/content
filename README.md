@@ -162,8 +162,33 @@ And the view:
 <%# app/views/admin/pages/show.html.erb %>
 <%= render @editor.status_bar %>
 <%= render @editor %>
-<%# We suggest you render new items in a sidebar %>
-<%= render @editor.new_items %>
+```
+
+### New items dialog customisation
+
+The new items dialog can be customised by providing content to the ViewComponent slot:
+
+```erb
+<%# app/views/admin/pages/show.html.erb %>
+<%= render @editor.status_bar %>
+<%= render @editor do |editor_component| %>
+  <% editor_component.with_new_items do |component| %>
+    <h3>Layouts</h3>
+    <ul role="list" class="items-list">
+      <%= component.item(:section) %>
+      <%= component.item(:group) %>
+      <%= component.item(:column) %>
+      <%= component.item(:aside) %>
+    </ul>
+    <h3>Content</h3>
+    <ul role="list" class="items-list">
+      <%= component.item(:content) %>
+      <%= component.item(:figure) %>
+      <%= component.item(:table) %>
+    </ul>
+  <% end %>
+<% end %>
+
 ```
 
 ## Development
