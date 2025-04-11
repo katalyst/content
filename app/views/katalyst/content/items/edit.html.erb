@@ -18,9 +18,8 @@
     <article class="flow">
       <header class="repel" data-nowrap>
         <h2><%= item_editor.title %></h2>
-        <button form="<%= item_editor.id %>"
-                formmethod="dialog"
-                class="button"
+        <button class="button"
+                data-action="content--editor--item-editor#dismiss"
                 data-button-padding="tight"
                 data-text-button>
           <icon aria-hidden="true" class="icon" data-icon="close">&nbsp;</icon>
