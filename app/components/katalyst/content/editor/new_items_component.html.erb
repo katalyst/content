@@ -18,8 +18,8 @@
       <span class="visually-hidden"><%= t(".add_item_inline") %></span>
     </button>
   </div>
-  <dialog id="content--editor--new-items-dialog" class="modal" data-action="click->content--editor--new-items#close">
-    <article class="flow" data-action="click->content--editor--new-items#noop:stop">
+  <dialog id="content--editor--new-items-dialog" class="modal" data-action="click->content--editor--new-items#click">
+    <article class="flow">
       <header class="repel" data-nowrap>
         <h2><%= t(".add_item") %></h2>
         <button class="button"
@@ -31,7 +31,7 @@
         </button>
       </header>
       <main>
-        <%= tag.div(role: "list", data: { action: "click->content--editor--new-items#noop:stop" }) do %>
+        <%= tag.div(role: "list") do %>
           <ul role="list" class="items-list">
             <%= render Katalyst::Content::Editor::NewItemComponent.with_collection(items) %>
           </ul>
