@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= form.label :theme %>
-    <%= form.select :theme, Katalyst::Content.config.themes %>
+    <%= form.select :theme, Katalyst::Content.config.themes, include_blank: true %>
   </div>
 
   <div class="field">
