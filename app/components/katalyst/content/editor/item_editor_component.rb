@@ -8,6 +8,16 @@ module Katalyst
 
         alias_method :model, :item
 
+        module Helpers
+          def prefix_partial_path_with_controller_namespace
+            false
+          end
+        end
+
+        def before_render
+          helpers.extend(Helpers)
+        end
+
         def call
           render("form", model:, scope:, url:, id:)
         end
