@@ -11,8 +11,21 @@ module Admin
       render locals: { collection: }
     end
 
+    def show
+      page   = Page.find(params[:id])
+      editor = Katalyst::Content::EditorComponent.new(container: page)
+
+      render locals: { page:, editor: }
+    end
+
     def new
       render locals: { page: Page.new }
+    end
+
+    def edit
+      page = Page.find(params[:id])
+
+      render locals: { page: }
     end
 
     def create
@@ -23,19 +36,6 @@ module Admin
       else
         render :new, locals: { page: @page }, status: :unprocessable_entity
       end
-    end
-
-    def show
-      page   = Page.find(params[:id])
-      editor = Katalyst::Content::EditorComponent.new(container: page)
-
-      render locals: { page:, editor: }
-    end
-
-    def edit
-      page = Page.find(params[:id])
-
-      render locals: { page: }
     end
 
     # PATCH /admins/pages/:slug
@@ -78,7 +78,7 @@ module Admin
     def page_params
       return {} if params[:page].blank?
 
-      params.require(:page).permit(:title, :slug, items_attributes: %i[id index depth])
+      params.expect(page: [:title, :slug, { items_attributes: [%i[id index depth]] }])
     end
 
     class Collection < Katalyst::Tables::Collection::Base
