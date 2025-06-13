@@ -1,14 +1,16 @@
-<%= content_item_tag(aside, data: { aside_reverse: ("" if aside.reverse) }) do %>
+<%= content_item_tag(aside, class: "flow") do %>
   <%= tag.h3 aside.heading, class: aside.heading_style_class if aside.show_heading? %>
 
   <% if aside.children.any? %>
     <% items = aside.children.select(&:visible?) %>
     <% last = items.pop %>
-    <div class="sidebar">
-      <div class="aside--main">
-        <%= render_content_items(*items, theme: aside.theme, class: "flow") %>
+    <%= tag.div(class: "content-aside", data: { wrap_reverse: ("" if aside.reverse) }) do %>
+      <div>
+        <%= render_content_items(*items, theme: aside.theme) %>
       </div>
-      <%= render_content_items(last, tag: :aside, class: "aside--sidebar", theme: aside.theme) %>
-    </div>
+      <div>
+        <%= render_content_items(last, tag: :aside, theme: aside.theme) %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
