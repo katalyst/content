@@ -8,6 +8,7 @@ module Katalyst
       include ActiveSupport::Configurable
 
       config_accessor(:themes) { %w[light dark] }
+      config_accessor(:default_theme) { themes.first }
       alias_method :backgrounds, :themes
       alias_method :backgrounds=, :themes=
 

@@ -60,7 +60,7 @@ module Katalyst
       end
 
       def theme
-        super.presence || parent&.theme
+        super.presence || parent&.theme || Config.default_theme
       end
 
       private

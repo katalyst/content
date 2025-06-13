@@ -1,19 +1,46 @@
 /* Spacing */
 
-.content-item {
-  --flow-space: var(--space-m);
-  margin-block: var(--block-space, var(--space-m));
+:root {
+  /*
+    The container width at which the component switches between a horizontal and vertical layout.
+  */
+  --content-gap: var(--space-l);
+  --content-gutter: var(--space-m);
+  --content-block-gutter: var(--content-gutter);
+  --content-block-gap: var(--content-gap);
+  --content-inline-gutter: var(--content-gutter);
+  --content-inline-gap: var(--content-gap);
 }
 
-/* Themes */
+.content-items {
+  /* gutters where the theme changes */
 
-[data-content-theme] {
-  display: flow-root;
+  &[data-content-theme] {
+    padding-block: var(--content-block-gutter);
+  }
+
+  /* gaps between items with the same theme */
+
+  > * + * {
+    margin-block-start: var(--content-block-gap);
+  }
+
+  /* add gutters to non themed siblings */
+
+  &[data-content-theme] + .content-items:not([data-content-theme]),
+  .content-items:not([data-content-theme]) + &[data-content-theme] {
+    margin-block-start: var(--content-block-gutter);
+  }
 }
 
-[data-content-theme] [data-content-theme] {
-  margin-inline: calc(-1 * var(--gutter));
-  padding-inline: var(--gutter);
+/*
+ If a content item has children with a theme applied, we want to steal some space
+ from the item to give to the children for a gutter. This makes content line up
+ between items with and without a theme.
+ */
+.content-item [data-content-theme] {
+  margin-inline: calc(-1 * var(--content-inline-gutter));
+  padding-inline: var(--content-inline-gutter);
 }
 
 [data-content-theme="light"] {
@@ -43,4 +70,33 @@
   img {
     margin-inline: auto;
   }
+}
+
+/*
+  Columns
+
+  A two-column horizontal layout that switches to vertical layout on narrow screens.
+  Based on https://every-layout.dev/layouts/switcher/
+*/
+
+:root {
+  /*
+    The container width at which the component switches between a horizontal and vertical layout.
+  */
+  --content-column-threshold-width: var(--mobile-breakpoint, 37.5rem);
+}
+
+.content-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--content-inline-gap) calc(2 * var(--content-inline-gap));
+
+  > * {
+    flex-grow: 1;
+    flex-basis: calc((var(--content-column-threshold-width) - 100%) * 999);
+  }
+}
+
+.content-column {
+  display: grid; /* equal height columns */
 }

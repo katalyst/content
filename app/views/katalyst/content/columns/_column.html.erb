@@ -1,17 +1,17 @@
-<%= content_item_tag column do %>
+<%= content_item_tag(column, class: "flow") do %>
   <%= tag.h3 column.heading, class: column.heading_style_class if column.show_heading? %>
 
   <% items = column.children.select(&:visible?) %>
   <% last = items.pop %>
-  <div class="columns-container">
-    <div class="column">
+  <div class="content-columns">
+    <div class="content-column">
       <% if items.any? %>
         <%= render_content_items(*items, theme: column.theme, class: "flow") %>
       <% elsif last %>
         <%= render_content_items(last, theme: column.theme) %>
       <% end %>
     </div>
-    <div class="column">
+    <div class="content-column">
       <%= render_content_items(last, theme: column.theme) if last && items.any? %>
     </div>
   </div>
