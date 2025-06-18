@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "katalyst-content"
-  spec.version = "3.0.0.alpha.5"
+  spec.version = "3.0.0.alpha.6"
   spec.authors = ["Katalyst Interactive"]
   spec.email   = ["developers@katalyst.com.au"]
 
