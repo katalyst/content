@@ -35,7 +35,7 @@ RSpec.describe Katalyst::Content::ItemsController do
 
   describe "GET /items/new" do
     let(:action) do
-      get katalyst_content.new_item_path, params: { item: item_params }, headers: { "Turbo-Frame" => "kpop" }
+      get katalyst_content.new_item_path, params: { item: item_params }
     end
 
     it { is_expected.to be_successful }
@@ -86,7 +86,7 @@ RSpec.describe Katalyst::Content::ItemsController do
 
   describe "GET /items/:id/edit" do
     let(:action) do
-      get katalyst_content.edit_item_path(item), headers: { "Turbo-Frame" => "kpop" }
+      get katalyst_content.edit_item_path(item)
     end
     let(:item) { create(:katalyst_content_content, container:) }
 

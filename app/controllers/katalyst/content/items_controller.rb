@@ -120,10 +120,6 @@ module Katalyst
       def prefix_partial_path_with_controller_namespace
         false
       end
-
-      def kpop_fallback_location
-        main_app.root_path
-      end
     end
   end
 end
