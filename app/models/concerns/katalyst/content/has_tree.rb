@@ -42,6 +42,12 @@ module Katalyst
             node.previous_sibling = previous
           end
 
+          # If the node does not have an explicit theme set already then set a
+          # rendering theme from context.
+          if node.theme.blank?
+            node.theme = current ? current.theme : Content.config.default_theme
+          end
+
           self
         end
 

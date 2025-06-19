@@ -11,6 +11,7 @@ module Katalyst
       end
 
       enum :heading_style, config.heading_styles, prefix: :heading
+      enum :theme, config.themes.index_with(&:itself), prefix: :theme
 
       belongs_to :container, polymorphic: true
 
@@ -57,10 +58,6 @@ module Katalyst
 
       def item_type
         model_name.param_key
-      end
-
-      def theme
-        super.presence || parent&.theme || Config.default_theme
       end
 
       private

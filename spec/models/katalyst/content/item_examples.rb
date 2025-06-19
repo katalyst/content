@@ -13,7 +13,13 @@ RSpec.shared_examples "a item" do
                       .with_prefix(:heading)
   end
 
-  it { is_expected.to validate_inclusion_of(:theme).in_array(Katalyst::Content.config.themes).allow_blank }
+  it "defines theme enum" do
+    expect(item).to define_enum_for(:theme)
+                      .backed_by_column_of_type(:string)
+                      .with_values(Katalyst::Content.config.themes.index_with(&:itself))
+                      .with_prefix(:theme)
+                      .with_default("")
+  end
 
   describe "#to_plain_text" do
     context "when item is not visible" do
