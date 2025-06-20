@@ -12,7 +12,7 @@ export default class ItemEditorController extends Controller {
     this.element.removeEventListener("turbo:submit-end", this.onSubmit);
   }
 
-  click(e) {
+  outside(e) {
     if (e.target.tagName === "DIALOG") this.dismiss();
   }
 

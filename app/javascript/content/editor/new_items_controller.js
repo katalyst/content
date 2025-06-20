@@ -16,7 +16,7 @@ export default class NewItemsController extends Controller {
     delete this.currentItem;
   }
 
-  click(e) {
+  outside(e) {
     if (e.target.tagName === "DIALOG") this.close(e);
   }
 

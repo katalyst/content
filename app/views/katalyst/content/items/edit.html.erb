@@ -8,9 +8,10 @@
       data: { controller: "content--editor--item-editor" },
     ) do %>
   <dialog class="modal"
+          closedby="any"
           data-content--editor--item-editor-target="dialog"
           data-action="
-            click->content--editor--item-editor#click
+            mousedown->content--editor--item-editor#outside
             close->content--editor--item-editor#dismiss
           "
           data-item-id="<%= dom_id(item_editor.item) %>"

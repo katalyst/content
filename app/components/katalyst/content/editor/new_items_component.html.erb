@@ -18,7 +18,10 @@
       <span class="visually-hidden"><%= t(".add_item_inline") %></span>
     </button>
   </div>
-  <dialog id="content--editor--new-items-dialog" class="modal" data-action="click->content--editor--new-items#click">
+  <dialog id="content--editor--new-items-dialog"
+          class="modal"
+          closedby="any"
+          data-action="mousedown->content--editor--new-items#outside">
     <article class="flow">
       <header class="repel" data-nowrap>
         <h2><%= t(".add_item") %></h2>
