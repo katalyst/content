@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "katalyst-govuk-formbuilder"
 require "katalyst/html_attributes"
 require "rails/engine"
 

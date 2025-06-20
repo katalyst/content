@@ -1,6 +1,13 @@
-<%= link_to "Pages", [:admin, Page] %>
+<%# locals: (page:, editor:) %>
 
-<h1><%= page.title %></h1>
+<div class="repel">
+  <div>
+    <h1><%= page.title %></h1>
+    <span><%= link_to("Pages", [:admin, Page]) %></span>
+  </div>
+
+  <%= link_to("Edit", edit_admin_page_path(page), class: "button", data: { text_button: "" }) %>
+</div>
 
 <%= render editor.status_bar %>
 

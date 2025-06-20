@@ -1,6 +1,6 @@
 <%# locals: (model:, scope:, url:, id:) %>
 
 <%= form_with(model:, scope:, url:, id:) do |form| %>
-  <%= render "hidden_fields", form: %>
+  <%= render("hidden_fields", form:) %>
   <%= render(model, form:) %>
 <% end %>

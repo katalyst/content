@@ -1,7 +1,10 @@
-<%= link_to "Pages", [:admin, Page] %>
+<%# locals: (page:) %>
 
-<%= form_with model: page, url: [:admin, page] do |form| %>
-  <%= render "form", form: %>
+<div class="repel">
+  <div>
+    <h1>New page</h1>
+    <span><%= link_to("Pages", [:admin, Page]) %></span>
+  </div>
+</div>
 
-  <%= form.submit :save %>
-<% end %>
+<%= render("form", page:) %>

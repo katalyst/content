@@ -1,15 +1,9 @@
-<div class="field required">
-  <%= form.label :title %>
-  <%= form.text_field :title %>
-</div>
+<%# locals: (page:) %>
 
-<div class="field optional">
-  <%= form.label :slug %>
-  <%= form.text_field :slug %>
-</div>
+<%= form_with(model: page, url: [:admin, page]) do |form| %>
+  <%= form.govuk_error_summary %>
+  <%= form.govuk_text_field(:title) %>
+  <%= form.govuk_text_field(:slug) %>
 
-<%= tag.div class: "errors" do %>
-  <% form.object.errors.full_messages.each do |error| %>
-    <li class="error"><%= error %></li>
-  <% end %>
-<% end if form.object.errors.any? %>
+  <%= form.button(type: :submit, class: "button") %>
+<% end %>

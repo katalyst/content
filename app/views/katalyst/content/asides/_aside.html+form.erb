@@ -1,28 +1,6 @@
 <%# locals: (form:, aside:) %>
 
-<%= render "form_errors", form: %>
-
-<div class="field">
-  <%= form.label :heading %>
-  <%= form.text_field :heading %>
-</div>
-
-<div class="field">
-  <%= form.label :heading_style %>
-  <%= form.collection_radio_buttons :heading_style, Katalyst::Content.config.heading_styles, :itself, :itself %>
-</div>
-
-<div class="field">
-  <%= form.label :theme %>
-  <%= form.select :theme, Katalyst::Content.config.themes, include_blank: true %>
-</div>
-
-<div class="field">
-  <%= form.label :visible %>
-  <%= form.check_box :visible %>
-</div>
-
-<div class="field">
-  <%= form.label :reverse %>
-  <%= form.check_box :reverse %>
-</div>
+<%= form.content_heading_fieldset %>
+<%= form.govuk_check_box_field(:reverse, label: { text: "Show aside before content on mobile" }) %>
+<%= form.content_theme_field %>
+<%= form.content_visible_field %>

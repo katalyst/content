@@ -1,15 +1,14 @@
-<div>
-  <%= link_to "Pages", [:admin, Page] %> >
-  <%= link_to page.title, [:admin, page] %>
+<%# locals: (page:) %>
+
+<div class="repel">
+  <div>
+    <h1>Edit page</h1>
+    <span><%= link_to("Pages", [:admin, Page]) %> > <%= link_to(page.title, [:admin, page]) %></span>
+  </div>
+
+  <%= link_to("Delete", url_for(action: :show),
+              class: "button",
+              data:  { ghost_button: true, turbo_method: :delete, turbo_confirm: "Are you sure?" }) %>
 </div>
 
-<%= form_with model: page, url: [:admin, page] do |form| %>
-  <%= render "form", form: %>
-
-  <div class="button-row">
-    <%= form.submit :save %>
-    <%= link_to "Delete", url_for(action: :show),
-                class: "button button-secondary",
-                data:  { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-  </div>
-<% end %>
+<%= render("form", page:) %>

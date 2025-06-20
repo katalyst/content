@@ -6,5 +6,7 @@ module Admin
     helper Katalyst::Tables::Frontend
 
     layout "admin"
+
+    default_form_builder "GOVUKDesignSystemFormBuilder::FormBuilder"
   end
 end
