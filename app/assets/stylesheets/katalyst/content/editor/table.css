@@ -1,40 +1,74 @@
-[data-content--editor--table-target="content"] {
-  position: relative;
-  min-height: 8rem;
+.content--editor--table-editor {
+  .content--editor--table-content {
+    position: relative;
+    min-height: 8rem;
 
-  &::after {
-    content: "Paste table here";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.5;
+    &::after {
+      content: "Paste table here";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.5;
+    }
+
+    /* tight wrap the table editor around the table and use table borders */
+
+    &:has(table) {
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    &:has(table)::after {
+      content: unset;
+    }
+
+    /* ensure the table editor is easy to target when empty */
+
+    &:not(:has(table)) {
+      min-height: 4rem !important;
+    }
+
+    table {
+      border: var(--stroke-input);
+      border-collapse: collapse;
+      max-width: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      font-size: var(--size-step--1);
+      line-height: var(--leading-fine);
+      border: var(--stroke-input);
+      padding: var(--space-2xs) var(--space-xs);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead {
+      background-color: var(--color-mid, #9ca3af);
+    }
+
+    tbody th {
+      background-color: var(--color-tint, #f0ecf3);
+    }
   }
 
-  &:has(table)::after {
-    content: unset;
-  }
-
-  table {
-    border-collapse: collapse;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  th,
-  td {
-    border: 1px solid var(--color-mid, #9ca3af);
-    padding: 0.25rem 0.5rem;
-    text-align: left;
-    vertical-align: top;
-  }
-
-  thead {
-    background-color: var(--color-mid, #9ca3af);
-  }
-
-  tbody th {
-    background-color: var(--color-tint, #f0ecf3);
+  /*
+    restore webkit spinners, hidden by govuk
+    these are not ideal, but spinners are much easier to work with for this
+    use case than the default number input, because we submit the form on
+    change to implement the live preview
+   */
+  .govuk-input[type="number"]::-webkit-outer-spin-button,
+  .govuk-input[type="number"]::-webkit-inner-spin-button {
+    position: relative;
+    margin: -3px -3px -3px 0;
+    -webkit-appearance: inner-spin-button;
+    appearance: auto;
+    opacity: 1;
   }
 }

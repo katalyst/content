@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 const EDITOR = `
-<div class="content--editor--table-editor"
+<div class="content--editor--table-content"
    contenteditable="true"
    data-content--editor--table-target="content"
    data-action="paste->content--editor--table#paste"

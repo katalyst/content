@@ -1,10 +1,13 @@
 <%# locals: (form:, table:) %>
 
-<div class="flow" data-controller="content--editor--table">
+<div class="content--editor--table-editor | flow" data-controller="content--editor--table">
   <%= form.content_heading_fieldset %>
 
   <% content = sanitize_content_table(normalize_content_table(form.object, heading: false)) %>
-  <%= form.govuk_text_area(:content, value: content, data: { content__editor__table_target: "input" }) %>
+  <%= form.govuk_text_area(:content,
+                           value: content,
+                           class: "table-input",
+                           data:  { content__editor__table_target: "input" }) %>
 
   <%# hidden button to receive <Enter> events (HTML-default is to click first button in form) %>
   <%= form.button("Save", hidden: "") %>
