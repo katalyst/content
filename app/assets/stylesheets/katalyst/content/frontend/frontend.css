@@ -33,13 +33,7 @@
   }
 }
 
-/*
- If a content item has children with a theme applied, we want to steal some space
- from the item to give to the children for a gutter. This makes content line up
- between items with and without a theme.
- */
 .content-item [data-content-theme] {
-  margin-inline: calc(-1 * var(--content-inline-gutter));
   padding-inline: var(--content-inline-gutter);
 }
 
@@ -89,7 +83,7 @@
 .content-columns {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--content-inline-gap) calc(2 * var(--content-inline-gap));
+  gap: var(--content-inline-gap);
 
   > * {
     flex-grow: 1;
@@ -104,7 +98,7 @@
 .content-aside {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--content-inline-gap) calc(2 * var(--content-inline-gap));
+  gap: var(--content-inline-gap);
   align-items: start;
 
   > :last-child {
