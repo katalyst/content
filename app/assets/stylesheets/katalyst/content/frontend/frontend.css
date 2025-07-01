@@ -56,13 +56,15 @@
 }
 
 /* Figures */
-
 .content-item[data-content-item-type="figure"] {
-  margin-inline: unset;
   text-align: center;
 
   img {
     margin-inline: auto;
+  }
+
+  &:not(.wrapper) {
+    margin-inline: 0;
   }
 }
 
