@@ -1,14 +1,14 @@
 [data-enum="state"][data-value="published"] {
-    --tag-background-color: #ebf9eb;
-    --tag-color: #4dd45c;
+  --tag-background-color: #ebf9eb;
+  --tag-color: #4dd45c;
 }
 
 [data-enum="state"][data-value="draft"] {
-    --tag-background-color: #fefaf3;
-    --tag-color: #ffa800;
+  --tag-background-color: #fefaf3;
+  --tag-color: #ffa800;
 }
 
 [data-enum="state"][data-value="unpublished"] {
-    --tag-background-color: #eee;
-    --tag-color: #888;
+  --tag-background-color: #eee;
+  --tag-color: #888;
 }

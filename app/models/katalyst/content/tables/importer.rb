@@ -77,7 +77,7 @@ module Katalyst
 
         def header_row_caption?
           !at_css("caption") &&
-            (tr = at_css("thead > tr:first-child"))&.elements&.count == 1 &&
+            (tr = at_css("thead > tr:first-child"))&.elements&.one? &&
             (colspan = tr.elements.first.attributes["colspan"]&.value) &&
             colspan.to_i > 1
         end
