@@ -1,6 +1,13 @@
 en:
   activerecord:
     attributes:
+      katalyst/content/item:
+        heading: "Heading"
+        heading_style: "Style"
+        url: "URL"
+        http_method: "HTTP method"
+        http_target: "HTTP target"
+        visible: "Visible"
       katalyst/content/figure:
         heading: "Alternate text"
     errors:

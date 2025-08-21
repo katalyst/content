@@ -18,39 +18,39 @@ module Katalyst
       end
 
       module Builder
-        def content_heading_fieldset(legend: { text: "Heading" })
+        def content_heading_fieldset(legend: { text: t("activerecord.attributes.katalyst/content/item.heading") })
           govuk_fieldset(legend:) do
-            concat(content_heading_field(label: { text: "Heading", class: "govuk-visually-hidden" }))
+            concat(content_heading_field(label: { class: "govuk-visually-hidden" }))
             concat(content_heading_style_field)
           end
         end
 
-        def content_heading_field(label: { text: "Heading" }, **)
-          govuk_text_field(:heading, label:, **)
+        def content_heading_field(**)
+          govuk_text_field(:heading, **)
         end
 
-        def content_heading_style_field(legend: { text: "Style" }, **)
-          govuk_enum_radio_buttons(:heading_style, legend:, **)
+        def content_heading_style_field(**)
+          govuk_enum_radio_buttons(:heading_style, **)
         end
 
-        def content_url_field(label: { text: "URL" }, **)
-          govuk_text_field(:url, label:, **)
+        def content_url_field(**)
+          govuk_text_field(:url, **)
         end
 
-        def content_http_method_field(label: { text: "HTTP method" }, **)
-          govuk_enum_select(:http_method, label:, **)
+        def content_http_method_field(**)
+          govuk_enum_select(:http_method, **)
         end
 
-        def content_target_field(label: { text: "HTTP target" }, **)
-          govuk_enum_select(:target, label:, **)
+        def content_target_field(**)
+          govuk_enum_select(:target, **)
         end
 
         def content_theme_field(options: { include_blank: true }, **)
           govuk_enum_select(:theme, options:, **)
         end
 
-        def content_visible_field(label: { text: "Visible?" }, **)
-          govuk_check_box_field(:visible, label:, **)
+        def content_visible_field(**)
+          govuk_check_box_field(:visible, **)
         end
       end
 
