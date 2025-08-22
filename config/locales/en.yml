@@ -8,6 +8,9 @@ en:
         http_method: "HTTP method"
         http_target: "HTTP target"
         visible: "Visible"
+      katalyst/content/item/heading_style:
+        none: "Hidden"
+        default: "Theme default"
       katalyst/content/figure:
         heading: "Alternate text"
     errors:

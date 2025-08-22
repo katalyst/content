@@ -30,7 +30,7 @@ module Katalyst
         end
 
         def content_heading_style_field(**)
-          govuk_enum_radio_buttons(:heading_style, **)
+          govuk_enum_select(:heading_style, **)
         end
 
         def content_url_field(**)
