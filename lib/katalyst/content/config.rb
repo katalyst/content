@@ -1,20 +1,27 @@
 # frozen_string_literal: true
 
-require "active_support/configurable"
-
 module Katalyst
   module Content
     class Config
-      include ActiveSupport::Configurable
+      attr_accessor :base_controller,
+                    :default_theme,
+                    :errors_component,
+                    :heading_styles,
+                    :image_mime_types,
+                    :items,
+                    :max_image_size,
+                    :table_sanitizer_allowed_attributes,
+                    :table_sanitizer_allowed_tags,
+                    :themes
 
-      config_accessor(:themes) { %w[light dark] }
-      config_accessor(:default_theme) { themes.first }
-      alias_method :backgrounds, :themes
-      alias_method :backgrounds=, :themes=
+      alias_attribute :backgrounds, :themes
 
-      config_accessor(:heading_styles) { %w[none default] }
-      config_accessor(:items) do
-        %w[
+      def initialize
+        self.themes        = %w[light dark]
+        self.default_theme = themes.first
+
+        self.heading_styles   = %w[none default]
+        self.items            = %w[
           Katalyst::Content::Content
           Katalyst::Content::Figure
           Katalyst::Content::Table
@@ -23,21 +30,16 @@ module Katalyst
           Katalyst::Content::Column
           Katalyst::Content::Aside
         ]
-      end
-      config_accessor(:image_mime_types) { %w[image/png image/gif image/jpeg image/webp] }
-      config_accessor(:max_image_size) { 20 }
+        self.image_mime_types = %w[image/png image/gif image/jpeg image/webp]
+        self.max_image_size   = 20
+        self.errors_component = "Katalyst::Content::Editor::ErrorsComponent"
 
-      # Components
-      config_accessor(:errors_component) { "Katalyst::Content::Editor::ErrorsComponent" }
+        self.base_controller = "ApplicationController"
 
-      config_accessor(:base_controller) { "ApplicationController" }
-
-      # Sanitizer
-      config_accessor(:table_sanitizer_allowed_tags) do
-        %w[table thead tbody tr th td caption a strong em span br p text].freeze
-      end
-      config_accessor(:table_sanitizer_allowed_attributes) do
-        %w[colspan rowspan href].freeze
+        # Sanitizer
+        self.table_sanitizer_allowed_tags       = %w[table thead tbody tr th td caption a strong em span br p
+                                                     text].freeze
+        self.table_sanitizer_allowed_attributes = %w[colspan rowspan href].freeze
       end
     end
   end

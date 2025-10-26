@@ -31,11 +31,11 @@ module Katalyst
       private
 
       def content_table_allowed_tags
-        Katalyst::Content::Config.table_sanitizer_allowed_tags
+        Katalyst::Content.config.table_sanitizer_allowed_tags
       end
 
       def content_table_allowed_attributes
-        Katalyst::Content::Config.table_sanitizer_allowed_attributes
+        Katalyst::Content.config.table_sanitizer_allowed_attributes
       end
 
       # rubocop:disable Rails/HelperInstanceVariable
