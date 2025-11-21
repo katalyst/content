@@ -79,7 +79,7 @@ end
 ```
 
 If you don't have a pages model yet, add it before the page_versions change:
-```
+```ruby
 class CreatePages < ActiveRecord::Migration[7.0]
   def change
     create_table :pages do |t|
