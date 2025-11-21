@@ -78,6 +78,35 @@ class CreatePageVersions < ActiveRecord::Migration[7.0]
 end
 ```
 
+If you don't have a pages model yet, add it before the page_versions change:
+```
+class CreatePages < ActiveRecord::Migration[7.0]
+  def change
+    create_table :pages do |t|
+      t.string :title
+      t.string :slug
+      t.boolean :show_title, default: true, null: false
+
+      t.timestamps
+    end
+    add_index :pages, :slug, unique: true
+
+    create_table :page_versions do |t|
+      t.references :parent, foreign_key: { to_table: :pages }, null: false
+      t.json :nodes
+
+      t.timestamps
+    end
+
+    change_table :pages do |t|
+      t.references :published_version, foreign_key: { to_table: :page_versions }
+      t.references :draft_version, foreign_key: { to_table: :page_versions }
+    end
+  end
+end
+```
+
+
 Next, include the `Katalyst::Content` concerns into your model, and add a nested
 model for storing content version information:
 
