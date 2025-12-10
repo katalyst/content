@@ -9,7 +9,7 @@ module Katalyst
         if item.valid?
           render :update, locals: { item_editor: }
         else
-          render :update, locals: { item_editor: }, status: :unprocessable_entity
+          render :update, locals: { item_editor: }, status: :unprocessable_content
         end
       end
       alias_method :create, :update

@@ -34,7 +34,7 @@ module Admin
       if @page.save
         redirect_to [:admin, @page]
       else
-        render :new, locals: { page: @page }, status: :unprocessable_entity
+        render :new, locals: { page: @page }, status: :unprocessable_content
       end
     end
 
@@ -48,7 +48,7 @@ module Admin
         editor = Katalyst::Content::EditorComponent.new(container: page)
 
         return respond_to do |format|
-          format.turbo_stream { render editor.errors, status: :unprocessable_entity }
+          format.turbo_stream { render editor.errors, status: :unprocessable_content }
         end
       end
 
