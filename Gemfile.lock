@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    katalyst-content (3.1.0)
+    katalyst-content (3.1.1)
       active_storage_validations
       activerecord
       katalyst-govuk-formbuilder
