@@ -34,22 +34,18 @@
 }
 
 .content-item [data-content-theme] {
+  background: var(--background, unset);
+  color: var(--text-color);
   padding-inline: var(--content-inline-gutter);
 }
 
 [data-content-theme="light"] {
-  background: var(--background, var(--background-color));
-  color: var(--text-color);
-
   --text-color: var(--color-dark, black);
   --background: var(--color-light, black);
   --link-color: var(--color-dark, black);
 }
 
 [data-content-theme="dark"] {
-  background: var(--background, var(--background-color));
-  color: var(--text-color);
-
   --text-color: var(--color-light, white);
   --background: var(--color-dark, black);
   --link-color: var(--color-light, white);
