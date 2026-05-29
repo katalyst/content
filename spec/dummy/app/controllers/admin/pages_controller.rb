@@ -12,7 +12,7 @@ module Admin
     end
 
     def show
-      page   = Page.find(params[:id])
+      page   = Page.find(params.expect(:id))
       editor = Katalyst::Content::EditorComponent.new(container: page)
 
       render locals: { page:, editor: }
@@ -23,7 +23,7 @@ module Admin
     end
 
     def edit
-      page = Page.find(params[:id])
+      page = Page.find(params.expect(:id))
 
       render locals: { page: }
     end
@@ -40,7 +40,7 @@ module Admin
 
     # PATCH /admins/pages/:slug
     def update
-      page = Page.find(params[:id])
+      page = Page.find(params.expect(:id))
 
       page.attributes = page_params
 
@@ -66,7 +66,7 @@ module Admin
     end
 
     def destroy
-      page = Page.find(params[:id])
+      page = Page.find(params.expect(:id))
 
       page.destroy!
 

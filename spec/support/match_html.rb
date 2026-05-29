@@ -61,7 +61,7 @@ class HTMLMatcher < RSpec::Matchers::BuiltIn::BaseMatcher
   end
 
   def describe_diff
-    diff = @diff.first
+    diff             = @diff.first
     expected, actual = [diff[:diff1], diff[:diff2]].map { |m| m.try(:to_html) || m.to_s }
     puts "Diff: #{expected} != #{actual}"
   end

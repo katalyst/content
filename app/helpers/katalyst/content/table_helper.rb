@@ -53,7 +53,7 @@ module Katalyst
 
           return unless @node
 
-          @heading_rows = @table.heading_rows.clamp(0..css("tr").length)
+          @heading_rows    = @table.heading_rows.clamp(0..css("tr").length)
           @heading_columns = @table.heading_columns.clamp(0..)
         end
 
@@ -94,7 +94,7 @@ module Katalyst
               # e.g. colspan=2 rowspan=3 would occupy 6 cells
               row_range(cell, y).each do |ty|
                 col_range(cell, x).each do |tx|
-                  matrix[ty] ||= []
+                  matrix[ty]   ||= []
                   matrix[ty][tx] = cell.text
                 end
               end

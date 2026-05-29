@@ -57,7 +57,7 @@ module Katalyst
 
         # Add node to the top of builder stacks
         def push(node)
-          self.depth += 1
+          self.depth   += 1
           self.current  = node
           self.children = node.children = []
           node
@@ -65,7 +65,7 @@ module Katalyst
 
         # Remove current from builder stack
         def pop
-          previous = current
+          previous    = current
           self.depth -= 1
           if depth.zero?
             self.current  = nil

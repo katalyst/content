@@ -50,7 +50,7 @@ module Katalyst
 
       def item_params_type
         requested_type = params.require(:item).fetch(:type, "")
-        if (type = Katalyst::Content.config.items.find { |t| t == requested_type })
+        if (type       = Katalyst::Content.config.items.find { |t| t == requested_type })
           type.safe_constantize
         else
           Item
@@ -70,9 +70,9 @@ module Katalyst
       end
 
       def set_item
-        @item      = Item.find(params[:id])
+        @item      = Item.find(params.expect(:id))
         @container = @item.container
-        @editor = Katalyst::Content::EditorComponent.new(container:, item:)
+        @editor    = Katalyst::Content::EditorComponent.new(container:, item:)
       end
 
       def set_editor_variant

@@ -14,7 +14,7 @@ module Katalyst
           super(**)
 
           @container = container
-          @item = item
+          @item      = item
         end
 
         def call; end

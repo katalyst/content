@@ -77,7 +77,7 @@ module Katalyst
 
         def header_row_caption?
           !at_css("caption") &&
-            (tr = at_css("thead > tr:first-child"))&.elements&.one? &&
+            (tr      = at_css("thead > tr:first-child"))&.elements&.one? &&
             (colspan = tr.elements.first.attributes["colspan"]&.value) &&
             colspan.to_i > 1
         end
@@ -130,10 +130,10 @@ module Katalyst
 
         # Promotes the first row to a caption if it only has one cell.
         def promote_header_row_caption!
-          tr   = at_css("thead > tr:first-child")
-          cell = tr.elements.first
+          tr                           = at_css("thead > tr:first-child")
+          cell                         = tr.elements.first
           tr.remove
-          thead = at_css("thead")
+          thead                        = at_css("thead")
           thead.before("<caption></caption>")
           thead.remove if thead.elements.empty?
           at_css("caption").inner_html = cell.inner_html.strip
@@ -141,7 +141,7 @@ module Katalyst
 
         # Set heading from caption and remove the caption from the table.
         def set_heading!
-          caption = at_css("caption")
+          caption             = at_css("caption")
           table.heading       = caption.text.strip
           table.heading_style = "default"
           caption.remove

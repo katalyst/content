@@ -151,7 +151,7 @@ module Katalyst
       private
 
       def unset_versions
-        self.draft_version_id = nil
+        self.draft_version_id     = nil
         self.published_version_id = nil
         save!(validate: false)
       end
