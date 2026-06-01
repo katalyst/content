@@ -17,7 +17,6 @@ group :development, :test do
   gem "rake"
   gem "rspec-rails"
   gem "rubocop-katalyst", require: false
-  gem "ruby-vips"
   gem "sentry-rails"
   gem "sqlite3"
   gem "stimulus-rails"

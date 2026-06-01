@@ -383,5 +383,16 @@ RSpec.describe Page do
 
       it { expect(page).to have_attributes(published_text: "BODY\nBODY\nBODY") }
     end
+
+    context "with a hidden parent" do
+      let(:items) do
+        [
+          build(:katalyst_content_group, heading: "PARENT", visible: false),
+          build(:katalyst_content_content, heading_style: "none", content: "CHILD", depth: 1),
+        ]
+      end
+
+      it { expect(page).to have_attributes(published_text: "") }
+    end
   end
 end
