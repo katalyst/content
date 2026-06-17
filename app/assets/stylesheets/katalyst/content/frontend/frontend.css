@@ -33,15 +33,14 @@
   }
 }
 
-.content-item [data-content-theme] {
-  background: var(--background, unset);
+[data-content-theme] {
+  background: var(--background, var(--background-color, unset));
   color: var(--text-color);
-  padding-inline: var(--content-inline-gutter);
 }
 
 [data-content-theme="light"] {
   --text-color: var(--color-dark, black);
-  --background: var(--color-light, black);
+  --background: var(--color-light, white);
   --link-color: var(--color-dark, black);
 }
 
@@ -49,6 +48,10 @@
   --text-color: var(--color-light, white);
   --background: var(--color-dark, black);
   --link-color: var(--color-light, white);
+}
+
+.content-item [data-content-theme] {
+  padding-inline: var(--content-inline-gutter);
 }
 
 /* Figures */
