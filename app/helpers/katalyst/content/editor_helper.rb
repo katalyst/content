@@ -10,9 +10,8 @@ module Katalyst
       def content_editor_rich_text_attributes(attributes = {})
         {
           data: {
-            direct_upload_url: direct_uploads_url,
-            controller:        "content--editor--trix",
-            action:            "trix-initialize->content--editor--trix#trixInitialize",
+            controller: "content--editor--trix",
+            action:     "trix-initialize->content--editor--trix#trixInitialize",
           },
         }.merge_html(attributes)
       end

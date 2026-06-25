@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "katalyst-content"
-  spec.version = "3.1.3"
+  spec.version = "3.4.0"
   spec.authors = ["Katalyst Interactive"]
   spec.email   = ["developers@katalyst.com.au"]
 
   spec.summary               = "Rich content page builder and editor"
   spec.homepage              = "https://github.com/katalyst/content"
   spec.license               = "MIT"
-  spec.required_ruby_version = ">= 3.3"
+  spec.required_ruby_version = ">= 4.0"
 
   spec.files                             = Dir["{app,config,db,lib/katalyst}/**/*", "spec/factories/**/*",
                                                "LICENSE.txt", "README.md"]
