@@ -5,7 +5,6 @@ import ListController from "./editor/list_controller";
 import NewItemsController from "./editor/new_items_controller";
 import StatusBarController from "./editor/status_bar_controller";
 import TableController from "./editor/table_controller";
-import TrixController from "./editor/trix_controller";
 
 const Definitions = [
   {
@@ -35,10 +34,6 @@ const Definitions = [
   {
     identifier: "content--editor--table",
     controllerConstructor: TableController,
-  },
-  {
-    identifier: "content--editor--trix",
-    controllerConstructor: TrixController,
   },
 ];
 
