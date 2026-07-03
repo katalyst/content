@@ -9,8 +9,6 @@ module Katalyst
 
       attr_reader :container, :item, :editor
 
-      default_form_builder "Katalyst::Content::EditorHelper::FormBuilder"
-
       helper EditorHelper
 
       def new

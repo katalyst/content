@@ -5,59 +5,32 @@ module Katalyst
     module EditorHelper
       include TableHelper
 
-      using Katalyst::HtmlAttributes::HasHtmlAttributes
-
-      def content_editor_rich_text_attributes(attributes = {})
-        {
-          data: {
-            controller: "content--editor--trix",
-            action:     "trix-initialize->content--editor--trix#trixInitialize",
-          },
-        }.merge_html(attributes)
-      end
-
-      module Builder
-        def content_heading_fieldset(legend: { text: t("activerecord.attributes.katalyst/content/item.heading") })
-          govuk_fieldset(legend:) do
-            concat(content_heading_field(label: { class: "govuk-visually-hidden" }))
-            concat(content_heading_style_field)
-          end
-        end
-
-        def content_heading_field(**)
-          govuk_text_field(:heading, **)
-        end
-
-        def content_heading_style_field(**)
-          govuk_enum_select(:heading_style, **)
-        end
-
-        def content_url_field(**)
-          govuk_text_field(:url, **)
-        end
-
-        def content_http_method_field(**)
-          govuk_enum_select(:http_method, **)
-        end
-
-        def content_target_field(**)
-          govuk_enum_select(:target, **)
-        end
-
-        def content_theme_field(options: { include_blank: true }, **)
-          govuk_enum_select(:theme, options:, **)
-        end
-
-        def content_visible_field(**)
-          govuk_check_box_field(:visible, **)
-        end
-      end
-
       class FormBuilder < ActionView::Helpers::FormBuilder
         include GOVUKDesignSystemFormBuilder::Builder
-        include Builder
+        include Katalyst::Content::Form::Builder
 
-        delegate_missing_to :@template
+        delegate :content_tag, :tag, :safe_join, :link_to, :capture, to: :@template
+      end
+
+      # @deprecated no longer required
+      def content_editor_rich_text_attributes(attributes = {})
+        attributes
+      end
+
+      private
+
+      def instantiate_builder(record_name, record_object, options, &)
+        super.tap do |builder|
+          builder.extend(Katalyst::Content::Form::Builder) unless builder.is_a?(Katalyst::Content::Form::Builder)
+        end
+      end
+
+      # Provides a compatible formbuilder if the default does not include GovUK
+      # @api internal
+      # @see ActionView::Helpers::FormHelper#default_form_builder_class
+      def default_form_builder_class
+        builder = super
+        builder.include?(GOVUKDesignSystemFormBuilder::Builder) ? builder : FormBuilder
       end
     end
   end
