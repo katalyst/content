@@ -7,7 +7,6 @@ require "rspec/core/rake_task"
 APP_RAKEFILE = File.expand_path("spec/dummy/Rakefile", __dir__)
 
 load "rails/tasks/engine.rake"
-load "rails/tasks/statistics.rake"
 
 # prepend test:prepare to run generators, and db:prepare to run migrations
 RSpec::Core::RakeTask.new(spec: %w[app:spec:prepare])
@@ -36,6 +35,9 @@ task security: :environment do
   sh "bundle exec brakeman -q -w2"
 end
 
-task default: %i[lint build spec security] do
-  puts "🎉 build complete! 🎉"
+desc "Run the full CI suite (style, assets, specs, security) via bin/ci"
+task ci: :environment do
+  sh "bin/ci"
 end
+
+task default: :ci

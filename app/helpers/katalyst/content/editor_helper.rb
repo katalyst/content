@@ -19,7 +19,7 @@ module Katalyst
 
       private
 
-      def instantiate_builder(record_name, record_object, options, &)
+      def instantiate_builder(record_name, record_object, options)
         super.tap do |builder|
           builder.extend(Katalyst::Content::Form::Builder) unless builder.is_a?(Katalyst::Content::Form::Builder)
         end

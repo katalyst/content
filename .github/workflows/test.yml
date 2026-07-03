@@ -18,4 +18,4 @@ jobs:
           bin/setup --skip-server
       - name: Test
         run: |
-          bundle exec rake
+          bin/ci
