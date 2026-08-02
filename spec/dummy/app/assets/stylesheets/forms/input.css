@@ -1,15 +1,15 @@
-:is(
-  input:not([type="checkbox"], [type="radio"], [type="color"], [type="button"])
-),
-:is(select, textarea),
-trix-editor {
+:where(
+  input:not([type="checkbox"], [type="radio"], [type="color"], [type="button"]),
+  select,
+  textarea
+) {
   background: var(--color-light);
   border-radius: var(--input-radius);
   border: var(--stroke-input);
   color: var(--color-dark);
   padding: var(--space-3xs);
   width: 100%;
-  min-height: var(--input-size);
+  min-block-size: var(--input-size);
 
   &::placeholder {
     color: var(--color-mid);
@@ -30,15 +30,13 @@ trix-editor {
   }
 }
 
-:is(input, select, textarea, .govuk-richtextarea),
-trix-editor {
+:where(input, select, textarea) {
   accent-color: var(--color-primary);
 }
 
-:is(textarea),
-trix-editor {
-  resize: vertical;
+:where(textarea) {
   line-height: var(--leading-fine);
+  resize: vertical;
 }
 
 .govuk-input {

@@ -1,4 +1,5 @@
-.button {
+.button,
+:where(.govuk-button) {
   /* Configuration */
   --button-padding: 0.5em 1em;
   --button-gap: 0.5em;
@@ -33,7 +34,7 @@
   font-weight: var(--button-font-weight, 500);
   font-size: var(--button-font-size, 1em);
   letter-spacing: 0.05ch;
-  font-family: sans-serif;
+  font-family: var(--font-base);
   line-height: 1.1;
 
   /* Interactive */
@@ -72,7 +73,8 @@
     --button-padding: 0.5em;
   }
 
-  &[data-ghost-button] {
+  &[data-ghost-button],
+  &:where(.govuk-button--secondary) {
     --button-bg: transparent;
     --button-border-color: currentColor;
     --button-color: currentColor;
