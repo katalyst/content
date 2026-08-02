@@ -1,9 +1,8 @@
 <%# locals: (form:, figure:) %>
 
-<%= form.govuk_image_field(:image) do %>
-  <%= form.govuk_text_field(:heading, label: { text: "Alternate text" }) %>
-  <%= form.govuk_text_field(:caption, label: { text: "Caption (optional)" }, optional: true) %>
-<% end %>
+<%= form.govuk_image_field(:image) %>
+<%= form.govuk_text_field(:heading, label: { text: "Alternate text" }) %>
+<%= form.govuk_text_field(:caption, label: { text: "Caption (optional)" }) %>
 
 <%= form.content_theme_field %>
 <%= form.content_visible_field %>
