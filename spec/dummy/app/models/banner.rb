@@ -8,6 +8,8 @@ class Banner < Katalyst::Content::Item
   has_one_attached :image
   has_many_attached :slides
 
+  has_rich_text :subtitle
+
   validates :image,
             content_type: config.image_mime_types,
             size:         { less_than: config.max_image_size.megabytes }

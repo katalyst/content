@@ -72,4 +72,21 @@ RSpec.describe Banner do
       end
     end
   end
+
+  describe "#dup subtitle (has_rich_text)" do
+    it "copies rich text" do
+      expect(banner.dup.subtitle).to be_new_record
+    end
+
+    it "preserves rich text content" do
+      expect(banner.dup.subtitle.body).to eq(banner.subtitle.body)
+    end
+
+    context "with unsaved changes" do
+      it "copies the changed rich text" do
+        banner.subtitle = "<p>updated</p>"
+        expect(banner.dup.subtitle.body).to eq(banner.subtitle.body)
+      end
+    end
+  end
 end

@@ -14,12 +14,6 @@ module Katalyst
 
       after_initialize :set_defaults
 
-      def initialize_copy(source)
-        super
-
-        content.body = source.content&.body if source.content.is_a?(ActionText::RichText)
-      end
-
       def self.permitted_params
         super + %i[content heading_rows heading_columns]
       end
