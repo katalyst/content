@@ -4,6 +4,7 @@ module Katalyst
   module Content
     # STI base class for content items
     class Item < ApplicationRecord
+      include DuplicatesAttachments
       include HasStyle
 
       def self.config

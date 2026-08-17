@@ -12,17 +12,6 @@ module Katalyst
 
       default_scope { with_attached_image }
 
-      def initialize_dup(source)
-        super
-
-        # if image has changed, duplicate the change, otherwise attach the existing blob
-        if source.attachment_changes["image"]
-          self.image = source.attachment_changes["image"].attachable
-        elsif source.image.attached? && !source.image.marked_for_destruction?
-          image.attach(source.image.blob)
-        end
-      end
-
       def self.permitted_params
         super - %i[heading_style] + %i[image caption]
       end

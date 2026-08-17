@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "item_examples"
 
 RSpec.describe Katalyst::Content::Figure do
   subject(:figure) { build(:katalyst_content_figure, container: page) }
@@ -51,9 +52,18 @@ RSpec.describe Katalyst::Content::Figure do
       expect(copy.image.blob).to eq(figure.image.blob)
     end
 
+    context "with removed attachment" do
+      it "removes the attachment from the copy" do
+        # govuk_attachment_field submits "" when the user makes no selection,
+        # which Active Storage records as a DeleteOne attachment change
+        figure.image = ""
+        expect(figure.dup.image).not_to be_attached
+      end
+    end
+
     context "with new attachment" do
       it "saves the new attachment data" do
-        figure.image = Rack::Test::UploadedFile.new(Rails.root.parent.join("fixtures/images/sample.png"), "image/png")
+        figure.image = image_upload
         copy         = figure.dup
         copy.save!
         expect(ActiveStorage::Blob.service).to exist(copy.image.blob.key)
