@@ -9,12 +9,6 @@ module Katalyst
 
       default_scope { with_rich_text_content }
 
-      def initialize_copy(source)
-        super
-
-        self.content = source.content&.body if source.content.is_a?(ActionText::RichText)
-      end
-
       def self.permitted_params
         super + %i[content]
       end
