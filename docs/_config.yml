@@ -1,0 +1,14 @@
+title: "Katalyst Content"
+description: "A library for editing and publishing rich content in Ruby on Rails."
+baseurl: "/content"
+url: "https://katalyst.github.io/content"
+theme: just-the-docs
+search_enabled: true
+color_scheme: custom
+logo: "/logo/katalyst.svg"
+favicon_ico: "/logo/katalyst.ico"
+aux_links:
+  "Katalyst Content on GitHub":
+    - "https://github.com/katalyst/content"
+aux_links_new_tab: true
+gh_edit_link: false
