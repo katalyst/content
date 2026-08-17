@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
+require_relative "item_examples"
 
 RSpec.describe Katalyst::Content::Content do
   subject(:content) { build(:katalyst_content_content, container: page) }

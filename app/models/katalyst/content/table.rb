@@ -24,10 +24,6 @@ module Katalyst
         super + %i[content heading_rows heading_columns]
       end
 
-      def valid?(context = nil)
-        super
-      end
-
       def to_plain_text
         content.to_plain_text if visible?
       end

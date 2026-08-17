@@ -5,3 +5,7 @@ module FileHelper
     Rack::Test::UploadedFile.new("spec/fixtures/images/#{image}", type)
   end
 end
+
+RSpec.configure do |config|
+  config.include FileHelper
+end
