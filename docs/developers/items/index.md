@@ -13,8 +13,8 @@ in the `katalyst_content_items` table, arranged in a tree: each item has an
 `index` (position) and `depth` (nesting), managed by the editor.
 
 Every item has a `heading` (with a configurable `heading_style`, including
-`none` to hide it), an optional `theme`, and a `visible` flag — hidden items
-stay in the draft but are not rendered in the frontend.
+`none` to hide it), an optional [theme](themes), and a `visible` flag —
+hidden items stay in the draft but are not rendered in the frontend.
 
 ## Built-in item types
 
