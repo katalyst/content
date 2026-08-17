@@ -89,4 +89,60 @@ RSpec.describe Banner do
       end
     end
   end
+
+  describe "#dup banner_detail (has_one association)" do
+    before { banner.create_banner_detail!(analytics_title: "original") }
+
+    it "copies the detail" do
+      expect(banner.dup.banner_detail).to be_new_record
+    end
+
+    it "preserves detail attributes" do
+      expect(banner.dup.banner_detail.analytics_title).to eq("original")
+    end
+
+    it "saves an independent copy" do
+      copy = banner.dup
+      copy.save!
+      expect(copy.banner_detail.id).not_to eq(banner.banner_detail.id)
+    end
+
+    context "with unsaved changes" do
+      it "copies the changed detail" do
+        banner.banner_detail_attributes = { analytics_title: "updated" }
+        expect(banner.dup.banner_detail.analytics_title).to eq("updated")
+      end
+    end
+  end
+
+  describe "#dup banner_detail (has_one association, no detail)" do
+    it "produces a copy without a detail" do
+      expect(banner.dup.banner_detail).to be_nil
+    end
+  end
+
+  describe "#dup banner_notes (has_many association)" do
+    before { banner.banner_notes.create!([{ note: "first" }, { note: "second" }]) }
+
+    it "copies the notes" do
+      expect(banner.dup.banner_notes).to all(be_new_record)
+    end
+
+    it "preserves note attributes" do
+      expect(banner.dup.banner_notes.map(&:note)).to eq(%w[first second])
+    end
+
+    context "when a note is marked for destruction" do
+      it "copies only the remaining notes" do
+        banner.banner_notes_attributes = [{ id: banner.banner_notes.first.id, _destroy: true }]
+        expect(banner.dup.banner_notes.map(&:note)).to eq(%w[second])
+      end
+    end
+  end
+
+  describe ".duplicates_association" do
+    it "does not leak declarations to other item types" do
+      expect(Katalyst::Content::Figure.duplicated_associations).to be_empty
+    end
+  end
 end

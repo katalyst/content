@@ -4,6 +4,7 @@ module Katalyst
   module Content
     # STI base class for content items
     class Item < ApplicationRecord
+      include DuplicatesAssociations
       include DuplicatesAttachments
       include DuplicatesRichText
       include HasStyle

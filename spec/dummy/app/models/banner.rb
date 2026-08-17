@@ -10,6 +10,14 @@ class Banner < Katalyst::Content::Item
 
   has_rich_text :subtitle
 
+  has_one :banner_detail, as: :detailable, autosave: true, dependent: :destroy
+  accepts_nested_attributes_for :banner_detail, update_only: true
+  duplicates_association :banner_detail
+
+  has_many :banner_notes, as: :notable, autosave: true, dependent: :destroy
+  accepts_nested_attributes_for :banner_notes, allow_destroy: true
+  duplicates_association :banner_notes
+
   validates :image,
             content_type: config.image_mime_types,
             size:         { less_than: config.max_image_size.megabytes }
