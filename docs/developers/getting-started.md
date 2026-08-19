@@ -122,35 +122,39 @@ the editor on the `show` route of an admin controller.
 class Admin::PagesController < Admin::BaseController
   before_action :set_page, only: %i[show update]
 
-  def show; end
+  attr_reader :page, :editor
+
+  def show
+    render locals: { editor: }
+  end
 
   def update
-    @page.attributes = page_params
+    page.attributes = page_params
 
-    unless @page.valid?
+    unless page.valid?
       return respond_to do |format|
-        format.turbo_stream { render @editor.errors, status: :unprocessable_entity }
+        format.turbo_stream { render editor.errors, status: :unprocessable_content }
       end
     end
 
     case params[:commit]
     when "publish"
-      @page.save!
-      @page.publish!
+      page.save!
+      page.publish!
     when "save"
-      @page.save!
+      page.save!
     when "revert"
-      @page.revert!
+      page.revert!
     end
 
-    redirect_to [:admin, @page], status: :see_other
+    redirect_to [:admin, page], status: :see_other
   end
 
   private
 
   def set_page
     @page = Page.find(params[:id])
-    @editor = Katalyst::Content::EditorComponent.new(container: @page)
+    @editor = Katalyst::Content::EditorComponent.new(container: page)
   end
 
   def page_params
@@ -163,8 +167,9 @@ And the view:
 
 ```erb
 <%# app/views/admin/pages/show.html.erb %>
-<%= render @editor.status_bar %>
-<%= render @editor %>
+<%# locals: (editor:) %>
+<%= render editor.status_bar %>
+<%= render editor %>
 ```
 
 ## Rendering content in your frontend
@@ -173,8 +178,13 @@ Include `Katalyst::Content::FrontendHelper` and render the published version:
 
 ```erb
 <%# app/views/pages/show.html.erb %>
-<%= render_content(@page.published_version) %>
+<%# locals: (page:, version:) %>
+<%= render_content(version) %>
 ```
+
+The editor's status bar links to the container's public page and a draft
+preview — see [routing and previews](routing-and-previews) for the routes
+this expects.
 
 ## Customising the new items dialog
 
@@ -183,8 +193,9 @@ ViewComponent slot:
 
 ```erb
 <%# app/views/admin/pages/show.html.erb %>
-<%= render @editor.status_bar %>
-<%= render @editor do |editor_component| %>
+<%# locals: (editor:) %>
+<%= render editor.status_bar %>
+<%= render editor do |editor_component| %>
   <% editor_component.with_new_items do |component| %>
     <h3>Layouts</h3>
     <ul role="list" class="items-list">

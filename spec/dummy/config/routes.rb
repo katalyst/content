@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :pages, param: :slug, only: :show, path: "" do
-    get "preview"
+    get :preview, on: :member
   end
 
   resolve("Page") { |page| page_path(page.slug) }

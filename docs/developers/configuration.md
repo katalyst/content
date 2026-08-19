@@ -2,7 +2,7 @@
 layout: default
 title: Configuration
 parent: Developers
-nav_order: 6
+nav_order: 7
 ---
 
 # Configuration

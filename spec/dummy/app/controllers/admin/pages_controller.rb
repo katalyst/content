@@ -5,6 +5,10 @@ module Admin
     helper Katalyst::Content::EditorHelper
     helper Katalyst::Tables::Frontend
 
+    before_action :set_page, only: %i[show edit update destroy]
+
+    attr_reader :page
+
     def index
       collection = Collection.with_params(params).apply(Page)
 
@@ -12,41 +16,34 @@ module Admin
     end
 
     def show
-      page   = Page.find(params.expect(:id))
-      editor = Katalyst::Content::EditorComponent.new(container: page)
-
       render locals: { page:, editor: }
     end
 
     def new
-      render locals: { page: Page.new }
+      @page = Page.new
+
+      render locals: { page: }
     end
 
     def edit
-      page = Page.find(params.expect(:id))
-
       render locals: { page: }
     end
 
     def create
       @page = Page.new(page_params)
 
-      if @page.save
-        redirect_to [:admin, @page]
+      if page.save
+        redirect_to [:admin, page], status: :see_other
       else
-        render :new, locals: { page: @page }, status: :unprocessable_content
+        render :new, locals: { page: }, status: :unprocessable_content
       end
     end
 
     # PATCH /admins/pages/:slug
     def update
-      page = Page.find(params.expect(:id))
-
       page.attributes = page_params
 
       unless page.valid?
-        editor = Katalyst::Content::EditorComponent.new(container: page)
-
         return respond_to do |format|
           format.turbo_stream { render editor.errors, status: :unprocessable_content }
         end
@@ -66,14 +63,20 @@ module Admin
     end
 
     def destroy
-      page = Page.find(params.expect(:id))
-
       page.destroy!
 
       redirect_to action: :index, status: :see_other
     end
 
     private
+
+    def set_page
+      @page = Page.find(params.expect(:id))
+    end
+
+    def editor
+      @editor ||= Katalyst::Content::EditorComponent.new(container: page)
+    end
 
     def page_params
       return {} if params[:page].blank?
