@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-# rubocop:disable RSpec/ExampleLength
+# rubocop:disable-next RSpec/ExampleLength
 RSpec.describe Katalyst::Content::TableHelper do
   subject(:helper) { Object.new.extend(described_class) }
 
@@ -55,4 +55,3 @@ RSpec.describe Katalyst::Content::TableHelper do
     end
   end
 end
-# rubocop:enable RSpec/ExampleLength

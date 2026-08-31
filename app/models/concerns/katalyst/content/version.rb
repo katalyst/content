@@ -8,9 +8,8 @@ module Katalyst
       included do # rubocop:disable Metrics/BlockLength
         include Katalyst::Content::HasTree
 
-        # rubocop:disable Rails/ReflectionClassName
+        # rubocop:disable-next Rails/ReflectionClassName
         belongs_to :parent, class_name: name.gsub(/::Version$/, ""), inverse_of: :versions
-        # rubocop:enable Rails/ReflectionClassName
 
         attribute :nodes, Katalyst::Content::Types::NodesType.new, default: -> { [] }
 

@@ -75,10 +75,9 @@ RSpec.describe Katalyst::Content::ItemsController do
       it "stores the attachment's id in the form" do
         action
         # note: response.parsed_body strips out <template> tags
-        # rubocop:disable Rails/ResponseParsedBody
+        # rubocop:disable-next Rails/ResponseParsedBody
         inputs = Capybara::Node::Simple.new(Nokogiri::HTML5.parse(response.body))
                    .all("[name='item[image]']", visible: false)
-        # rubocop:enable Rails/ResponseParsedBody
         expect(inputs).to include(have_attributes(value: assigns(:item).image.signed_id))
       end
     end

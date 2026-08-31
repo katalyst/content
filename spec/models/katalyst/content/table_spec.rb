@@ -27,7 +27,7 @@ RSpec.describe Katalyst::Content::Table do
     end
   end
 
-  # rubocop:disable RSpec/ExampleLength
+  # rubocop:disable-next RSpec/ExampleLength
   describe "#content=" do
     it "loads factory default without modifications" do
       expect(table.content.body.to_html).to match_html(<<~HTML)
@@ -122,7 +122,6 @@ RSpec.describe Katalyst::Content::Table do
       end
     end
   end
-  # rubocop:enable RSpec/ExampleLength
 
   describe "#dup" do
     it "preserves page association on dup" do
