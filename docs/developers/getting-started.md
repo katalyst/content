@@ -197,18 +197,18 @@ ViewComponent slot:
 <%= render editor.status_bar %>
 <%= render editor do |editor_component| %>
   <% editor_component.with_new_items do |component| %>
-    <h3>Layouts</h3>
+    <p><strong>Content</strong></p>
+    <ul role="list" class="items-list">
+      <%= component.item(:content) %>
+      <%= component.item(:figure) %>
+      <%= component.item(:table) %>
+    </ul>
+    <p><strong>Layouts</strong></p>
     <ul role="list" class="items-list">
       <%= component.item(:section) %>
       <%= component.item(:group) %>
       <%= component.item(:column) %>
       <%= component.item(:aside) %>
-    </ul>
-    <h3>Content</h3>
-    <ul role="list" class="items-list">
-      <%= component.item(:content) %>
-      <%= component.item(:figure) %>
-      <%= component.item(:table) %>
     </ul>
   <% end %>
 <% end %>
