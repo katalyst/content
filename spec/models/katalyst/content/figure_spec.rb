@@ -18,7 +18,7 @@ RSpec.describe Katalyst::Content::Figure do
   it { is_expected.to validate_content_type_of(:image).rejecting("text/plain", "text/xml") }
 
   it "validates attachment size" do
-    expect(figure).to validate_size_of(:image).less_than_or_equal_to(Katalyst::Content.config.max_image_size.megabytes)
+    expect(figure).to validate_size_of(:image).less_than(Katalyst::Content.config.max_image_size.megabytes)
   end
 
   describe "#to_plain_text" do
