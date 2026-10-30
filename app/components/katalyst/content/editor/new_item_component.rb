@@ -4,8 +4,6 @@ module Katalyst
   module Content
     module Editor
       class NewItemComponent < BaseComponent
-        include ::Turbo::StreamsHelper
-
         with_collection_parameter :item
 
         def initialize(item:, container: item.container)
